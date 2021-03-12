@@ -3,7 +3,7 @@ CS 546 Final Project
 
 --- 
 
-commit 规范
+commit format
 
 git commit -m 'Issue #[issue number] by [username]: [Short summary of the change].'	
 
