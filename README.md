@@ -21,4 +21,6 @@ Footer部分只用于两种情况：
 关联Issue 如：Issue #1, #2, #3	
 关闭Issue 如：Close #1, #2, #3	
 
+Jiaqing JIaqing
+
 
