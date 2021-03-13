@@ -2,6 +2,14 @@
 CS 546 Final Project 
 
 --- 
+The website is designed to make a platform to list second-hand furniture and rent lease sublets. Users can visit the website to find their desired products at a much cheaper price and the best place to live for pursuing their education or career future. Also, users can post their unwanted goods for extra gain and sublets an apartment.
+There is a potential market among students to handle used products and sublet apartments. Due to the pandemic, many students need to sublet their rents and sell their used goods. We want a website to make it easier for students to sell their goods for convenience.
+On the website, a secure environment is going to be provided for users to feed themselves with timely and accurate information and post goods’ information with no worry.
+
+
+
+--- 
+
 
 commit format
 
