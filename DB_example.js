@@ -1,5 +1,5 @@
 // Example User JSON
-{
+User = {
     "_id": "user_collection_id_1",
     "first_name": "first",
     "last_name": "last",
@@ -7,17 +7,17 @@
     "age": 12,
     "email": "xxx@stevens.edu",
     "hashed_pw": "jfldjaf24kjdslk12414afjlsaj",
-    "comments_id": ["comment_collection_id_1", "comment_collection_id_12"]
+    "comments_id": ["comment_collection_id_1", "comment_collection_id_12"],
     "furniture_id": ["furniture_id1", "furniture_id2"],
     "rental_id": ["rental_id1", "rental_id2"],
 }
 
 
 // Example Rental house JSON
-{
+Rental_house = {
     "_id": "rental_id1",
     "user_id": "user_collection_id_1",
-    "comment_id": ["comment_collection_id_101","comment_collection_id_102"]
+    "comment_id": ["comment_collection_id_101","comment_collection_id_102"],
     "location": "123 Washington St", // google map 
     "price": 1000,
     "bedroom": 2,
@@ -33,11 +33,11 @@
 }
 
 // Example Furniture JSON
-{
+Furniture = {
     "_id": "furniture_id1",
     "user_id": "user_collection_id_1", 
-    "comment_id": ["comment_collection_id_1232", "comment_collection_id_1234",]
-    "category": ["electronics", "computer"] // refer amazon
+    "comment_id": ["comment_collection_id_1232", "comment_collection_id_1234",],
+    "category": ["electronics", "computer"], // refer amazon
     "location": "1253 Garden St", // google map 
     "price": 10, 
     "description": "long paragraph string", // used age 4/10  // search by descrption match
@@ -51,7 +51,7 @@
 
 
 // Example Comment JSON
-{
+Comment = {
     "_id": "comment_collection_id_1",
     "user_id": "user_collection_id_1",
     "comment": "this is the comment for xxx",
