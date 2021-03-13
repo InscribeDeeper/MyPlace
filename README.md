@@ -17,8 +17,11 @@ commit format
 git commit -m 'Issue #[issue number] by [username]: [Short summary of the change].'	
 
 - 以动词开头，使用第一人称现在时，比如Change
+- Start with verb(such as 'Change') with first person
 - 第一个字母大写
+- Captain first letter
 - 结尾不加句号
+- No dot at the end of sentence
 - example: 
     - Add xxx feature ( 新加入的需求 )
     - Fix ( 修复 bug )
@@ -30,7 +33,7 @@ Footer部分只用于两种情况：
 关联Issue 如：Issue #1, #2, #3	
 关闭Issue 如：Close #1, #2, #3	
 
-Jiaqing JIaqing
+Jiaqing Jiaqing
 
 
 Yixuan Wang.
