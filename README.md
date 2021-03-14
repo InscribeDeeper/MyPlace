@@ -12,6 +12,26 @@ On the website, a secure environment is going to be provided for users to feed t
 
 --- 
 
+DATABASE
+
+1. Users
+The user collection will store all users. Users can create names, usernames, passwords ages, email addresses, etc. In their profile. Users can also post their houses on rent, second-hand goods, and comments. All their posts and comments will be stored in arrays. 
+
+2. Rental House
+The rental house collection will contain all the posted rental sublets. Each of the sublets will be related to information about labels, locations, prices, room types, descriptions, photos, utilities, contacts. Comments, likes, dislikes will be updated after users add comments or click on “likes” or “dislikes” button.
+
+3. Furniture
+The furniture collection will contain all the posted second-hand furniture. Each of the goods will be related to information about categories, prices, locations, descriptions, photos, likes, dislikes, purchase links, contact, and sold or not. Comments, likes, dislikes will be updated after users add comments or click on “likes” or “dislikes” button.
+
+4. Comments
+The comments collection will contain all comments posted on individual furniture or individual rent. The comment will be a string. The value of “report_count” will be added by 1 after one user reports the specific comment. After the value of “report_count” reach 50, the comment will be hidden. The value of “helpful_count” will be added by 1 after one user click on the “helpful” button. 
+
+
+--- 
+
+
+
+
 commit format
 
 git commit -m 'Issue #[issue number] by [username]: [Short summary of the change].'	
