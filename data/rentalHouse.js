@@ -18,3 +18,6 @@ Rental_house = {
     "labels": ["warm", "big", "cheap", "luxury", "convenient", ""],
     "contact": "vx_abcd / 155 564 1235"
 }
+
+
+//lalalala
