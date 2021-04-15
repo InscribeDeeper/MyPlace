@@ -62,3 +62,22 @@ Jiaqing Jiaqing
 
 Yixuan Wang.
 
+---
+Note:
+- 要经常pull -> 
+
+
+4个collections 可以先把基本的增删改查写好
+- 之后如果还有特殊的需求, 再进行func的补充
+    - 从relational DB开始出发 -> 之后考虑改进为 NoSQL=mongoDB
+- 按file分, 摇骰子 
+    - comment -> wjq
+    - user -> yw
+    - Furniture -> wyx
+    - Rental House -> lsb
+    - verify 文件可以拿来用
+
+- 还得写一些seeds 
+    - 用来测试 + 创建fake用户
+
+
