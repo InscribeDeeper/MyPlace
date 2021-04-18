@@ -28,7 +28,7 @@ async function getByFurnitureId(id){
      return theFurniture;
 }
 
-async function Create(user_id, comment_id, category, location, price, description, photos, likes, dislike, purchase_link, sold, contact){
+async function Create(category, location, price, description, photos, purchase_link, sold, contact){
      // check for title
      // if(!title) throw 'title is not defined.';
      // if(typeof title != 'string') throw `${title} is not a string.`;
@@ -56,7 +56,7 @@ async function Create(user_id, comment_id, category, location, price, descriptio
      // add to collection
      const furnitureCollection = await furniture();
 
-     let newBook = {
+     let newFurniture = {
           _id:uuid.v4(),
           comment_id:[], 
           category:[], 
@@ -72,8 +72,11 @@ async function Create(user_id, comment_id, category, location, price, descriptio
      }
      // console.log(typeof newBook._id + "book")
      // console.log(newBook._id + "book") 
-     const newInsertedBook = await booksCollection.insertOne(newBook);
-     if (newInsertedBook.insertedCount === 0) throw 'Insert failed!';
-     // console.log(typeof newInsertedBook.insertedId + " book create")
-     return await this.getByBookId(newInsertedBook.insertedId);
+     const newInsertedFurniture = await furnitureCollection.insertOne(newFurniture);
+     if (newInsertedFurniture.insertedCount === 0) throw 'Insert failed!';
+     return await this.getByFurnitureId(newInsertedFurniture.insertedId);
+}
+
+module.exports = {
+     getByFurnitureId, Create
 }
