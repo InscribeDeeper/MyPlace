@@ -1,4 +1,4 @@
-//Yixuan Wang 04/17/2021
+//Yixuan Wang 
 
 const mongoCollections = require('../config/mongoCollections')
 const rental = mongoCollections.rental
@@ -45,9 +45,35 @@ const ExportedMethos = {
         return rentalList
     },
 
-    
+    async getRentalById(){
+        if (!id) throw 'Error: You must provide an id to search for'
+        if (typeof id !== 'string' || id.trim().length == 0) throw 'Error: You must provide a valid id'
+        const rentalCollection = await rental()
+        const thisRental = await rentalCollection.findOne({ _id: id})
+        if (!thisRental) throw 'Error: Rental not found'
+        return thisRental
+    },
 
+
+    //Delete
+    async deleteRental(id) {
+        const rentalCollection = await rental()
+        const deleteInfo = await rentalCollection.removeOne({ _id: id})
+        if (deleteInfo.deletedCount === 0) {
+            throw `Could not delete rentalwith id of ${id}`;
+        }
+        return true
+    }
 }
+
+
+module.exports = exportedMethods
+
+// Finished by Yixuan Wang on April 18, 2021
+
+
+
+
 
 // DB Example
 // rental = {
