@@ -7,7 +7,7 @@ const main = async () => {
   await db.dropDatabase();
 /** start of the testing code */ 
 // function Create(category:[], location, price, description, photos:[], purchase_link, sold, contact) 没有customer_id，like和dislike
-const f1 = await furniture.create(["f","u"], "a", 20, "good",[],"b", false, 123)
+const f1 = await furniture.Create(["f","u"], "a", 20, "good",[],"b", false, 123)
 console.log(f1);
 
 /** End of the testing code */  
