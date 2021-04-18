@@ -31,7 +31,8 @@ const ExportedMethos = {
         const insertInfo = await rentalCollection.insertOne(newRental)
         if (insertInfo.insertedCount === 0) throw 'Could not add a rental post';
         const newId = insertInfo.insertedId
-        await users.addRentalToUser
+        await users.addRentalToUser(bookId, newId, user, location, price, bedroom, bathroom, space, description, photos, utility, like, dislike, labels, contact)
+        return await this.getRentalById(newId)
     }
 
 
