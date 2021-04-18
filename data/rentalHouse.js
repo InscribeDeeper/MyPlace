@@ -1,7 +1,44 @@
-//WYX
+//Yixuan Wang 04/17/2021
 
-// Example Rental house JSON
-Rental_house = {
+const mongoCollections = require('../config/mongoCollections')
+const rental = mongoCollections.rental
+const users = require('./users')
+
+const ExportedMethos = {
+
+    //create
+
+    async addRental(location, price, bedroom, bathroom, space, description, photos, utility, like, dislike, labels, contact) {
+        //check errors will be finished later
+
+        const rentalCollection = await rental
+
+        const newRental = {
+            location: location, 
+            price: price, 
+            bedroom: bedroom, 
+            bathroom: bathroom, 
+            space: space, 
+            description: description , 
+            photos: photos, 
+            utility: utility, 
+            like: like, 
+            dislike: dislike, 
+            labels: labels, 
+            contact: contact,
+            _id: uuid.v4()
+        }
+        const insertInfo = await rentalCollection.insertOne(newRental)
+        if (insertInfo.insertedCount === 0) throw 'Could not add a rental post';
+        const newId = insertInfo.insertedId
+        await users.addRentalToUser
+    }
+
+
+}
+
+
+rental = {
     "_id": "rental_id1",
     "user_id": "user_collection_id_1",
     "comment_id": ["comment_collection_id_101","comment_collection_id_102"],

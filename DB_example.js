@@ -14,7 +14,7 @@ User = {
 
 
 // Example Rental house JSON
-Rental_house = {
+Rental = {
     "_id": "rental_id1",
     "user_id": "user_collection_id_1",
     "comment_id": ["comment_collection_id_101","comment_collection_id_102"],
