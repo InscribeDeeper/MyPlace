@@ -2,16 +2,18 @@
 
 const mongoCollections = require('../config/mongoCollections')
 const rental = mongoCollections.rental
-const users = require('./users')
+// const users = require('./users')
+const shareUtilsDB = require("./shareUtilsDB");
 
-const ExportedMethos = {
+const ExportedMethods = {
 
     //create
 
-    async addRental(location, price, bedroom, bathroom, space, description, photos, utility, like, dislike, labels, contact) {
-        //check errors will be finished later
+    async createRental(location, price, bedroom, bathroom, space, description, photos, utility, like, dislike, labels, contact) {
+        //check errors will be finished later 
+        // use function on verify.js
 
-        const rentalCollection = await rental
+        const rentalCollection = await rental()
 
         const newRental = {
             location: location, 
@@ -31,7 +33,7 @@ const ExportedMethos = {
         const insertInfo = await rentalCollection.insertOne(newRental)
         if (insertInfo.insertedCount === 0) throw 'Could not add a rental post';
         const newId = insertInfo.insertedId
-        await users.addRentalToUser(userId, newId, user, location, price, bedroom, bathroom, space, description, photos, utility, like, dislike, labels, contact)
+        // await shareUtilsDB.toggleRentalToUser(userId, newId) // you may need to think where to get userId
         return await this.getRentalById(newId)
     },
 
@@ -45,7 +47,7 @@ const ExportedMethos = {
         return rentalList
     },
 
-    async getRentalById(){
+    async getRentalById(id){
         if (!id) throw 'Error: You must provide an id to search for'
         if (typeof id !== 'string' || id.trim().length == 0) throw 'Error: You must provide a valid id'
         const rentalCollection = await rental()
@@ -62,17 +64,21 @@ const ExportedMethos = {
         if (deleteInfo.deletedCount === 0) {
             throw `Could not delete rentalwith id of ${id}`;
         }
+        // await shareUtilsDB.untoggleRentalToUser(userId, newId)
         return true
     }
+
+ 	//////////////////////////////////////////////////////////////////
+	// Update refer ./data/user.js
+    // toggle refer ./data/verify.js
+	//////////////////////////////////////////////////////////////////
+
 }
 
 
-module.exports = exportedMethods
+module.exports = ExportedMethods
 
 // Finished by Yixuan Wang on April 18, 2021
-
-
-
 
 
 // DB Example
