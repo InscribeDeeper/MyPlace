@@ -39,7 +39,7 @@ To 杨威：
 ### rental Example
 
 ```json
-+ own_furnitureId: [] // 可以用这个 从 家具界面跳到 rental界面
++ own_furnitureId: [] // 
 
 (rental = {
 	"_id": "rental_id1",

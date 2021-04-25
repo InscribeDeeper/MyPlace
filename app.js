@@ -70,8 +70,25 @@ app.use("/private", (req, res, next) => {
 
 // Logging Middleware 
 // 需要做流量统计的函数
+let totalRequests = 0;
 
+app.use(async (req, res, next) => {
+	//  这个middle ware  会记录总的request, 所有访问的记录, 都会经过这个middle ware - 这个不是route
+	// 之后会经过next, 去找另外的 middle ware function in app.js
+	// 下面的都是middleware function, 而且每一次request, 就可以读取 client side request的对应的内容
+	// 这个request可以是访问不同的route
+	totalRequests++;
+	console.log(`There have been ${totalRequests} requests made to the server`);
+	next();
+});
 
+// 访问流量 的时间统计 // 这些都可以作为 服务器的log 存起来
+app.use(async (req, res, next) => {
+	if (req.originalUrl !== "/css/main.css") {
+		console.log(`[${new Date().toUTCString()}]: ${req.method} ${req.originalUrl} (${req.session.AuthCookie ? "Authenticated User" : "Non-Authenticated User"}) `);
+	}
+	next();
+});
 
 // 只能登录后 才能访问的界面
 // furniture 创建界面的 filter

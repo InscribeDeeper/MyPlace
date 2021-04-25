@@ -22,8 +22,8 @@ const constructorMethod = (app) => {
     app.use('/restaurants', restaurantRoutes);
     app.use('/comments', commentRoutes);
     // app.use('/statistics', statisticsRoutes);
-    app.use('/users', userRoutes);
-    app.use('/users', userRoutes);
+    app.use('/furniture', furnitureRoutes);
+    app.use('/rental', rentalRoutes);
     app.use('/users', userRoutes);
 
     app.use('*', (req, res) => {
