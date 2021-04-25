@@ -4,7 +4,7 @@ const furniture = mongoCollections.furniture;
 const comments = mongoCollections.comments;
 const rental = mongoCollections.rental;
 
-const verify = require("./verify");
+const verifier = require("./verify");
 const shareUtilsDB = require("./shareUtilsDB");
 const bcrypt = require("bcryptjs");
 const saltRounds = 8;
@@ -41,13 +41,13 @@ let exportedMethods = {
 	// Add
 	//////////////////////////////////////////////////////////////////
 	async createUser(userName, firstName, lastName, age, email, password, selfSummary) {
-		if (!verify.validString(firstName)) throw "First name is not a valid string.";
-		if (!verify.validString(lastName)) throw "Last name is not a valid string.";
-		if (!verify.validEmail(email)) throw "Email is not a valid string.";
-		if (!verify.validString(userName)) throw "userName is not a valid string.";
-		if (!verify.validAge(age)) throw "Age must be a positive integer";
-		if (!verify.validPassword(password)) throw "Password can only contain [a-z][0-9][A-Z][_-], and length range [6, 16]";
-		// if (!verify.validString(selfSummary)) throw "selfSummary is not a valid string.";
+		if (!verifier.validString(firstName)) throw "First name is not a valid string.";
+		if (!verifier.validString(lastName)) throw "Last name is not a valid string.";
+		if (!verifier.validEmail(email)) throw "Email is not a valid string.";
+		if (!verifier.validString(userName)) throw "userName is not a valid string.";
+		if (!verifier.validAge(age)) throw "Age must be a positive integer";
+		if (!verifier.validPassword(password)) throw "Password can only contain [a-z][0-9][A-Z][_-], and length range [6, 16]";
+		// if (!verifier.validString(selfSummary)) throw "selfSummary is not a valid string.";
 
 		// duplicate checking
 		userName = userName.toLowerCase();
@@ -72,6 +72,7 @@ let exportedMethods = {
 			comments_id: [],
 			furniture_id: [],
 			rental_id: [],
+			acessHistory: {furniture_id: [], rental_id: []}
 		};
 
 		const usersCollection = await users();
@@ -91,7 +92,7 @@ let exportedMethods = {
 	},
 
 	async getUserById(id) {
-		if (!verify.validString(id)) throw "User id is not a valid string.";
+		if (!verifier.validString(id)) throw "User id is not a valid string.";
 		const userCollection = await users();
 		let user = await userCollection.findOne({ _id: id });
 		if (user === null) throw `user not found with id: ${id}`;
@@ -103,29 +104,29 @@ let exportedMethods = {
 	//////////////////////////////////////////////////////////////////
 	// update User email, userName, age, selfSummary
 	async updateUserInfo(id, newUserInfo) {
-		if (!verify.validString(id)) throw "User id is not a valid string.";
+		if (!verifier.validString(id)) throw "User id is not a valid string.";
 
 		let updatedUserData = {};
 
 		if (newUserInfo.userName) {
-			if (!verify.validString(newUserInfo.userName)) throw "userName is not a valid string.";
+			if (!verifier.validString(newUserInfo.userName)) throw "userName is not a valid string.";
 			userName = newUserInfo.userName.toLowerCase();
 			if (await this.DuplicateCheck_userName(userName)) throw "This userName is already taken.";
 			updatedUserData.userName = userName;
 		}
 
 		if (newUserInfo.email) {
-			if (!verify.validEmail(newUserInfo.email)) throw "Email is not a valid string.";
+			if (!verifier.validEmail(newUserInfo.email)) throw "Email is not a valid string.";
 			email = newUserInfo.email.toLowerCase();
 			if (await this.DuplicateCheck_email(email)) throw "This email is already taken.";
 			updatedUserData.email = email;
 		}
 		if (newUserInfo.age) {
-			if (!verify.validAge(age)) throw "Age must be a positive integer";
+			if (!verifier.validAge(age)) throw "Age must be a positive integer";
 			updatedUserData.age = age;
 		}
 		if (newUserInfo.selfSummary) {
-			// if (!verify.validString(selfSummary)) throw "selfSummary is not a valid string.";
+			// if (!verifier.validString(selfSummary)) throw "selfSummary is not a valid string.";
 			updatedUserData.selfSummary = newUserInfo.selfSummary;
 		}
 
@@ -137,8 +138,8 @@ let exportedMethods = {
 
 	// updateUserPassword
 	async updateUserPassword(id, password) {
-		if (!verify.validString(id)) throw "User id is not a valid string.";
-		if (!verify.validPassword(password)) throw "Password is not a valid string.";
+		if (!verifier.validString(id)) throw "User id is not a valid string.";
+		if (!verifier.validPassword(password)) throw "Password is not a valid string.";
 		const userCollection = await users();
 		const user = await userCollection.findOne({ _id: id });
 
@@ -151,7 +152,7 @@ let exportedMethods = {
 
 		// updare hashed password
 		const new_hashedPassword = await bcrypt.hash(password, saltRounds);
-		if (!verify.validPassword(password)) throw "Password is not a valid string.";
+		if (!verifier.validPassword(password)) throw "Password is not a valid string.";
 		const updatedInfo = await userCollection.update({ _id: id }, { $set: { hashed_pw: new_hashedPassword } });
 		if (updatedInfo.modifiedCount === 0) throw "Could not update password in User collection successfully.";
 		return await this.getUserById(id);
@@ -161,7 +162,7 @@ let exportedMethods = {
 	// Delete not that neccessary in project
 	//////////////////////////////////////////////////////////////////
 	async deleteUser(user_id) {
-		if (!verify.validString(user_id)) throw "User id is not a valid string.";
+		if (!verifier.validString(user_id)) throw "User id is not a valid string.";
 		const user = await this.getUserById(user_id);
 		let deleteInfoAll = {};
 

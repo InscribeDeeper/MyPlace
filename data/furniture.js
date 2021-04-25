@@ -31,7 +31,7 @@ async function Create(category, location, price, description, photos, likes, dis
 		contact,
 	};
 	// console.log(typeof newBook._id + "book")
-	console.log("error1");
+	// console.log("error1");
 	const newInsertedFurniture = await furnitureCollection.insertOne(newFurniture);
 	if (newInsertedFurniture.insertedCount === 0) throw "Insert failed!";
 	return await this.getByFurnitureId(newInsertedFurniture.insertedId);

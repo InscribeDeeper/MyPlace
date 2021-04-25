@@ -36,16 +36,8 @@ The comments collection will contain all comments posted on individual furniture
 
 
 
-commit format
+## commit format
 
-git commit -m 'Issue #[issue number] by [username]: [Short summary of the change].'	
-
-- 以动词开头，使用第一人称现在时，比如Change
-- Start with verb(such as 'Change') with first person
-- 第一个字母大写
-- Captain first letter
-- 结尾不加句号
-- No dot at the end of sentence
 - example: 
     - Add xxx feature ( 新加入的需求 )
     - Fix ( 修复 bug )
@@ -53,30 +45,7 @@ git commit -m 'Issue #[issue number] by [username]: [Short summary of the change
     - Update ( 完成的任务，或者由于第三方模块变化而做的变化 )
 	- Update tensorboard launch command in colab
 
-Footer部分只用于两种情况：	
-关联Issue 如：Issue #1, #2, #3	
-关闭Issue 如：Close #1, #2, #3	
-
-Jiaqing Jiaqing
-
-
-Yixuan Wang.
 
 ---
-Note:
-- 要经常pull -> 
-
-
-4个collections 可以先把基本的增删改查写好
-- 之后如果还有特殊的需求, 再进行func的补充
-    - 从relational DB开始出发 -> 之后考虑改进为 NoSQL=mongoDB
-- 按file分, 摇骰子 
-    - comment -> wjq
-    - user -> yw
-    - Furniture -> wyx
-    - Rental House -> lsb
-    - verify 文件可以拿来用
-
-- 还得写一些seeds 
-    - 用来测试 + 创建fake用户
-    - 测试修改
+## Note:
+- 习惯: commit-> pull -> push

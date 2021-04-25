@@ -39,6 +39,8 @@ To 杨威：
 ### rental Example
 
 ```json
++ own_furnitureId: [] // 可以用这个 从 家具界面跳到 rental界面
+
 (rental = {
 	"_id": "rental_id1",
 	"user_id": "user_collection_id_1",
@@ -61,6 +63,9 @@ To 杨威：
 ### Furniture Example
 
 ```json
++ belong_rentalId: null // 可以用这个 从 家具界面跳到 rental界面
+
+
 (Furniture = {
 	"_id": "furniture_id1",
 	"user_id": "user_collection_id_1",
