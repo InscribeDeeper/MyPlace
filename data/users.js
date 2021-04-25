@@ -1,42 +1,15 @@
-//To 杨威：
-
-//在你这里面记得加一个addRentalToUser和removeRentalToUser的函数
-//我发现我们这个project还是得用sub-document比较好可能？
-//我的rental.js导进你的函数叫：
-//users.addRentalToUser(userId, newId, user, location, price, bedroom, bathroom, space, description, photos, utility, like, dislike, labels, contact)
-//和 users.removeRentalToUser
-//主要是因为如果要用relationalDB还是啥的话...我不会！！
-
-//from wyx
-
-// ++ update the selfSummary field
-// Example User JSON
-// User = {
-//     "_id": "user_collection_id_1",
-//     "first_name": "first",
-//     "last_name": "last",
-//     "user_name": "myname",
-//     "age": 12,
-//     "email": "xxx@stevens.edu",
-//     "hashed_pw": "jfldjaf24kjdslk12414afjlsaj",
-//     "comments_id": ["comment_collection_id_1", "comment_collection_id_12"],
-//     "furniture_id": ["furniture_id1", "furniture_id2"],
-//     "rental_id": ["rental_id1", "rental_id2"],
-//   "selfSummary":""
-// }
-
-// 不可以引用其他的DB js, 尽管有在调用的时候, 一个文件管一个collections的理念
-// 但是可以在 管这个collections的里面, 调用其他的collections
-// 像 SQL一样, 自己关联其他的表格更新.
-// 因为会导致循环引用, 所以需要copy对应的函数到这里来就行
 const mongoCollections = require("../config/mongoCollections");
 const users = mongoCollections.users;
+const furniture = mongoCollections.furniture;
+const comments = mongoCollections.comments;
+const rental = mongoCollections.rental;
+
 const verify = require("./verify");
 const shareUtilsDB = require("./shareUtilsDB");
 const bcrypt = require("bcryptjs");
 const saltRounds = 8;
 // const uuid = require("uuid");
-const { ObjectId } = require('mongodb');
+const { ObjectId } = require("mongodb");
 
 let exportedMethods = {
 	//////////////////////////////////////////////////////////////////
@@ -167,18 +140,19 @@ let exportedMethods = {
 		if (!verify.validString(id)) throw "User id is not a valid string.";
 		if (!verify.validPassword(password)) throw "Password is not a valid string.";
 		const userCollection = await users();
-		old_hashPassword = userCollection.findOne({ _id: id }, { projection: { hashed_pw: 1 } });
+		const user = await userCollection.findOne({ _id: id });
 
 		let match = false;
 		try {
-			match = await bcrypt.compare(password, old_hashPassword); // 从data 里面来
+			match = await bcrypt.compare(password, user.hashed_pw);
 		} catch (e) {}
+
 		if (match) throw "Password is not changed";
 
 		// updare hashed password
 		const new_hashedPassword = await bcrypt.hash(password, saltRounds);
 		if (!verify.validPassword(password)) throw "Password is not a valid string.";
-		const updatedInfo = await userCollection.updateOne({ _id: id }, { hashed_pw: new_hashedPassword });
+		const updatedInfo = await userCollection.update({ _id: id }, { $set: { hashed_pw: new_hashedPassword } });
 		if (updatedInfo.modifiedCount === 0) throw "Could not update password in User collection successfully.";
 		return await this.getUserById(id);
 	},
@@ -191,23 +165,35 @@ let exportedMethods = {
 		const user = await this.getUserById(user_id);
 		let deleteInfoAll = {};
 
-		const furnitureCollection = await furniture();
-		const deletionInfo_furniture = await furnitureCollection.deleteMany({ _id: { $nin: user.furniture_id } });
-		deleteInfoAll.furniture_deletedCount = deletionInfo_furniture.deletedCount;
+		if (user.furniture_id.length != 0) {
+			const furnitureCollection = await furniture();
+			const deletionInfo_furniture = await furnitureCollection.deleteMany({ _id: { $in: Object.values(user.furniture_id) } });
+			deleteInfoAll.furniture_deletedCount = deletionInfo_furniture.deletedCount;
+			// console.log((user.furniture_id));
+			// console.log(typeof(user.furniture_id));
+			// console.log( typeof(user.furniture_id.toString()))
+			// console.log( Object.values(user.furniture_id))
+			// console.log(deletionInfo_furniture.deletedCount)
+		}
 
-		const rentalCollection = await rental();
-		const deletionInfo_rental = await rentalCollection.deleteMany({ _id: { $nin: user.rental_id } });
-		deleteInfoAll.rental_deletedCount = deletionInfo_rental.deletedCount;
+		if (user.rental_id.length != 0) {
+			const rentalCollection = await rental();
+			const deletionInfo_rental = await rentalCollection.deleteMany({ _id: { $in: Object.values(user.rental_id) } });
+			deleteInfoAll.rental_deletedCount = deletionInfo_rental.deletedCount;
+		}
 
-		const commentsCollection = await comments();
-		const deletionInfo_comment = await commentsCollection.deleteMany({ _id: { $nin: user.comment_id } });
-		deleteInfoAll.comment_deletedCount = deletionInfo_comment.deletedCount;
+		// console.log(user.comments_id);
+		if (user.comments_id.length != 0) {
+			const commentsCollection = await comments();
+			const deletionInfo_comment = await commentsCollection.deleteMany({ _id: { $in: Object.values(user.comments_id) } });
+			deleteInfoAll.comment_deletedCount = deletionInfo_comment.deletedCount;
+		}
 
 		const usersCollection = await users();
 		const deletionInfo = await usersCollection.deleteOne({ _id: user_id });
 		if (deletionInfo.deletedCount === 0) throw `Could not delete user with id of ${user_id}`;
 
-		return user + " has been successfully deleted. Related deleted records: " + JSON.stringify(deleteInfoAll);
+		return user.userName + " has been successfully deleted. Related deleted records: " + JSON.stringify(deleteInfoAll);
 	},
 };
 
