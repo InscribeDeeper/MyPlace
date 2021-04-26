@@ -170,11 +170,6 @@ let exportedMethods = {
 			const furnitureCollection = await furniture();
 			const deletionInfo_furniture = await furnitureCollection.deleteMany({ _id: { $in: Object.values(user.furniture_id) } });
 			deleteInfoAll.furniture_deletedCount = deletionInfo_furniture.deletedCount;
-			// console.log((user.furniture_id));
-			// console.log(typeof(user.furniture_id));
-			// console.log( typeof(user.furniture_id.toString()))
-			// console.log( Object.values(user.furniture_id))
-			// console.log(deletionInfo_furniture.deletedCount)
 		}
 
 		if (user.rental_id.length != 0) {

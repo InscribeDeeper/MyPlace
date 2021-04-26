@@ -18,6 +18,7 @@ let cuisineTypes = ['American', 'Breakfast', 'Brunch', 'Chinese', 'Fast Food', '
 cuisineTypes.sort();
 
 // Route for the page of all restaurants
+// /furniture  需要显示所有的 furniture的list, 是一个 table, 包含大部分furniture的 属性
 router.get('/', async (req, res) => {
     const restaurants = await restaurantData.getAllRestaurants();
     restaurants.forEach(async (restaurant)=>{

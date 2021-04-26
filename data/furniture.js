@@ -24,8 +24,8 @@ async function Create(category, location, price, description, photos, likes, dis
 		price,
 		description,
 		photos,
-		likes,
-		dislike,
+		likes:[], // 储存userId
+		dislike:[], // 储存userId
 		purchase_link,
 		sold,
 		contact,
