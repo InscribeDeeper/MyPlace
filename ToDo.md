@@ -1,4 +1,6 @@
 # pitch的frame
+- 明晚11点? 讨论? 如果可以就录了
+
 1. Intro: 参考proposal, 但是pre的对象是investor, 所以得从投资回报的角度去intro (考虑市场需求的角度 去吹水)
 2. core features: 参考ToDO.md, 里面每个部分的 js 部分(来源是 views)
 3. extra features: 参考ToDO.md, fancy 的特点, 在本文档用 (-) 标记出来了
