@@ -1,36 +1,13 @@
-# pitch的frame
-- 明晚11点? 讨论? 如果可以就录了
-
-1. Intro: 参考proposal, 但是pre的对象是investor, 所以得从投资回报的角度去intro (考虑市场需求的角度 去吹水)
-2. core features: 参考ToDO.md, 里面每个部分的 js 部分(来源是 views)
-3. extra features: 参考ToDO.md, fancy 的特点, 在本文档用 (-) 标记出来了
-4. Value of product: 
-	- 目标用户群
-	- 产品的价值是什么, 怎么用信息创造收益
-		- 会员? 会有特权? 卖权限?
-			- 可以多post 几个rental
-			- 头像边框?? V
-			- 具体内容不讲
-		- 广告? 
-			- 会员免广告
-		- 目前不是交易平台, 可以之后往这个方向发展? 
-		- Donate
-		- 用的人越多 价值越高
-	- 为什么需要被投资? 
-		- 留学生很多, 而且还可以拓展到其他国家的留学生
-		- 正规去到
-	- 竞争对象: 没有, 因为目前都是在微信上share, 没有正规的网页竞争
-	- SWOT analysis, Porter’s 5 Forces
-		- strength: 整合平台, 竞争力强, 免费, 用户群体集中, 不要交钱, 信息交流平台, 
-		- weakness: 现在没钱 不成熟, 用户不能稳定, 3年没了
-		- opportunity: 
-		- Threats: 竞争ebay
-5. summary
-	- 没有demo
+# 写route注意事项: 
+## 在第一次写route的时候, 一定要先写好下面这个以方便之后调试. 
+- 因为可以清楚的输出当前的 方法和路径, 从而知道调试那个function. 或者知道是不是进入到了自己想要的 route
+```js
+ res.json({ route: '/private/dashboard', method: req.method });
+ ```
 
 
 
-note: 在proposal写到的, 尽量都得都cover
+
 
 # <font color = green>这里记录 note 和笔记 和信息沟通</font>
 
@@ -202,3 +179,38 @@ rental界面(
 	"timestamp": "2020/12/23", // 保存内置函数的 Now 的字符串形式就行
 })
 ```
+
+
+---
+
+past event 
+
+# pitch的frame
+- 明晚11点? 讨论? 如果可以就录了
+
+1. Intro: 参考proposal, 但是pre的对象是investor, 所以得从投资回报的角度去intro (考虑市场需求的角度 去吹水)
+2. core features: 参考ToDO.md, 里面每个部分的 js 部分(来源是 views)
+3. extra features: 参考ToDO.md, fancy 的特点, 在本文档用 (-) 标记出来了
+4. Value of product: 
+	- 目标用户群
+	- 产品的价值是什么, 怎么用信息创造收益
+		- 会员? 会有特权? 卖权限?
+			- 可以多post 几个rental
+			- 头像边框?? V
+			- 具体内容不讲
+		- 广告? 
+			- 会员免广告
+		- 目前不是交易平台, 可以之后往这个方向发展? 
+		- Donate
+		- 用的人越多 价值越高
+	- 为什么需要被投资? 
+		- 留学生很多, 而且还可以拓展到其他国家的留学生
+		- 正规去到
+	- 竞争对象: 没有, 因为目前都是在微信上share, 没有正规的网页竞争
+	- SWOT analysis, Porter’s 5 Forces
+		- strength: 整合平台, 竞争力强, 免费, 用户群体集中, 不要交钱, 信息交流平台, 
+		- weakness: 现在没钱 不成熟, 用户不能稳定, 3年没了
+		- opportunity: 
+		- Threats: 竞争ebay
+5. summary
+	- 没有demo

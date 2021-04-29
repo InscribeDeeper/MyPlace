@@ -7,6 +7,23 @@ const exphbs = require("express-handlebars");
 // const cookieParser = require("cookie-parser");
 // app.use(cookieParser()); // which will generate req.cookies
 
+// edit default views directory and file suffix
+// var path = require('path');
+// var express = require('express');
+// var app = express();
+// var http = require('http').Server(app);
+
+// var handlebars = require('express-handlebars').create({
+//   layoutsDir: path.join(__dirname,"views/layouts"),
+//   partialsDir: path.join(__dirname,"views/partials"),
+//   defaultLayout: 'layout',
+//   extname: 'hbs'
+// });
+
+// app.engine('hbs', handlebars.engine);
+// app.set('view engine', 'hbs');
+// app.set('views', path.join(__dirname,"views"));
+
 const handlebarsInstance = exphbs.create({
 	defaultLayout: "main", // Specify helpers which are only registered on this instance.
 	helpers: {
@@ -45,8 +62,14 @@ app.use(
 		secret: "This is a secret.. shhh don't tell anyone",
 		saveUninitialized: true,
 		resave: false,
+		// cookie: { secure: true, maxAge: 60000 } // req.session.cookie
 	}) // 这个session 会在浏览器关掉后就没了
 );
+
+// if (app.get('env') === 'production') {
+// 	app.set('trust proxy', 1) // trust first proxy
+// 	sess.cookie.secure = true // serve secure cookies
+//   }
 
 // Authentication Middleware
 app.use("/private", (req, res, next) => {
@@ -68,7 +91,7 @@ app.use("/private", (req, res, next) => {
 	// }
 });
 
-// Logging Middleware 
+// Logging Middleware
 // 需要做流量统计的函数
 let totalRequests = 0;
 
@@ -85,7 +108,9 @@ app.use(async (req, res, next) => {
 // 访问流量 的时间统计 // 这些都可以作为 服务器的log 存起来
 app.use(async (req, res, next) => {
 	if (req.originalUrl !== "/css/main.css") {
-		console.log(`[${new Date().toUTCString()}]: ${req.method} ${req.originalUrl} (${req.session.AuthCookie ? "Authenticated User" : "Non-Authenticated User"}) `);
+		console.log(
+			`[${new Date().toUTCString()}]: ${req.method} ${req.originalUrl} (${req.session.AuthCookie ? "Authenticated User" : "Non-Authenticated User"}) `
+		);
 	}
 	next();
 });
@@ -123,3 +148,19 @@ app.listen(3005, () => {
 	console.log("We've now got a server!");
 	console.log("Your routes will be running on http://localhost:3005");
 });
+
+
+// // Access the session as req.session
+// app.get('/', function(req, res, next) {
+// 	if (req.session.views) {
+	//   console.log(req.sessionID) // unique
+// 	  req.session.views++
+// 	  res.setHeader('Content-Type', 'text/html')
+// 	  res.write('<p>views: ' + req.session.views + '</p>')
+// 	  res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
+// 	  res.end()
+// 	} else {
+// 	  req.session.views = 1
+// 	  res.end('welcome to the session demo. refresh!')
+// 	}
+//   })
