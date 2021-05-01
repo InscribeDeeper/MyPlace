@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "seeds": "node ./tasks/seeds.js"
+    "seeds": "node ./tasks/seeds.js",
+    "pytest" : "node ./tasks/python_test.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
     "bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
     "bootstrap-icons": "^1.1.0",
+    "child_process": "^1.0.2",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
     "express-session": "^1.17.1",
