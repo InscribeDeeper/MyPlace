@@ -12,7 +12,7 @@ const ExportedMethods = {
 
     //create
 
-    async createRental(location, price, bedroom, bathroom, space, description, photos, utility, like, dislike, labels, contact) {
+    async createRental(location, price, bedroom, bathroom, space, description, photos, utility, like, dislike, labels, contact, newId) {
         // use function on verify.js
         if (!verifier.validString(location)) throw "Location is not a valid string.";
         if (!verifier.validNum(price)) throw "Price is not a valid number.";
@@ -46,7 +46,7 @@ const ExportedMethods = {
         const insertInfo = await rentalCollection.insertOne(newRental)
         if (insertInfo.insertedCount === 0) throw 'Could not add a rental post';
         const newId = insertInfo.insertedId
-        // await shareUtilsDB.toggleRentalToUser(userId, newId) // you may need to think where to get userId
+        await shareUtilsDB.toggleRentalToUser(userId, newId) 
         return await this.getRentalById(newId)
     },
 
@@ -71,20 +71,17 @@ const ExportedMethods = {
 
 
     //Delete
-    async deleteRental(id) {
+    async deleteRental(id, userId) {
         const rentalCollection = await rental()
         const deleteInfo = await rentalCollection.removeOne({ _id: id})
         if (deleteInfo.deletedCount === 0) {
             throw `Could not delete rentalwith id of ${id}`;
         }
-        // await shareUtilsDB.untoggleRentalToUser(userId, newId)
+        await shareUtilsDB.untoggleRentalToUser(userId, id)
         return true
     }
 
- 	//////////////////////////////////////////////////////////////////
-	// Update refer ./data/user.js
-    // toggle refer ./data/verify.js
-	//////////////////////////////////////////////////////////////////
+ 	
 
 }
 
