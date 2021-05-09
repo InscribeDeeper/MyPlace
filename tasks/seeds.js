@@ -31,7 +31,7 @@ async function main() {
 	console.log(userOneId);
 
 	// create furniture
-	var furniture1 = await furnitureData.Create(
+	var furniture1 = await furnitureData.createFurniture(
 		(category = ["f", "u"]),
 		(location = "A"),
 		(price = 20),
@@ -46,7 +46,7 @@ async function main() {
 	const furniture1Id = furniture1._id;
 	// console.log(furnitureOneId);
 
-	var furniture2 = await furnitureData.Create(
+	var furniture2 = await furnitureData.createFurniture(
 		(category = ["f", "u"]),
 		(location = "A"),
 		(price = 20),
@@ -75,8 +75,8 @@ async function main() {
 	// toggle comments into the rental
 
 	// delete userOne
-	userOne_deleteInfo = await userData.deleteUser(userOneId);
-	console.log(userOne_deleteInfo);
+	// userOne_deleteInfo = await userData.deleteUser(userOneId);
+	// console.log(userOne_deleteInfo);
 	/** End of the testing code */
 	console.log("Done seeding database");
 	await db.serverConfig.close();

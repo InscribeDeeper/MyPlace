@@ -13,17 +13,17 @@ async function getFurnitureById(id) {
 	return theFurniture;
 }
 
-async function CreateFurniture(category, location, price, description, photos, purchase_link, sold, contact) {
-// async function Create(category, location, price, description, photos, likes, dislike, purchase_link, sold, contact) {
+// async function CreateFurniture(category, location, price, description, photos, purchase_link, sold, contact) {
+async function createFurniture(category, location, price, description, photos, likes, dislikes, purchase_link, sold, contact) {
 	// add to collection
-	if (!verifier.validString(category)) throw "First name is not a valid string.";
+	// if (!verifier.validString(category)) throw "First name is not a valid string.";
 	if (!verifier.validString(location)) throw "Last name is not a valid string.";
 	if (!verifier.validNum(price)) throw "Price is not a valid number.";
 	if (!verifier.validString(description)) throw "userName is not a valid string.";
-	if (!verifier.validString(photo)) throw "photo is not a valid string.";
+	// if (!verifier.validString(photo)) throw "photo is not a valid string.";
 	if (!verifier.validString(purchase_link)) throw "purchase_link is not a valid string.";
 	if (!verifier.validBoolean(sold)) throw "Sold should be a boolean";
-	if (!verifier.validString(contact)) throw "contact should be a string";
+	// if (!verifier.validString(contact)) throw "contact should be a string";
 
 	const furnitureCollection = await furniture();
 
@@ -34,9 +34,9 @@ async function CreateFurniture(category, location, price, description, photos, p
 		location,
 		price,
 		description,
-		photos:[],
-		likes:[], // 储存userId
-		dislikes:[], // 储存userId
+		photos,
+		likes, // 储存userId
+		dislikes, // 储存userId
 		purchase_link,
 		sold,
 		contact,
@@ -92,7 +92,7 @@ async function deleteFurniture(id){
 }
 module.exports = {
 	getFurnitureById,
-	CreateFurniture,
+	createFurniture,
 	getAllFurnitures,
 	updataFurniture,
 	deleteFurniture

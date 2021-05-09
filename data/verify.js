@@ -83,5 +83,6 @@ module.exports = {
     validMetrics,
     validLink,
     generateList,
-    validPassword
+    validPassword,
+    validNum
 };
