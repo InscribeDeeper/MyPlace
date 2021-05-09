@@ -1,6 +1,6 @@
 const express = require('express');
-const reviews = require('../data/reviews');
-const restaurants = require('../data/restaurants')
+// const reviews = require('../data/reviews');
+// const restaurants = require('../data/restaurants')
 const router = express.Router();
 const verifier = require('../data/verify');
 

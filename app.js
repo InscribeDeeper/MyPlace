@@ -72,38 +72,38 @@ app.use(
 //   }
 
 // Authentication Middleware
-app.use("/private", (req, res, next) => {
-	if (!req.session.user) {
-		let errors = [];
-		errors.push("You cannot access the private route without logging in");
-		return res.render("errors/error", {
-			title: "Errors",
-			errors: errors,
-			partial: "errors-script",
-		});
-	}
-	next();
+// app.use("/private", (req, res, next) => {
+// 	if (!req.session.user) {
+// 		let errors = [];
+// 		errors.push("You cannot access the private route without logging in");
+// 		return res.render("errors/error", {
+// 			title: "Errors",
+// 			errors: errors,
+// 			partial: "errors-script",
+// 		});
+// 	}
+// 	next();
 
-	// if (!req.session.AuthCookie) {
-	// 	res.status(403).render("logSys/login", { error: "403: Forbidden Please Log in" });
-	// } else {
-	// 	next();
-	// }
-});
+// 	// if (!req.session.AuthCookie) {
+// 	// 	res.status(403).render("logSys/login", { error: "403: Forbidden Please Log in" });
+// 	// } else {
+// 	// 	next();
+// 	// }
+// });
 
 // Logging Middleware
 // 需要做流量统计的函数
-let totalRequests = 0;
+// let totalRequests = 0;
 
-app.use(async (req, res, next) => {
-	//  这个middle ware  会记录总的request, 所有访问的记录, 都会经过这个middle ware - 这个不是route
-	// 之后会经过next, 去找另外的 middle ware function in app.js
-	// 下面的都是middleware function, 而且每一次request, 就可以读取 client side request的对应的内容
-	// 这个request可以是访问不同的route
-	totalRequests++;
-	console.log(`There have been ${totalRequests} requests made to the server`);
-	next();
-});
+// app.use(async (req, res, next) => {
+// 	//  这个middle ware  会记录总的request, 所有访问的记录, 都会经过这个middle ware - 这个不是route
+// 	// 之后会经过next, 去找另外的 middle ware function in app.js
+// 	// 下面的都是middleware function, 而且每一次request, 就可以读取 client side request的对应的内容
+// 	// 这个request可以是访问不同的route
+// 	totalRequests++;
+// 	console.log(`There have been ${totalRequests} requests made to the server`);
+// 	next();
+// });
 
 // 访问流量 的时间统计 // 这些都可以作为 服务器的log 存起来
 app.use(async (req, res, next) => {
@@ -144,7 +144,7 @@ app.use("/rental/new", async (req, res, next) => {
 
 configRoutes(app);
 
-app.listen(3005, () => {
+app.listen(3000, () => {
 	console.log("We've now got a server!");
 	console.log("Your routes will be running on http://localhost:3005");
 });

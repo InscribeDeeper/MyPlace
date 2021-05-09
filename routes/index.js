@@ -19,7 +19,7 @@ const constructorMethod = (app) => {
     });
     // app.use('/api', apiRoutes);
     // app.use('/private', privateRoutes);
-    app.use('/restaurants', restaurantRoutes);
+    // app.use('/restaurants', restaurantRoutes);
     app.use('/comments', commentRoutes);
     // app.use('/statistics', statisticsRoutes);
     app.use('/furniture', furnitureRoutes);

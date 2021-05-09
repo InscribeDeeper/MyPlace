@@ -1,21 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const data = require('../data');
-const yelp = require('yelp-fusion');
-const restaurantData = data.restaurants;
-const reviewData = data.reviews;
-const commentData = data.comments;
+const furnitureData = data.furniture;
 const userData = data.users;
+// const commentData = data.comments;
 const verify = require('../data/verify');
 const xss = require('xss');
-const apiKey = 'yelpAPIKey';
 
-let cuisineTypes = ['American', 'Breakfast', 'Brunch', 'Chinese', 'Fast Food', 'Italian',
-    'Mexican', 'Thai', 'Korean', 'Middle-Eastern', 'Indian', 'Soul Food',
-    'French', 'Japanese', 'Vietnamese', 'Mediterranean', 'Cuban', 'Sichuan',
-    'Greek', 'Halal','Other'
-];
-cuisineTypes.sort();
+// let cuisineTypes = ['American', 'Breakfast', 'Brunch', 'Chinese', 'Fast Food', 'Italian',
+//     'Mexican', 'Thai', 'Korean', 'Middle-Eastern', 'Indian', 'Soul Food',
+//     'French', 'Japanese', 'Vietnamese', 'Mediterranean', 'Cuban', 'Sichuan',
+//     'Greek', 'Halal','Other'
+// ];
+// cuisineTypes.sort();
 
 // Route for the page of all restaurants
 // /furniture  需要显示所有的 furniture的list, 是一个 table, 包含大部分furniture的 属性
@@ -40,16 +37,22 @@ router.get('/', async (req, res) => {
     //         restaurants: restaurants
     // });
 });
+/**
+ * show all furniures in '/Furnitures'
+ */
+ 
+router.get('/Furnitures', async (req, res) => {  // 查看网页
+    
+    const allFurnitures = await furnitureData.getAllFurnitures();
 
-// Get create a restaurant page
-router.get('/new', async (req, res) => { // 查看网页
-    // Select options for cuisine type
-    return res.render('restaurants/new', { 
-            cuisines: cuisineTypes,
-            title: 'New Restaurant',                             
-            authenticated: req.session.user? true : false,
-            user: req.session.user,
-            partial: 'restaurants-form-script'
+    return res.render('furnitures/list', { 
+            // cuisines: cuisineTypes,
+            title: 'All Furnitures',
+            furnitures: allFurnitures,                             
+            // authenticated: req.session.user? true : false,
+            authenticated: true // 为了测试用
+            // user: req.session.user,
+            // partial: 'restaurants-form-script'
     });
 });
 
