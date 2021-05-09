@@ -1,12 +1,11 @@
 //Yixuan Wang 
 
 const mongoCollections = require("../config/mongoCollections");
-const furniture = mongoCollections.furniture;
 const uuid = require("uuid");
 const verifier = require("./verify");
 const rental = mongoCollections.rental
-// const users = require('./users')
 const shareUtilsDB = require("./shareUtilsDB");
+
 
 const ExportedMethods = {
 
@@ -69,6 +68,37 @@ const ExportedMethods = {
         return thisRental
     },
 
+    //Update
+    async updateRental(rentalId, updatedInfo){
+        if (!verifier.validString(rentalId)) throw "id is not a valid string.";
+    
+        const rentalCollection = await rental();
+        const theRental = getRentalById(rentalId);
+        const updatingInfo = {
+            location: updatedInfo.location, 
+            price: updatedInfo.price, 
+            bedroom: updatedInfo.bedroom, 
+            bathroom: updatedInfo.bathroom, 
+            space: updatedInfo.space, 
+            description: updatedInfo.description , 
+            photos: updatedInfo.photos, 
+            utility: updatedInfo.utility, 
+            like: theRental.like, 
+            dislike: theRental.dislike, 
+            labels: updatedInfo.labels, 
+            contact: updatedInfo.contact
+        }
+        
+        
+        const updatedRental = await rentalCollection.updateOne(
+              {_id: id},
+              {$set: updatingInfo}
+         )
+        if(!updatedRental.matchedCount && !updatedRental.motifiedCount) throw 'updated failed.'
+        
+        return await this.getRentalById;
+    },
+
 
     //Delete
     async deleteRental(id, userId) {
@@ -81,14 +111,9 @@ const ExportedMethods = {
         return true
     }
 
- 	
 
 }
 
 
 module.exports = ExportedMethods
-
-// Finished by Yixuan Wang on April 18, 2021
-
-
 
