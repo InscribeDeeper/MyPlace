@@ -73,7 +73,8 @@ const ExportedMethods = {
         if (!verifier.validString(rentalId)) throw "id is not a valid string.";
     
         const rentalCollection = await rental();
-        const theRental = getRentalById(rentalId);
+        const thisRental = getRentalById(rentalId);
+     
         const updatingInfo = {
             location: updatedInfo.location, 
             price: updatedInfo.price, 
@@ -83,12 +84,11 @@ const ExportedMethods = {
             description: updatedInfo.description , 
             photos: updatedInfo.photos, 
             utility: updatedInfo.utility, 
-            like: theRental.like, 
-            dislike: theRental.dislike, 
+            like: thisRental.like, 
+            dislike: thisRental.dislike, 
             labels: updatedInfo.labels, 
             contact: updatedInfo.contact
         }
-        
         
         const updatedRental = await rentalCollection.updateOne(
               {_id: id},
@@ -96,7 +96,7 @@ const ExportedMethods = {
          )
         if(!updatedRental.matchedCount && !updatedRental.motifiedCount) throw 'updated failed.'
         
-        return await this.getRentalById;
+        return await this.getRentalById(rentalId)
     },
 
 
