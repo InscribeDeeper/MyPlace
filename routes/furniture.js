@@ -50,7 +50,7 @@ router.get('/Furnitures', async (req, res) => {  // 查看网页
             title: 'All Furnitures',
             furnitures: allFurnitures,                             
             // authenticated: req.session.user? true : false,
-            authenticated: true // 为了测试用
+            authenticated: true // 
             // user: req.session.user,
             // partial: 'restaurants-form-script'
     });

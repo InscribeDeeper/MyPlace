@@ -4,8 +4,6 @@ const mongoCollections = require("../config/mongoCollections");
 const furniture = mongoCollections.furniture;
 const uuid = require("uuid");
 const verifier = require("./verify");
-
-const mongoCollections = require('../config/mongoCollections')
 const rental = mongoCollections.rental
 // const users = require('./users')
 const shareUtilsDB = require("./shareUtilsDB");

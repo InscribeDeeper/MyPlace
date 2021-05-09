@@ -1,7 +1,9 @@
 const mongoCollections = require("../config/mongoCollections");
 const furniture = mongoCollections.furniture;
+// const users = mongoCollections.users;
 const uuid = require("uuid");
 const verifier = require("./verify");
+const shareUtilsDB = require("./shareUtilsDB");
 // const bcrypt = require("bcryptjs");
 // const saltRounds = 8;
 
@@ -14,7 +16,7 @@ async function getFurnitureById(id) {
 }
 
 // async function CreateFurniture(category, location, price, description, photos, purchase_link, sold, contact) {
-async function createFurniture(category, location, price, description, photos, likes, dislikes, purchase_link, sold, contact) {
+async function createFurniture(userId, category, location, price, description, photos, likes, dislikes, purchase_link, sold, contact) {
 	// add to collection
 	// if (!verifier.validString(category)) throw "First name is not a valid string.";
 	if (!verifier.validString(location)) throw "Last name is not a valid string.";
@@ -26,9 +28,10 @@ async function createFurniture(category, location, price, description, photos, l
 	// if (!verifier.validString(contact)) throw "contact should be a string";
 
 	const furnitureCollection = await furniture();
-
+	// const userCollection = await users();
 	let newFurniture = {
 		_id: uuid.v4().toString(),
+		book_id: userId,
 		comment_id: [],
 		category,
 		location,
@@ -45,6 +48,8 @@ async function createFurniture(category, location, price, description, photos, l
 	// console.log("error1");
 	const newInsertedFurniture = await furnitureCollection.insertOne(newFurniture);
 	if (newInsertedFurniture.insertedCount === 0) throw "Insert failed!";
+	
+	await shareUtilsDB.toggleFurnitureToUser(userId, newFurniture._id);
 	return await this.getFurnitureById(newInsertedFurniture.insertedId);
 }
 

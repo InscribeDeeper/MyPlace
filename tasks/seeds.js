@@ -32,6 +32,7 @@ async function main() {
 
 	// create furniture
 	var furniture1 = await furnitureData.createFurniture(
+		userOneId,
 		(category = ["f", "u"]),
 		(location = "A"),
 		(price = 20),
@@ -44,9 +45,10 @@ async function main() {
 		(contact = 1500000000)
 	);
 	const furniture1Id = furniture1._id;
-	// console.log(furnitureOneId);
+	console.log(furniture1Id);
 
 	var furniture2 = await furnitureData.createFurniture(
+		userOneId,
 		(category = ["f", "u"]),
 		(location = "A"),
 		(price = 20),
@@ -59,11 +61,11 @@ async function main() {
 		(contact = 1500000000)
 	);
 	const furniture2Id = furniture2._id;
-	// console.log(furnitureOneId);
+	console.log(furniture2Id);
 
 	// toggle furniture into the userId
-	await toggleFn.toggleFurnitureToUser(userOneId, furniture1Id);
-	await toggleFn.toggleFurnitureToUser(userOneId, furniture2Id);
+	// await toggleFn.toggleFurnitureToUser(userOneId, furniture1Id);
+	// await toggleFn.toggleFurnitureToUser(userOneId, furniture2Id);
 
 	// create comments
 	// toggle comments into the furniture
