@@ -9,10 +9,10 @@ const shareUtilsDB = require("./shareUtilsDB");
 
 const ExportedMethods = {
 
-    //create
-
+    //CREATE
+   
     async createRental(location, price, bedroom, bathroom, space, description, photos, utility, like, dislike, labels, contact, newId) {
-        // use function on verify.js
+
         if (!verifier.validString(location)) throw "Location is not a valid string.";
         if (!verifier.validNum(price)) throw "Price is not a valid number.";
         if (!verifier.validNum(bedroom)) throw "Bedtoom is not a valid number.";
@@ -50,7 +50,8 @@ const ExportedMethods = {
     },
 
 
-    //Read ('get all', 'get by id')
+    //READ
+    // ('get all', 'get by id')
 
     async getAllRental(){
         const rentalCollection = await rental()
@@ -68,7 +69,7 @@ const ExportedMethods = {
         return thisRental
     },
 
-    //Update
+    //UPDATE
     async updateRental(rentalId, updatedInfo){
         if (!verifier.validString(rentalId)) throw "id is not a valid string.";
     
@@ -100,7 +101,7 @@ const ExportedMethods = {
     },
 
 
-    //Delete
+    //DELETE
     async deleteRental(id, userId) {
         const rentalCollection = await rental()
         const deleteInfo = await rentalCollection.removeOne({ _id: id})
