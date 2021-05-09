@@ -1,5 +1,10 @@
 //Yixuan Wang 
 
+const mongoCollections = require("../config/mongoCollections");
+const furniture = mongoCollections.furniture;
+const uuid = require("uuid");
+const verifier = require("./verify");
+
 const mongoCollections = require('../config/mongoCollections')
 const rental = mongoCollections.rental
 // const users = require('./users')
@@ -10,8 +15,18 @@ const ExportedMethods = {
     //create
 
     async createRental(location, price, bedroom, bathroom, space, description, photos, utility, like, dislike, labels, contact) {
-        //check errors will be finished later 
         // use function on verify.js
+        if (!verifier.validString(location)) throw "Location is not a valid string.";
+        if (!verifier.validNum(price)) throw "Price is not a valid number.";
+        if (!verifier.validNum(bedroom)) throw "Bedtoom is not a valid number.";
+        if (!verifier.validNum(bathroom)) throw "Bathroom is not a valid number.";
+        if (!verifier.validNum(space)) throw "Space is not a valid number.";
+        if (!verifier.validString(description)) throw "Description is not a valid string.";
+        // if (!verifier.validString(photo)) throw "photo is not a valid string.";
+        if (!verifier.validString(utility)) throw "utlity is not a valid string.";
+        if (!verifier.validBoolean(sold)) throw "Sold should be a boolean";
+        // if (!verifier.validString(contact)) throw "contact should be a string";
+
 
         const rentalCollection = await rental()
 
