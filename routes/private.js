@@ -6,14 +6,14 @@ const verifier = require('../data/verify');
 
 router.get('/', async(req, res) =>{
     const userData = req.session.user;
-    const userReviews = await reviews.getAllReviewsOfUser(userData._id);
+    // const userReviews = await reviews.getAllReviewsOfUser(userData._id);
 
     // Combine restaurants and reviews into one array for easier access
-    let restaurantNames = [];
-    for (let review of userReviews){
-        let rest = await restaurants.getRestaurantById(review.restaurantId);
-        restaurantNames.push(rest.name);
-    }
+    // let restaurantNames = [];
+    // for (let review of userReviews){
+    //     let rest = await restaurants.getRestaurantById(review.restaurantId);
+    //     restaurantNames.push(rest.name);
+    // }
 
     let reviewRest = [];
     for (let i = 0; i < userReviews.length; i++) {

@@ -24,31 +24,7 @@ const exphbs = require("express-handlebars");
 // app.set('view engine', 'hbs');
 // app.set('views', path.join(__dirname,"views"));
 
-const handlebarsInstance = exphbs.create({
-	defaultLayout: "main", // Specify helpers which are only registered on this instance.
-	helpers: {
-		asJSON: (obj, spacing) => {
-			if (typeof spacing === "number") return new Handlebars.SafeString(JSON.stringify(obj, null, spacing));
-			return new Handlebars.SafeString(JSON.stringify(obj));
-		},
-	},
-	// helpers: {
-	// 	asJSON: (obj, spacing) => {
-	// 		if (typeof spacing === "number") return new Handlebars.SafeString(JSON.stringify(obj, null, spacing));
-
-	// 		return new Handlebars.SafeString(JSON.stringify(obj));
-	// 	},
-	// 	checkListMem: function (elem, target) {
-	// 		if (elem && target) {
-	// 			return target.includes(elem);
-	// 		} else return false;
-	// 	},
-	// 	checkListLengthZero: function (arr) {
-	// 		return arr.length == 0;
-	// 	},
-	// },
-	// partialsDir: ["views/partials/"],
-});
+const handlebarsInstance = exphbs.create({defaultLayout: "main"});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -72,24 +48,24 @@ app.use(
 //   }
 
 // Authentication Middleware
-// app.use("/private", (req, res, next) => {
-// 	if (!req.session.user) {
-// 		let errors = [];
-// 		errors.push("You cannot access the private route without logging in");
-// 		return res.render("errors/error", {
-// 			title: "Errors",
-// 			errors: errors,
-// 			partial: "errors-script",
-// 		});
-// 	}
-// 	next();
+app.use("/private", (req, res, next) => {
+	if (!req.session.user) {
+		let errors = [];
+		errors.push("You cannot access the private route without logging in");
+		return res.render("errors/error", {
+			title: "Errors",
+			errors: errors,
+			partial: "errors-script",
+		});
+	}
+	next();
 
-// 	// if (!req.session.AuthCookie) {
-// 	// 	res.status(403).render("logSys/login", { error: "403: Forbidden Please Log in" });
-// 	// } else {
-// 	// 	next();
-// 	// }
-// });
+	if (!req.session.AuthCookie) {
+		res.status(403).render("users/login", { error: "403: Forbidden Please Log in" });
+	} else {
+		next();
+	}
+});
 
 // Logging Middleware
 // 需要做流量统计的函数
