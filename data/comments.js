@@ -23,7 +23,7 @@ async function addComments(user_id, comment, report_count, helpful_count) {
     if (!verifier.validNum(report_count)) throw 'Invalid Report Count'
     if (!verifier.validNum(helpful_count)) throw 'Invalid Helpful Count'
 
-    const commentsCollection = await comments
+    const commentsCollection = await comments()
 
     const newComments = {
         user_id: user_id,
@@ -36,8 +36,8 @@ async function addComments(user_id, comment, report_count, helpful_count) {
     const newInsertedComments = await commentsCollection.insertOne(newComments);
     if (newInsertedComments.insertedCount === 0) throw 'No Comment(s) input';
 
-    await shareUtilsDB.toggleCommentToUser(userId, newComments._id);
-    return await this.getByCommentsId(newInsertedComments.insertedId);
+    await shareUtilsDB.toggleCommentToUser(user_id, newComments._id);
+    return await this.getByCommentId(newInsertedComments.insertedId);
 }
 
 
