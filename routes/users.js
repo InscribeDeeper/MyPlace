@@ -48,7 +48,7 @@ router.post("/login", async (req, res) => {
 	const password = xss(req.body.password.trim());
 	let myUser;
 
-	errors = [];
+	let errors = [];
 
 	if (!verifier.validString(userName) || !verifier.validString(password)) errors.push("Invalid userName or password");
 
