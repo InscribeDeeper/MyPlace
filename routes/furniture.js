@@ -41,7 +41,7 @@ router.get('/', async (req, res) => {
  * show all furniures in '/Furnitures'
  */
  
-router.get('/Furnitures', async (req, res) => {  // 查看网页
+router.get('/', async (req, res) => {  // 查看网页
     
     const allFurnitures = await furnitureData.getAllFurnitures();
 
@@ -58,32 +58,28 @@ router.get('/Furnitures', async (req, res) => {  // 查看网页
 
 // Route to create a restaurant
 router.post('/new', async (req, res) => { // 上传新建
-    let newName = xss(req.body.name);
-    let newAddress = xss(req.body.address);
-    let newCuisine = xss(req.body.cuisine);
-    let newCuisineInput = xss(req.body.cuisineInput);
-    let newLink = xss(req.body.link);
-    let otherOption = 'Other';
-
-    if (newCuisine === otherOption) newCuisine = newCuisineInput;
+    let category = xss(req.body.category);
+    let location = xss(req.body.location);
+    let price = xss(req.body.price);
+    let description = xss(req.body.description);
+    let photos = xss(req.body.photos);
+    let purchase_link = xss(req.body.purchase_link);
 
     let errors = [];
-    if (!verify.validString(newName)) errors.push('Invalid restaurant name.');
-    if (!verify.validString(newAddress)) errors.push('Invalid restaurat address.');
-    if (!verify.validString(newCuisine)) errors.push('Invalid cuisine.');
-    if (newLink && !verify.validLink(newLink)) errors.push('Invalid yelp link. Link should be of the form :\n https://www.yelp.com/biz/name-of-the-restaurant.');
+    if (!category) errors.push('Invalid furniture category.');
+    if (!location) errors.push('Invalid location.');
+    if (!price) errors.push('No price added.');
+    if (!photos) errors.push('photos strongly recommended');
 
-    const allRestaurants = await restaurantData.getAllRestaurants();
-    for (let x of allRestaurants) {
-        if (x.address.toLowerCase() === newAddress.toLowerCase()) errors.push('A restaurant with this address already exists.');
-    }
+    // const allRestaurants = await restaurantData.getAllRestaurants();
+    // for (let x of allRestaurants) {
+    //     if (x.address.toLowerCase() === newAddress.toLowerCase()) errors.push('A restaurant with this address already exists.');
+    // }
 
     // Do not submit if there are errors in the form
     if (errors.length > 0) {
-        return res.render('restaurants/new', {
-            cuisines: cuisineTypes,
-            title: 'New Restaurant',
-            partial: 'restaurants-form-script',
+        return res.render('furniture/new', {
+            title: 'New Furniture',
             authenticated: req.session.user ? true : false,
             user: req.session.user,
             hasErrors: true,
@@ -92,8 +88,8 @@ router.post('/new', async (req, res) => { // 上传新建
     }
 
     try {
-        const newRestaurant = await restaurantData.createRestaurant(newName, newAddress, newCuisine, newLink);
-        res.redirect(`/restaurants`);
+        const newFurniture = await furnitureData.createFurniture(req.params._id, category, location, price, description, photos, 0, 0, purchase_link, false, contact);
+        res.redirect(`/furniture`);
     } catch(e) {
         res.status(500).json({error: e});
     }
