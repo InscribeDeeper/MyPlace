@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const data = require('../data');
-const comments = require('../data/comments');
+const furnitureData = data.furniture;
+const userData = data.users;
 const commentData = data.comments;
-const restaurantData = data.restaurants;
-const verifier = require('../data/verify');
-const xss = require('xss')
+const verify = require('../data/verify');
+const xss = require('xss');
 
-router.get('/writeareview/:id', async (req, res) => {
+router.get('/writeareview/:id', async(req, res) => {
     // Redirect the user to login page if they attempt to create a review without logging in 
     // Use req.session to store the redirect address after logging in
     if (!req.session.user) {
@@ -19,7 +19,7 @@ router.get('/writeareview/:id', async (req, res) => {
     // Clear the previousRoute in req.session if it exists
     let errors = [];
     let restaurantId = req.params.id.trim();
-    if (!verifier.validString(restaurantId)) {
+    if (!verify.validString(restaurantId)) {
         errors.push("No id was provided to 'restaurants/writeareview/:id' route.");
         res.render('errors/error', {
             title: 'Errors',
@@ -28,13 +28,13 @@ router.get('/writeareview/:id', async (req, res) => {
         });
     }
 
-    try {
+    try { //pull评论
         const restaurant = await restaurantData.getRestaurantById(restaurantId);
         res.render('reviews/create', {
             partial: 'write-a-review-script',
             title: 'Write a Review',
-            authenticated: req.session.user? true : false,
-            user : req.session.user,
+            authenticated: req.session.user ? true : false,
+            user: req.session.user,
             restaurant: restaurant
         });
     } catch (e) {
@@ -48,10 +48,10 @@ router.get('/writeareview/:id', async (req, res) => {
 });
 
 // User should only be able to access POST route after logging in
-router.post('/writeareview/:id', async (req, res) => {
+router.post('/writeareview/:id', async(req, res) => {
     // Validate input in this route before sending to server
     let restaurantId = xss(req.params.id.trim());
-    if (!verifier.validString(restaurantId)) res.render('errors/errror', {errorMessage: "Invalid restaurant id."});
+    if (!verify.validString(restaurantId)) res.render('errors/errror', { errorMessage: "Invalid restaurant id." });
 
     // Everything in req.body is a string
     const newRating = parseInt(xss(req.body.reviewRating));
@@ -70,13 +70,13 @@ router.post('/writeareview/:id', async (req, res) => {
         noTouchPayment: !!newPayment,
         outdoorSeating: !!newSeating
     };
-    
+
     // Route-side input validation
     let errors = [];
     if (!req.session.user) errors.push('User is not logged in!');
-    if (!verifier.validRating(newMetrics.rating)) errors.push('Invalid review rating.');
-    if (!verifier.validRating(newMetrics.price)) errors.push('Invalid review price.');
-    if (!verifier.validString(newReviewText)) errors.push('Invalid review text.');
+    if (!verify.validRating(newMetrics.rating)) errors.push('Invalid review rating.');
+    if (!verify.validRating(newMetrics.price)) errors.push('Invalid review price.');
+    if (!verify.validString(newReviewText)) errors.push('Invalid review text.');
 
     if (errors.length > 0) {
         res.render('errors/error', {
