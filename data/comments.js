@@ -6,7 +6,7 @@ const verifier = require("./verify");
 const shareUtilsDB = require("./shareUtilsDB");
 
 
-async function getByCommentId(id) {
+async function getCommentById(id) {
 
     const commentsCollection = await comments();
     const theComments = await commentsCollection.findOne({ _id: id });
@@ -80,7 +80,7 @@ async function updateComment(commentId, updatedInfo) {
 
 
 module.exports = {
-    getByCommentId,
+    getCommentById,
     addComments,
     getAllComments,
     deleteComment,

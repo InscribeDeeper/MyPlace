@@ -7,7 +7,7 @@ const commentData = data.comments;
 const verify = require('../data/verify');
 const xss = require('xss');
 
-router.get('/writeareview/:id', async(req, res) => {
+router.get('/commentFuniture/:id', async(req, res) => {
     // Redirect the user to login page if they attempt to create a review without logging in 
     // Use req.session to store the redirect address after logging in
     if (!req.session.user) {
@@ -18,9 +18,9 @@ router.get('/writeareview/:id', async(req, res) => {
 
     // Clear the previousRoute in req.session if it exists
     let errors = [];
-    let restaurantId = req.params.id.trim();
-    if (!verify.validString(restaurantId)) {
-        errors.push("No id was provided to 'restaurants/writeareview/:id' route.");
+    let furnitureId = req.params.id.trim();
+    if (!verify.validString(furnitureId)) {
+        errors.push("No id was provided to 'funiture/commentFuniture/:id' route.");
         res.render('errors/error', {
             title: 'Errors',
             errors: errors,
@@ -29,7 +29,7 @@ router.get('/writeareview/:id', async(req, res) => {
     }
 
     try { //pull评论
-        const restaurant = await restaurantData.getRestaurantById(restaurantId);
+        const comment = await commentData.getCommentById(furnitureId);
         res.render('reviews/create', {
             partial: 'write-a-review-script',
             title: 'Write a Review',
@@ -47,8 +47,9 @@ router.get('/writeareview/:id', async(req, res) => {
     }
 });
 
+
 // User should only be able to access POST route after logging in
-router.post('/writeareview/:id', async(req, res) => {
+router.post('/commentFuniture/:id', async(req, res) => {
     // Validate input in this route before sending to server
     let restaurantId = xss(req.params.id.trim());
     if (!verify.validString(restaurantId)) res.render('errors/errror', { errorMessage: "Invalid restaurant id." });
