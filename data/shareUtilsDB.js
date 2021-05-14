@@ -65,6 +65,47 @@ async function untoggleFurnitureToUser(user_id, furniture_id) {
 	return await getUserById(user_id);
 }
 
+async function addFavFurnitureToUser(user_id, furniture_id) {
+	if (!verifier.validString(user_id)) throw "User id is not a valid string.";
+	if (!verifier.validString(furniture_id)) throw "furniture_id id is not a valid string.";
+
+	const userCollection = await users();
+	const updatedInfo = await userCollection.updateOne({ _id: user_id }, { $addToSet: { favor_furniture_id: furniture_id } });
+	if (updatedInfo.modifiedCount === 0) throw "Could not update favor_furniture_id in User collection successfully.";
+	return await getUserById(user_id);
+}
+
+async function addFavRentalToUser(user_id, furniture_id) {
+	if (!verifier.validString(user_id)) throw "User id is not a valid string.";
+	if (!verifier.validString(furniture_id)) throw "furniture_id id is not a valid string.";
+
+	const userCollection = await users();
+	const updatedInfo = await userCollection.updateOne({ _id: user_id }, { $addToSet: { favor_rental_id: furniture_id } });
+	if (updatedInfo.modifiedCount === 0) throw "Could not update favor_rental_id in User collection successfully.";
+	return await getUserById(user_id);
+}
+
+async function removeFavFurnitureToUser(user_id, furniture_id) {
+	if (!verifier.validString(user_id)) throw "User id is not a valid string.";
+	if (!verifier.validString(furniture_id)) throw "furniture_id id is not a valid string.";
+
+	const userCollection = await users();
+	const updatedInfo = await userCollection.updateOne({ _id: user_id }, { $pull: { favor_furniture_id: furniture_id } });
+	if (updatedInfo.modifiedCount === 0) throw "Could not update favor_furniture_id in User collection successfully.";
+	return await getUserById(user_id);
+}
+
+async function removeFavRentalToUser(user_id, furniture_id) {
+	if (!verifier.validString(user_id)) throw "User id is not a valid string.";
+	if (!verifier.validString(furniture_id)) throw "furniture_id id is not a valid string.";
+
+	const userCollection = await users();
+	const updatedInfo = await userCollection.updateOne({ _id: user_id }, { $pull: { favor_rental_id: furniture_id } });
+	if (updatedInfo.modifiedCount === 0) throw "Could not update favor_rental_id in User collection successfully.";
+	return await getUserById(user_id);
+}
+
+
 // async function untoggleCommentToUser(user_id, furniture_id) {
 // 	if (!verifier.validString(user_id)) throw "User id is not a valid string.";
 // 	if (!verifier.validString(furniture_id)) throw "furniture_id id is not a valid string.";
@@ -82,4 +123,9 @@ module.exports = {
 	untoggleRentalToUser,
 	untoggleCommentToUser,
 	untoggleFurnitureToUser,
+
+	addFavFurnitureToUser,
+	addFavRentalToUser,
+	removeFavFurnitureToUser, 
+	removeFavRentalToUser
 };

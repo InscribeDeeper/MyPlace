@@ -17,10 +17,10 @@
                         </div>
                         <div class="container row mb-3">
                             <div class="col col-4">
-                                <label for="username" class="mr-3">Username</label>
+                                <label for="userName" class="mr-3">userName</label>
                             </div>
                             <div class="col">
-                                <input type="text" id="username" class="rounded p-1" placeholder="{{user.username}}" disabled>
+                                <input type="text" id="userName" class="rounded p-1" placeholder="{{user.userName}}" disabled>
                             </div>
                         </div>
                         <div class="container row mb-3">
@@ -60,7 +60,7 @@
                 <div class="container">
                     <h2 class="card-title h3">Favorited Restaurants</h2>
                 </div>
-                <div class="container">
+                {{!-- <div class="container">
                     {{#if (checkListLengthZero favRestaurants)}}
                         <p class = "font-italic">None, go favorite some restaurants!</p>
                     {{else}}
@@ -72,7 +72,7 @@
                         {{/each}}
                         </ul>
                     {{/if}}
-                </div>
+                </div> --}}
             </div>
         </div>
         <div class="col card shadow">
@@ -80,7 +80,7 @@
                 <div class="container">
                     <h2 class="card-title h3">Your Statistics</h2>
                 </div>
-                <div class="container">
+                {{!-- <div class="container">
                     <div class="container">
                         <span class="font-weight-bold">Number of Favorited Restaurants:</span>
                         <span id="numFav" class="text-right">{{favRestaurants.length}}</span>
@@ -89,7 +89,7 @@
                         <span class="font-weight-bold">Number of Reviews:</span>
                         <span id="numReviews" class="text-right">{{reviews.length}}</span>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -101,7 +101,7 @@
                 </div>
                 <div class="container">
                     <ul class="list-group list-group-flush">
-                        {{#each reviews}}
+                        {{!-- {{#each reviews}}
                         <li class="list-group-item borderless">
                             <div class="card container mb-5">
                                 <div class="card-header row">
@@ -217,7 +217,7 @@
                                 </div>
                             </div>
                         </li>
-                        {{/each}}
+                        {{/each}} --}}
                     </ul>
                 </div>
             </div>

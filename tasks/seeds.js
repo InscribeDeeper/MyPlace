@@ -19,7 +19,7 @@ async function main() {
         (lastName = "yang"),
         (age = 100),
         (email = "wyang17@stevens.edu"),
-        (password = "1234756"),
+        (password = "111111"),
         (selfSummary = "Wyang summary")
     );
 
@@ -27,7 +27,7 @@ async function main() {
     console.log(userOneId);
 
     userOne = await userData.updateUserInfo((id = userOneId), (newUserInfo = { age: 200, email: "hey.weiyang@gmail.com" }));
-    userOne = await userData.updateUserPassword((id = userOneId), (password = "12347567"));
+    userOne = await userData.updateUserPassword((id = userOneId), (password = "123456"));
     console.log(userOneId);
 
     // create furniture

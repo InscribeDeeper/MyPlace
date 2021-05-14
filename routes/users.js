@@ -16,17 +16,19 @@ router.get("/", async (req, res) => {
 	}
 });
 
+// 这里的get 的 if 判断, 全部用 middleware解决
+
 // Get login page
 router.get("/login", async (req, res) => {
-	if (req.session.user) {
-		res.redirect("/private");
-	} else {
+	// if (req.session.user) {
+	// 	res.redirect("/private");
+	// } else {
 		res.render("users/login", {
 			title: "Log In",
 			authenticated: false,
 			partial: "login-script",
 		});
-	}
+	// }
 });
 
 // Get signup page
@@ -46,24 +48,21 @@ router.get("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
 	const userName = xss(req.body.userName.trim());
 	const password = xss(req.body.password.trim());
-	let myUser;
+	let myUser = null;
 
 	let errors = [];
 
-	if (!verifier.validString(userName) || !verifier.validString(password)) errors.push("Invalid userName or password");
-
-	/*
-        Why not create a function in users to query by userName since each userName should be unique?
-    */
-	const users = await userData.getAllUser();
-	for (let i = 0; i < users.length; i++) {
-		if (users[i].userName == userName) {
-			myUser = users[i];
-		}
+	if (!verifier.validString(userName) || !verifier.validString(password)) {
+		errors.push("Invalid userName or password");
 	}
 
-	if (!myUser) errors.push("userName or password does not match.");
+	try {
+		myUser = await userData.getUserByUserName(userName);
+	} catch (e) {
+		errors.push("userName or password does not match.");
+	}
 
+	// user exist
 	if (errors.length > 0) {
 		return res.status(401).render("users/login", {
 			title: "Log In",
@@ -72,23 +71,25 @@ router.post("/login", async (req, res) => {
 		});
 	}
 
-	// let match = await bcrypt.compare(password, myUser.hashedPassword);
-	let match = true;
-
+	// password compare
+	let match = await bcrypt.compare(password, myUser.hashed_pw);
+	// console.log('match :' + match)
 	if (match) {
-		req.session.user = myUser;
-		// Redirect the user to their previous route after they login if it exists
-		// Otherwise, bring them to the restaurants list page
-		let temp = req.session.previousRoute;
-		if (temp) {
-			req.session.previousRoute = "";
-			return res.redirect(temp);
-		}
-		res.redirect("/");
+		req.session.user = myUser.userName; // record into session.user
+
+		// console.log(myUser)
+		// console.log(req.session.user )
+		let temp = req.session.previousRoute; // bring back to previous page before login
+		// if (temp) {
+		// 	req.session.previousRoute = "";
+		// 	res.redirect(temp);
+		// } else {
+			res.redirect("/private");
+		// }
 	} else {
 		errors.push("userName or password does not match");
 		return res.status(401).render("users/login", {
-			title: "Errors",
+			title: "Log In",
 			partial: "login-script",
 			errors: errors,
 		});
@@ -96,6 +97,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/signup", async (req, res) => {
+
 	const firstName = xss(req.body.firstName);
 	const lastName = xss(req.body.lastName);
 	const userName = xss(req.body.userName);
@@ -103,17 +105,20 @@ router.post("/signup", async (req, res) => {
 	const email = xss(req.body.email);
 	const selfSummary = xss(req.body.selfSummary);
 	let age = parseInt(xss(req.body.age));
-	console.log(userName)
-	console.log(typeof userName)
-	console.log(req.body)
+
+	// console.log(userName);
+	// console.log(typeof userName);
+	// console.log(req.body);
 	let errors = [];
-	if (!verifier.validString(firstName)) throw "First name is not a valid string.";
-	if (!verifier.validString(lastName)) throw "Last name is not a valid string.";
-	if (!verifier.validEmail(email)) throw "Email is not a valid string.";
-	if (!verifier.validString(userName)) throw "userName is not a valid string.";
-	if (!verifier.validAge(age)) throw "Age must be a positive integer";
-	if (!verifier.validPassword(password)) throw "Password can only contain [a-z][0-9][A-Z][_-], and length range [6, 16]";
-	// if (!verifier.validString(selfSummary)) throw "selfSummary is not a valid string.";
+
+	if (!verifier.validString(firstName)) errors.push( "First name is not a valid string.");
+	if (!verifier.validString(lastName)) errors.push( "Last name is not a valid string.");
+	if (!verifier.validEmail(email)) errors.push( "Email is not a valid string.");
+	if (!verifier.validString(userName)) errors.push( "userName is not a valid string.");
+	if (!verifier.validAge(age)) errors.push( "Age must be a positive integer");
+	if (!verifier.validPassword(password)) errors.push( "Password can only contain [a-z][0-9][A-Z][_-], and length range [6, 16]");
+	// if (!verifier.validString(selfSummary)) error.push( "selfSummary is not a valid string.");
+	
 
 	if (errors.length > 0) {
 		return res.status(401).render("users/signup", {
@@ -126,7 +131,9 @@ router.post("/signup", async (req, res) => {
 
 	try {
 		const user = await userData.createUser(userName, firstName, lastName, age, email, password, selfSummary);
-		req.session.user = user;
+		// console.log("route users/signup")
+		// console.log(user)
+		req.session.user = user.userName;
 		res.redirect("/"); // to landing
 	} catch (e) {
 		errors.push(e);
