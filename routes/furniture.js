@@ -1,207 +1,274 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const data = require('../data');
-const yelp = require('yelp-fusion');
-const restaurantData = data.restaurants;
-const reviewData = data.reviews;
-const commentData = data.comments;
+const data = require("../data");
+const furnitureData = data.furniture;
 const userData = data.users;
-const verify = require('../data/verify');
-const xss = require('xss');
-const apiKey = 'yelpAPIKey';
+const commentData = data.comments;
+const verify = require("../data/verify");
+const xss = require("xss");
 
-let cuisineTypes = ['American', 'Breakfast', 'Brunch', 'Chinese', 'Fast Food', 'Italian',
-    'Mexican', 'Thai', 'Korean', 'Middle-Eastern', 'Indian', 'Soul Food',
-    'French', 'Japanese', 'Vietnamese', 'Mediterranean', 'Cuban', 'Sichuan',
-    'Greek', 'Halal','Other'
+let category = [
+	"American",
+	"Breakfast",
+	"Brunch",
+	"Chinese",
+	"Fast Food",
+	"Italian",
+	"Mexican",
+	"Thai",
+	"Korean",
+	"Middle-Eastern",
+	"Indian",
+	"Soul Food",
+	"French",
+	"Japanese",
+	"Vietnamese",
+	"Mediterranean",
+	"Cuban",
+	"Sichuan",
+	"Greek",
+	"Halal",
+	"Other",
 ];
-cuisineTypes.sort();
+category.sort();
 
 // Route for the page of all restaurants
 // /furniture  需要显示所有的 furniture的list, 是一个 table, 包含大部分furniture的 属性
-router.get('/', async (req, res) => {
-    
-    // const restaurants = await restaurantData.getAllRestaurants();
-    // restaurants.forEach(async (restaurant)=>{
-    //     allReviews = await reviewData.getAllReviewsOfRestaurant(restaurant._id);
-    //     numReviews = allReviews.length;
-    //     restaurant.rating = (restaurant.rating / numReviews).toFixed(2);
-    //     restaurant.price = (restaurant.price / numReviews).toFixed(2);
-    //     if (numReviews === 0) {
-    //         restaurant.rating = 'No Reviews';
-    //         restaurant.price = 'No Reviews';
-    //     }
-    // });
-    // return res.render('restaurants/list', { 
-    //     authenticated: req.session.user ? true : false, // 这里会进行 认证
-    //     user: req.session.user,
-    //         title: 'All Restaurants',
-    //         partial: 'restaurants-list-script', 
-    //         restaurants: restaurants
-    // });
+// router.get('/', async (req, res) => {
+
+// const restaurants = await restaurantData.getAllRestaurants();
+// restaurants.forEach(async (restaurant)=>{
+//     allReviews = await reviewData.getAllReviewsOfRestaurant(restaurant._id);
+//     numReviews = allReviews.length;
+//     restaurant.rating = (restaurant.rating / numReviews).toFixed(2);
+//     restaurant.price = (restaurant.price / numReviews).toFixed(2);
+//     if (numReviews === 0) {
+//         restaurant.rating = 'No Reviews';
+//         restaurant.price = 'No Reviews';
+//     }
+// });
+// return res.render('restaurants/list', {
+//     authenticated: req.session.user ? true : false, // 这里会进行 认证
+//     user: req.session.user,
+//         title: 'All Restaurants',
+//         partial: 'restaurants-list-script',
+//         restaurants: restaurants
+// });
+// });
+
+router.get("/", async (req, res) => {
+	const allFurnitures = await furnitureData.getAllFurnitures();
+	return res.render("furniture/list", {
+		category: category,
+		title: "All Furnitures",
+		furniture: allFurnitures,
+		authenticated: req.session.user ? true : false,
+		user: req.session.user,
+		partial: "restaurants-form-script",
+	});
 });
 
-// Get create a restaurant page
-router.get('/new', async (req, res) => { // 查看网页
-    // Select options for cuisine type
-    return res.render('restaurants/new', { 
-            cuisines: cuisineTypes,
-            title: 'New Restaurant',                             
-            authenticated: req.session.user? true : false,
-            user: req.session.user,
-            partial: 'restaurants-form-script'
-    });
+router.get("/new", async (req, res) => {
+	return res.render("furniture/new", {
+		title: "New Furniture",
+		authenticated: req.session.user ? true : false,
+		user: req.session.user,
+		hasErrors: false,
+		errors: null,
+	});
 });
 
-// Route to create a restaurant
-router.post('/new', async (req, res) => { // 上传新建
-    let newName = xss(req.body.name);
-    let newAddress = xss(req.body.address);
-    let newCuisine = xss(req.body.cuisine);
-    let newCuisineInput = xss(req.body.cuisineInput);
-    let newLink = xss(req.body.link);
-    let otherOption = 'Other';
+router.post("/new", async (req, res) => {
+	// 上传新建
+	let category = xss(req.body.category);
+	let location = xss(req.body.location);
+	let price = xss(req.body.price);
+	let description = xss(req.body.description);
+	let photo_link = xss(req.body.photo_link);
+	let purchase_link = xss(req.body.purchase_link);
+	let contact = xss(req.body.contact);
 
-    if (newCuisine === otherOption) newCuisine = newCuisineInput;
+	let errors = [];
 
-    let errors = [];
-    if (!verify.validString(newName)) errors.push('Invalid restaurant name.');
-    if (!verify.validString(newAddress)) errors.push('Invalid restaurat address.');
-    if (!verify.validString(newCuisine)) errors.push('Invalid cuisine.');
-    if (newLink && !verify.validLink(newLink)) errors.push('Invalid yelp link. Link should be of the form :\n https://www.yelp.com/biz/name-of-the-restaurant.');
+	if (!category) errors.push("Invalid furniture category.");
+	if (!location) errors.push("Invalid location.");
+	if (!price) errors.push("No price added.");
+	if (!photo_link) errors.push("photos strongly recommended");
+	if (!purchase_link) errors.push("purchase_link strongly recommended");
+	if (!contact) errors.push("No contact");
 
-    const allRestaurants = await restaurantData.getAllRestaurants();
-    for (let x of allRestaurants) {
-        if (x.address.toLowerCase() === newAddress.toLowerCase()) errors.push('A restaurant with this address already exists.');
-    }
+	// const allRestaurants = await restaurantData.getAllRestaurants();
+	// for (let x of allRestaurants) {
+	//     if (x.address.toLowerCase() === newAddress.toLowerCase()) errors.push('A restaurant with this address already exists.');
+	// }
 
-    // Do not submit if there are errors in the form
-    if (errors.length > 0) {
-        return res.render('restaurants/new', {
-            cuisines: cuisineTypes,
-            title: 'New Restaurant',
-            partial: 'restaurants-form-script',
-            authenticated: req.session.user ? true : false,
-            user: req.session.user,
-            hasErrors: true,
-            errors: errors
-        });
-    }
+	// Do not submit if there are errors in the form
+	if (errors.length > 0) {
+		return res.render("furniture/new", {
+			title: "New Furniture",
+			authenticated: req.session.user ? true : false,
+			user: req.session.user,
+			hasErrors: true,
+			errors: errors,
+			reqInput: req.body
+		});
+	}
 
-    try {
-        const newRestaurant = await restaurantData.createRestaurant(newName, newAddress, newCuisine, newLink);
-        res.redirect(`/restaurants`);
-    } catch(e) {
-        res.status(500).json({error: e});
-    }
+	// get user
+	const userName = req.session.user;
+	try {
+		myUser = await userData.getUserByUserName(userName);
+	} catch (e) {
+		errors.push("userName or password is not valid.");
+	}
+
+	try {
+		const newFurniture = await furnitureData.createFurniture(
+			myUser._id,
+			category,
+			location,
+			price,
+			description,
+			photo_link,
+			0,
+			0,
+			purchase_link,
+			false,
+			contact
+		);
+		res.redirect(`/furniture`);
+	} catch (e) {
+		res.status(500).json({ error: e });
+	}
 });
 
-// Search for a specific restaurant
-router.get('/:id', async (req, res) => {
-    let id = req.params.id.trim();
-    let errors = [];
-    if (!verify.validString(id)) {
-        errors.push('Id of the restaurant must be provided')
-        return res.render('errors/error', {
-            title: 'Errors',
-            partial: 'errors-script',
-            errors: errors
-        });
-    }
-    
-    try {
-        const restaurant = await restaurantData.getRestaurantById(id);
-        const allReviews = await reviewData.getAllReviewsOfRestaurant(id);
-        
-        // Reviews will be a list of objects s.t. each object will hold all the info for a single review
-        /*
-            {
-                username: "sgao",
-                age: 20,
-                text: "Oh wow this is a great restaurant",
-                metrics : {subdocument of metrics},
-                comments: []
-            }
-        */
-        const reviews = [];
-        for (const review of allReviews) {
-            let current = {};
-            let { firstName, lastName, age } = await userData.getUserById(review.reviewerId);
-            current.id = review._id;
-            current.name = firstName + ' ' + lastName;
-            current.age = age;
-            current.text = review.reviewText;
-            current.metrics = review.metrics;
-            current.likes = review.likes;
-            current.dislikes = review.dislikes;
-            current.reported = review.reported;
+// Search for a specific furniture
+router.get("/:id", async (req, res) => {
+	if (!req.session.user) {
+		req.session.previousRoute = req.originalUrl;
+		res.redirect("/users/login");
+		return;
+	}
 
-            let allComments = await commentData.getAllCommentsOfReview(review._id);
-            let comments = [];
-            for (const comment of allComments) {
-                let currentComment = {};
-                let {firstName, lastName, age} = await userData.getUserById(comment.userId);
-                currentComment.name = firstName + ' ' + lastName;
-                currentComment.age = age;
-                currentComment.text = comment.text
-                comments.push(currentComment);
-            }
-            current.comments = comments;
+	var furnitureID = req.params.id.trim();
+	var errors = [];
+	var allComments = [];
 
-            let max = 5;
-            current.filledStars = verify.generateList(current.metrics.rating);
-            current.unfilledStars = verify.generateList(max - current.metrics.rating);
-            current.filledDollars = verify.generateList(current.metrics.price)
-            reviews.push(current);
-        }
+	// get user
+	const userName = req.session.user;
+	try {
+		myUser = await userData.getUserByUserName(userName);
+	} catch (e) {
+		errors.push("userName or password is not valid.");
+	}
 
-        // Calculate percentages for ratings based off of reviews
-        const numReviews = allReviews.length;
-        restaurant.rating = (restaurant.rating / numReviews).toFixed(2);
-        restaurant.price = (restaurant.price / numReviews).toFixed(2);
-        restaurant.distancedTables = ((restaurant.distancedTables / numReviews) * 100).toFixed(2);
-        restaurant.maskedEmployees = ((restaurant.maskedEmployees / numReviews) * 100).toFixed(2);
-        restaurant.noTouchPayment = ((restaurant.noTouchPayment / numReviews) * 100).toFixed(2);
-        restaurant.outdoorSeating = ((restaurant.outdoorSeating / numReviews) * 100).toFixed(2);
+	if (!verify.validString(furnitureID)) {
+		errors.push("Id of the furniture must be provided");
+		return res.render("errors/error", {
+			title: "Errors",
+			partial: "errors-script",
+			errors: errors,
+		});
+	}
 
-        // Get the restaurant's photos from calling Yelp API
-        const client = yelp.client(apiKey);
-        const matchRequest = {
-            name: restaurant.name,
-            address1: restaurant.address,
-            city: 'Hoboken',
-            state: 'NJ',
-            country: 'US'
-        };
+	try {
+		const furniture = await furnitureData.getFurnitureById(furnitureID);
+		const commentsIdList = furniture.comments_id || [];
 
-        const matchRes = await client.businessMatch(matchRequest);
-        const jsonRes = matchRes.jsonBody;
-        let results = jsonRes.businesses;
-        let result = results[0];
-        let photos = [];
-        if (results.length > 0) {
-            const businessRes = await client.business(result.id);
-            const jsonRes2 = businessRes.jsonBody;
-            photos = jsonRes2.photos;
-        }
+		if (commentsIdList.length > 0) {
+			allComments = await Promise.all(
+				commentsIdList.map(async (x) => {
+					return await commentData.getCommentById(x);
+				})
+			);
+		}
 
-        res.render('restaurants/single', {
-            partial: 'restaurants-single-script',
-            title: `${restaurant.name}`,
-            authenticated: req.session.user ? true : false,
-            user: req.session.user,
-            restaurant: restaurant,
-            reviews: reviews,
-            photos: photos
-        });
-    } catch(e) {   
-        errors.push(e);
-        res.status(500).render('errors/error', {
-            title: 'Errors',
-            partial: 'errors-script',
-            errors: errors
-        });
-    }
+		var allCommentsProcessed = [];
+		var userArr = [];
+		for (let eachCommment of allComments) {
+			let current = {};
+
+			let commentedUser = await userData.getUserById(eachCommment.user_id); // get each comment's owner
+			// current.id = review._id;
+			current.name = commentedUser.first_name + " " + commentedUser.last_name;
+			current.age = commentedUser.age;
+			current.text = eachCommment.comment;
+			current.helpful = eachCommment.helpful;
+			current.reported = eachCommment.report; // checkListMem ../user._id this.reported
+
+			// let allsubComments = await commentData.getAllCommentsOfReview(eachCommment._id);
+			let subComments = [];
+			// for (let eachsubcomment of allsubComments) {
+			//     let currentComment = {};
+			//     let {firstName, lastName, age} = await userData.getUserById(eachsubcomment[0]);
+			//     currentComment.name = firstName + ' ' + lastName;
+			//     currentComment.age = age;
+			//     currentComment.text = comment.text
+			//     subComments.push(currentComment);
+			// }
+			current.subcomments = subComments;
+
+			// let max = 5;
+			// current.filledStars = verify.generateList(current.metrics.rating);
+			// current.unfilledStars = verify.generateList(max - current.metrics.rating);
+			// current.filledDollars = verify.generateList(current.metrics.price);
+			allCommentsProcessed.push(current);
+		}
+
+		// Calculate percentages for ratings based off of reviews
+		const numComments = allCommentsProcessed.length;
+		// furniture.rating = (furniture.rating / numReviews).toFixed(2);
+		// furniture.price = (furniture.price / numReviews).toFixed(2);
+		// furniture.distancedTables = ((furniture.distancedTables / numReviews) * 100).toFixed(2);
+		// furniture.maskedEmployees = ((furniture.maskedEmployees / numReviews) * 100).toFixed(2);
+		// furniture.noTouchPayment = ((furniture.noTouchPayment / numReviews) * 100).toFixed(2);
+		// furniture.outdoorSeating = ((furniture.outdoorSeating / numReviews) * 100).toFixed(2);
+
+
+		// Get the furniture's photos from calling Yelp API
+		// const client = yelp.client(apiKey);
+		// const matchRequest = {
+		//     name: furniture.name,
+		//     address1: furniture.address,
+		//     city: 'Hoboken',
+		//     state: 'NJ',
+		//     country: 'US'
+		// };
+
+		// // Get the furniture's photos from calling googleMap API
+		// const matchRes = await client.businessMatch(matchRequest);
+		// const jsonRes = matchRes.jsonBody;
+		// let results = jsonRes.businesses;
+		// let result = results[0];
+		// let photos = [];
+		// if (results.length > 0) {
+		//     const businessRes = await client.business(result.id);
+		//     const jsonRes2 = businessRes.jsonBody;
+		//     photos = jsonRes2.photos;
+		// }
+
+		
+
+
+		photos = null;
+
+		res.render("furniture/single", {
+			partial: "furnitures-single-script",
+			title: "Furniture",
+			authenticated: req.session.user ? true : false,
+			user: userArr, // obj
+			furniture: furniture, // obj
+			comments: allCommentsProcessed, // arr
+			photos: photos,
+		});
+	} catch (e) {
+		errors.push(e);
+		res.status(500).render("errors/error", {
+			title: "Errors",
+			partial: "errors-script",
+			errors: errors,
+		});
+	}
 });
 
 module.exports = router;

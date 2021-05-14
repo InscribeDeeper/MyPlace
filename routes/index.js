@@ -1,10 +1,11 @@
+// const furnitureRoutes = require('./furniture_copy');
 const furnitureRoutes = require('./furniture');
 const rentalRoutes = require('./rental');
 const commentRoutes = require('./comments');
 const userRoutes = require('./users');
 const privateRoutes = require('./private');
-const apiRoutes = require('./api');
-const statisticsRoutes = require('./statistics');
+// const apiRoutes = require('./api');
+// const statisticsRoutes = require('./statistics');
 
 const constructorMethod = (app) => {
 
@@ -18,8 +19,8 @@ const constructorMethod = (app) => {
         });
     });
     // app.use('/api', apiRoutes);
-    // app.use('/private', privateRoutes);
-    app.use('/restaurants', restaurantRoutes);
+    app.use('/private', privateRoutes);
+    // app.use('/restaurants', restaurantRoutes);
     app.use('/comments', commentRoutes);
     // app.use('/statistics', statisticsRoutes);
     app.use('/furniture', furnitureRoutes);

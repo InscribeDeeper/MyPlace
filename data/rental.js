@@ -1,17 +1,29 @@
 //Yixuan Wang 
 
-const mongoCollections = require('../config/mongoCollections')
+const mongoCollections = require("../config/mongoCollections");
+const uuid = require("uuid");
+const verifier = require("./verify");
 const rental = mongoCollections.rental
-// const users = require('./users')
 const shareUtilsDB = require("./shareUtilsDB");
+
 
 const ExportedMethods = {
 
-    //create
+    //CREATE
+   
+    async createRental(location, price, bedroom, bathroom, space, description, photos, utility, like, dislike, labels, contact, userId) {
 
-    async createRental(location, price, bedroom, bathroom, space, description, photos, utility, like, dislike, labels, contact) {
-        //check errors will be finished later 
-        // use function on verify.js
+        if (!verifier.validString(location)) throw "Location is not a valid string.";
+        if (!verifier.validNum(price)) throw "Price is not a valid number.";
+        if (!verifier.validNum(bedroom)) throw "Bedtoom is not a valid number.";
+        if (!verifier.validNum(bathroom)) throw "Bathroom is not a valid number.";
+        if (!verifier.validNum(space)) throw "Space is not a valid number.";
+        if (!verifier.validString(description)) throw "Description is not a valid string.";
+        // if (!verifier.validString(photo)) throw "photo is not a valid string.";
+        if (!verifier.validString(utility)) throw "utlity is not a valid string.";
+        if (!verifier.validBoolean(sold)) throw "Sold should be a boolean";
+        // if (!verifier.validString(contact)) throw "contact should be a string";
+
 
         const rentalCollection = await rental()
 
@@ -33,12 +45,13 @@ const ExportedMethods = {
         const insertInfo = await rentalCollection.insertOne(newRental)
         if (insertInfo.insertedCount === 0) throw 'Could not add a rental post';
         const newId = insertInfo.insertedId
-        // await shareUtilsDB.toggleRentalToUser(userId, newId) // you may need to think where to get userId
+        await shareUtilsDB.toggleRentalToUser(userId, newId) 
         return await this.getRentalById(newId)
     },
 
 
-    //Read ('get all', 'get by id')
+    //READ
+    // ('get all', 'get by id')
 
     async getAllRental(){
         const rentalCollection = await rental()
@@ -56,29 +69,52 @@ const ExportedMethods = {
         return thisRental
     },
 
+    //UPDATE
+    async updateRental(rentalId, updatedInfo){
+        if (!verifier.validString(rentalId)) throw "id is not a valid string.";
+    
+        const rentalCollection = await rental();
+        const thisRental = getRentalById(rentalId);
+     
+        const updatingInfo = {
+            location: updatedInfo.location, 
+            price: updatedInfo.price, 
+            bedroom: updatedInfo.bedroom, 
+            bathroom: updatedInfo.bathroom, 
+            space: updatedInfo.space, 
+            description: updatedInfo.description , 
+            photos: updatedInfo.photos, 
+            utility: updatedInfo.utility, 
+            like: thisRental.like, 
+            dislike: thisRental.dislike, 
+            labels: updatedInfo.labels, 
+            contact: updatedInfo.contact
+        }
+        
+        const updatedRental = await rentalCollection.updateOne(
+              {_id: id},
+              {$set: updatingInfo}
+         )
+        if(!updatedRental.matchedCount && !updatedRental.motifiedCount) throw 'updated failed.'
+        
+        return await this.getRentalById(rentalId)
+    },
 
-    //Delete
-    async deleteRental(id) {
+
+    //DELETE
+    async deleteRental(id, userId) {
         const rentalCollection = await rental()
         const deleteInfo = await rentalCollection.removeOne({ _id: id})
         if (deleteInfo.deletedCount === 0) {
             throw `Could not delete rentalwith id of ${id}`;
         }
-        // await shareUtilsDB.untoggleRentalToUser(userId, newId)
+        await shareUtilsDB.untoggleRentalToUser(userId, id)
         return true
     }
 
- 	//////////////////////////////////////////////////////////////////
-	// Update refer ./data/user.js
-    // toggle refer ./data/verify.js
-	//////////////////////////////////////////////////////////////////
 
 }
 
 
 module.exports = ExportedMethods
-
-// Finished by Yixuan Wang on April 18, 2021
-
-
 

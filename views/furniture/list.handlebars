@@ -3,24 +3,26 @@
 <div class="container m-5">
     <div class="row mb-4">
         <div class="col">
-            <a href="/restaurants/new" class="btn btn-primary ">Create a new restaurant</a>
+            <a href="/furniture/new" class="btn btn-primary ">Create a new furniture</a>
         </div>
     </div>
 
     <div class="row">
         <div class="col col-4">
             <label for="myInput"></label>
-            <input type="text" class="form-control" id="myInput" onkeyup="fName('myInput',0)" placeholder="Search Restaurant Name">
+            <input type="text" class="form-control" id="myInput" onkeyup="fName('myInput',0)" placeholder="Search Furniture Name">
         </div>
         <div class="col col-4">
             <label for="myInput_2"></label>
-            <input type="text" class="form-control" id="myInput_2" onkeyup="fName('myInput_2',2)" placeholder="Search Cuisine Type">
+            <input type="text" class="form-control" id="myInput_2" onkeyup="fName('myInput_2',2)" placeholder="Search Furnitures Category">
         </div>
     </div>
+
+
     <div class="row">
         <div class="col col-4">
             <div class="rating-slider w-100">
-                <label for="rsb" class="font-weight-bold">Rating above: <span id="rsd" class="ml-2"></span></label>
+                <label for="rsb" class="font-weight-bold">Likes above: <span id="rsd" class="ml-2"></span></label>
                 <input value="1" min="1" max="5" step="0.1" type="range" id="rsb" onmouseup="fNum('rsb',3)" onkeyup="fNum('rsb',3)">
             </div>
         </div>
@@ -37,21 +39,26 @@
     <table class="table table-hover">
     <thead class="thead-light">
         <tr>
-            <th scope="col">Restaurant Name</th>
-            <th scope="col">Restaurant Address</th>
-            <th scope="col">Cuisine</th>
-            <th scope="col">Rating</th>
-            <th scope="col">Price Level</th>
+            <th scope="col">Furniture Name</th>
+            <th scope="col">Location</th>
+            <th scope="col">Price</th>
+            <th scope="col">Likes</th>
+            <th scope="col">Dislikes</th>
+            <th scope="col">furnitureID in DB link</th>
         </tr>
     </thead>
     <tbody>
-        {{#each restaurants}}
-        <tr class="clickable-row" id="{{this._id}}" data-href="/restaurants/{{this._id}}">
-            <td>{{this.name}}</td>
-            <td>{{this.address}}</td>
-            <td>{{this.cuisine}}</td>
-            <td>{{this.rating}}</td>
+        {{#each furniture}}
+        {{!-- 需要绑定AJAX link上去 --}}
+        <tr class="clickable-row" id="{{this._id}}" data-href="/furniture/{{this._id}}">
+            {{!-- <td><img src = '{{this.photos}}'></td> --}}
+            <td>{{this.user_id}}</td>
+            {{!-- <td>{{this.name}}</td> --}}
+            <td>{{this.location}}</td>
             <td>{{this.price}}</td>
+            <td>{{this.likes}}</td>
+            <td>{{this.dislikes}}</td>
+            <td><a href= "/furniture/{{this._id}}">{{this._id}}</a></td>
         </tr>
         {{/each}}
     </tbody>

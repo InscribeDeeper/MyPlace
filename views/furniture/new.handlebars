@@ -1,0 +1,73 @@
+<div class="container mt-3 col-5">
+	<h1>Create a new restaurant</h1>
+	<form method="POST" action="/furniture/new" id="furniture-form" onsubmit="submitButton.disabled = true; return true;">
+
+		<div class="form-group">
+			<label for="category" class="input-label">Category</label>
+			<input type="text" class="form-control" id="category-input" name="category" placeholder="Enter furniture category" />
+			<div class="invalid-feedback">
+				Please provide a valid furniture category
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="location" class="input-label">Location</label>
+			<input type="text" class="form-control" id="location-input" name="location" placeholder="Enter furniture address" />
+			<div class="invalid-feedback">
+				Please provide a valid location
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="price" class="input-label">Price</label>
+			<input type="number" class="form-control" id="price-input" name="price" placeholder="Enter furniture price" />
+			<div class="invalid-feedback">
+				Please provide a valid price
+			</div>
+		</div>
+
+		<div class="form-group" id="furniture-input-div">
+			<label for="photo" class="input-label">Description</label>
+			<input type="text" class="form-control" id="description-input" name="description" placeholder="Enter furniture description" value={{furniture}} />
+			<div class="invalid-feedback">
+				Please provide a valid description
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="photo_link" class="input-label">Link photo</label>
+			<input type="text" class="form-control" id="photo-input" name="photo_link" placeholder="Enter furniture photo link" />
+			<div class="invalid-feedback">
+				Please provide a valid external photo link
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="purchase_link" class="input-label">Purchase link</label>
+			<input type="text" class="form-control" id="purchase_link-input" name="purchase_link" placeholder="Enter the product purchase link" />
+			<div class="invalid-feedback">
+				Please provide a valid purchase-link
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="photo" class="input-label">Contact</label>
+			<input type="text" class="form-control" id="contact-input" name="contact" placeholder="Enter contact" />
+			<div class="invalid-feedback">
+				Please provide a valid contact
+			</div>
+		</div>
+
+		<button class="btn btn-primary" type="submit" name="submitButton" id="submitButton">Submit!</button>
+
+		{{#if hasErrors}}
+			<ul class="error-list">
+				{{#each errors}}
+					<li>
+						{{this}}
+					</li>
+				{{/each}}
+			</ul>
+		{{/if}}
+	</form>
+</div>

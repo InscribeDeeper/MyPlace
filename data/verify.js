@@ -69,6 +69,10 @@ function generateList(n) {
     return arr;
 }
 
+function validNum(age){
+    if (!age || typeof age != 'number' || !Number.isInteger(age)) return false;
+    return true;
+}
 module.exports = {
     validString,
     convertId,
@@ -79,5 +83,6 @@ module.exports = {
     validMetrics,
     validLink,
     generateList,
-    validPassword
+    validPassword,
+    validNum
 };
