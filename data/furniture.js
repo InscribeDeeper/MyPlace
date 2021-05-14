@@ -3,9 +3,8 @@ const furniture = mongoCollections.furniture;
 // const users = mongoCollections.users;
 const uuid = require("uuid");
 const verifier = require("./verify");
-const shareUtilsDB = require("./shareUtilsDB");
-// const bcrypt = require("bcryptjs");
-// const saltRounds = 8;
+const toggleFn = require("../data/shareUtilsDB");
+
 
 async function getFurnitureById(id) {
 	const furnitureCollection = await furniture();
@@ -50,7 +49,7 @@ async function createFurniture(userId, category, location, price, description, p
 	const newInsertedFurniture = await furnitureCollection.insertOne(newFurniture);
 	if (newInsertedFurniture.insertedCount === 0) throw "Insert failed!";
 	
-	await shareUtilsDB.toggleFurnitureToUser(userId, newFurniture._id);
+	await toggleFn.toggleFurnitureToUser(userId, newFurniture._id); // ???
 	return await this.getFurnitureById(newInsertedFurniture.insertedId);
 }
 

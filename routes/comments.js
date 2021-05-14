@@ -6,6 +6,7 @@ const userData = data.users;
 const commentData = data.comments;
 const verify = require('../data/verify');
 const xss = require('xss');
+const toggleFn = data.toggleFn;
 
 
 router.get('/', async(req, res) => {
@@ -40,10 +41,8 @@ router.get('/addComment/:id', async(req, res) => {
 
     try { //pull评论
         const furniture = await furnitureData.getFurnitureById(furnitureId);
-        let commentsIdList = furniture.comment_id
-
-        const comment = await commentData.getCommentById(commentsIdList[0]);
-
+        // let commentsIdList = furniture.comment_id
+        // const comment = await commentData.getCommentById(commentsIdList[0]);
         res.render('comments/create', {
             partial: 'write-a-review-script',
             title: 'Write a Review',
@@ -51,6 +50,7 @@ router.get('/addComment/:id', async(req, res) => {
             user: req.session.user,
             furniture: furniture
         });
+        
     } catch (e) {
         errors.push(e)
         res.status(500).render('errors/error', {
@@ -66,19 +66,15 @@ router.get('/addComment/:id', async(req, res) => {
 router.post('/addComment/:id', async(req, res) => {
     // Validate input in this route before sending to server
 
-
+    let errors = [];
     let furnitureId = xss(req.params.id.trim());
     if (!verify.validString(furnitureId)) res.render('errors/errror', { errorMessage: "Invalid furniture id." });
-    console.log('1')
         // Everything in req.body is a string
     const username = req.session.user
-    console.log('2')
-    console.log(username)
     myUser  =  await  userData.getUserByUserName(username); 
     const userId = myUser._id
     const comment = xss(req.body.reviewText);
 
-    console.log('3')
         //test later
         // Route-side input validation
         // let errors = [];
@@ -95,19 +91,20 @@ router.post('/addComment/:id', async(req, res) => {
     //     });
     //     return;
     // }
-    console.log('1')
+    // await commentData.addComments(userId, comment);
+
     try {
-        await commentData.addComments(userId, comment);
-        res.json({  error: comment })
-            //res.redirect(`../../furniture/${furnitureId}`);
-        console.log(comment)
+        newComment = await commentData.addComments(userId, comment);
+        await toggleFn.toggleCommentToUser(userId, newComment._id);
+        await toggleFn.toggleCommentToFurniture(furnitureId, newComment._id);
+        res.redirect(`../../furniture/${furnitureId}`);
     } catch (e) {
         errors.push(e);
-        // res.status(500).render('errors/error', {
-        //     errors: errors,
-        //     partial: 'errors-script'
-        // });
-        res.status(500).json({  error:  e  });
+        res.status(500).render('errors/error', {
+            errors: errors,
+            partial: 'errors-script'
+        });
+        // res.status(500).json({  error:  e  });
     }
 });
 

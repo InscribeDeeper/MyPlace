@@ -110,6 +110,7 @@ router.post("/new", async (req, res) => {
 			user: req.session.user,
 			hasErrors: true,
 			errors: errors,
+			reqInput: req.body
 		});
 	}
 
@@ -164,7 +165,7 @@ router.get("/:id", async (req, res) => {
 
 	try {
 		const furniture = await furnitureData.getFurnitureById(furnitureID);
-		const commentsIdList = furniture.comment_id;
+		const commentsIdList = furniture.comments_id || [];
 
 		if (commentsIdList.length > 0) {
 			allComments = await Promise.all(
