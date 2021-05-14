@@ -24,22 +24,22 @@ const exphbs = require("express-handlebars");
 // app.set('view engine', 'hbs');
 // app.set('views', path.join(__dirname,"views"));
 
-const handlebarsInstance = exphbs.create({defaultLayout: "main"});
+const handlebarsInstance = exphbs.create({ defaultLayout: "main" });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/public", static); // 这个有什么用?? 表明所有用到的client side js?
-app.engine("handlebars", handlebarsInstance.engine);
-app.set("view engine", "handlebars");
+
+
 
 app.use(
 	session({
-		name: "AuthCookie",
-		secret: "This is a secret.. shhh don't tell anyone",
+		name: "this is just a neccessary name. not a params",
+		secret: "This is just a neccessary secret.. shhh don't tell anyone. not a params",
 		saveUninitialized: true,
 		resave: false,
-		// cookie: { secure: true, maxAge: 60000 } // req.session.cookie
-	}) // 这个session 会在浏览器关掉后就没了
+		// cookie: { secure: true, maxAge: 60000 }, // req.session.cookie , this is a params, but can self define objects
+	})
 );
 
 // if (app.get('env') === 'production') {
@@ -49,22 +49,18 @@ app.use(
 
 // Authentication Middleware
 app.use("/private", (req, res, next) => {
+	console.log("req.originalUrl: " + req.originalUrl);
+	console.log("req.session.user: " + req.session.user);
 	if (!req.session.user) {
-		let errors = [];
-		errors.push("You cannot access the private route without logging in");
-		return res.render("errors/error", {
+		return res.status(403).render("errors/error", {
 			title: "Errors",
-			errors: errors,
+			errors: ["You cannot access the private route without logging in"],
 			partial: "errors-script",
 		});
-	}
-	next();
-
-	if (!req.session.AuthCookie) {
-		res.status(403).render("users/login", { error: "403: Forbidden Please Log in" });
 	} else {
-		next();
+		next(); 
 	}
+	
 });
 
 // Logging Middleware
@@ -83,22 +79,20 @@ app.use("/private", (req, res, next) => {
 
 // 访问流量 的时间统计 // 这些都可以作为 服务器的log 存起来
 app.use(async (req, res, next) => {
-	if (req.originalUrl !== "/css/main.css") {
-		console.log(
-			`[${new Date().toUTCString()}]: ${req.method} ${req.originalUrl} (${req.session.AuthCookie ? "Authenticated User" : "Non-Authenticated User"}) `
-		);
-	}
+	// console.log("req.originalUrl: " + req.originalUrl);
+	// console.log("req.session.user: " + req.session.user);
+	console.log(`[${new Date().toUTCString()}]: ${req.method} ${req.originalUrl} (${req.session.user ? "Authenticated User" : "Non-Authenticated User"}) `);
+
 	next();
 });
 
-// 只能登录后 才能访问的界面
-// furniture 创建界面的 filter
+// 只能登录后 才能访问的界面 furniture 创建界面的 filter
 app.use("/furniture/new", async (req, res, next) => {
 	if (!req.session.user) {
-		req.session.previousRoute = req.originalUrl;
-		return res.render("users/login", {
+		req.session.previousRoute = req.originalUrl; // request will record the originalUrl when it send the request
+		return res.status(403).render("users/login", {
 			title: "Log In",
-			error: "You must be logged in to create a furniture",
+			error: ["You must be logged in to create a furniture"],
 			partial: "login-script",
 		});
 	}
@@ -109,27 +103,30 @@ app.use("/furniture/new", async (req, res, next) => {
 app.use("/rental/new", async (req, res, next) => {
 	if (!req.session.user) {
 		req.session.previousRoute = req.originalUrl;
-		return res.render("users/login", {
+		return res.status(403).render("users/login", {
 			title: "Log In",
-			error: "You must be logged in to create a rental",
+			error: ["You must be logged in to create a rental"],
 			partial: "login-script",
 		});
 	}
 	next();
 });
 
+
+app.engine("handlebars", handlebarsInstance.engine);
+app.set("view engine", "handlebars");
+
 configRoutes(app);
 
 app.listen(3000, () => {
 	console.log("We've now got a server!");
-	console.log("Your routes will be running on http://localhost:3005");
+	console.log("Your routes will be running on http://localhost:3000");
 });
-
 
 // // Access the session as req.session
 // app.get('/', function(req, res, next) {
 // 	if (req.session.views) {
-	//   console.log(req.sessionID) // unique
+//   console.log(req.sessionID) // unique
 // 	  req.session.views++
 // 	  res.setHeader('Content-Type', 'text/html')
 // 	  res.write('<p>views: ' + req.session.views + '</p>')

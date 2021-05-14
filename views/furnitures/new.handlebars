@@ -4,53 +4,65 @@
 
 <div class="container mt-3 col-5">
     <h1>Create a new restaurant</h1>
-    <form method="POST" action="/restaurants/new" id="restaurant-form" class="needs-validation" novalidate>
+    <form method="POST" action="/furniture" id="furniture-form">
         <div class="form-group">
-            <label for="restaurant-name-input">Name</label>
-            <input type="text" class="form-control" id="restaurant-name-input" name="name" placeholder="Enter restaurant name">
-            <div class="valid-feedback">
+            <label for="category">Category</label>
+            <input type="text" id="category-input" name="category" placeholder="Enter furniture category">
+           
+            <div class="feedback">
+                Please provide a valid furniture category
+            </div>
+        </div>
 
-            </div>
-            <div class="invalid-feedback">
-                Please provide a valid restaurant name
+        <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" class="form-control" id="location-input" name="location" placeholder="Enter restaurant address">
+            <div class="feedback">
+                Please provide a valid location
             </div>
         </div>
+
         <div class="form-group">
-            <label for="restaurant-address-input">Address</label>
-            <input type="text" class="form-control" id="restaurant-address-input" name="address" placeholder="Enter restaurant address">
-            <div class="invalid-feedback">
-                Please provide a valid address 
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="cuisine-type-select">Cuisine Type</label>
-            <select name="cuisine" id="cuisine-type-select" class="form-control">
-                <option value="" selected>Select cuisine type</option>
-                {{#each cuisines}}
-                    <option value="{{this}}">{{this}}</option>
-                {{/each}}
-            </select>
-            <div class="invalid-feedback">
-                Please select a cuisine type
+            <label for="price">Price</label>
+            <input type="text" class = "form-control" id="price-input" name="price" placeholder="Enter price">
+            <div class="feedback">
+                Please enter a price
             </div>
         </div>
         <div class="form-group" id="cuisine-input-div">
-            <label for="restaurant-cuisine-input">Cuisine Type</label>
-            <input type="text" class="form-control" id="restaurant-cuisine-input" name="cuisineInput" placeholder="Enter cuisine type">
-            <div class="invalid-feedback">
-                Please provide a valid cuisine 
-            </div>
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description-input" name="description" placeholder="Enter a description">
+            {{!-- <div class="invalid-feedback">
+                Please provide a description 
+            </div> --}}
         </div>
         <div class="form-group">
-            <label for="restaurant-link-input">External Link to Yelp</label>
-            <input type="text" class="form-control" id="restaurant-link-input" name="link" placeholder="Enter external link">
-            <div class="invalid-feedback">
-                Please provide a valid external link e.g. https://www.yelp.com/biz/bobs-burgers-hoboken
+            <label for="photos">link photos</label>
+            <input type="text" class="form-control" id="photos" name="photos" placeholder="Enter photos link">
+            <div class="feedback">
+                Please provide a valid external photo link
             </div>
         </div>
-        <button type="submit" class="btn btn-primary" name="submitButton" id="submitButton">Create New Restaurant</button>
-        {{#each errors}}
-            <div class = "error font-italic">{{this}}</div>
-        {{/each}}
+
+        <div class="form-group">
+            <label for="purchase-link">Purchase-link</label>
+            <input type="text" class="form-control" id="purchase-link" name="purchase-link" placeholder="Enter the product purchase link">
+        </div>
+
+        <div class="form-group">
+            <label for="contact">Contact</label>
+            <input type="text" class="form-control" id="contact" name="contact" placeholder="Enter contact>
+        </div>
+
+        <button type="submit" class="buttom-furniture" name="submit" id="submit">Post</button>
+        {{#if hasErrors}}
+        <ul class = "error-list">
+            {{#each errors}}
+            <li>
+                {{this}}
+            </li>
+            {{/each}}
+        </ul>
+        {{/if}}
     </form>
 </div>

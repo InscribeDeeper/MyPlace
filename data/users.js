@@ -72,6 +72,8 @@ let exportedMethods = {
 			comments_id: [],
 			furniture_id: [],
 			rental_id: [],
+			favor_furniture_id: [],
+			favor_rental_id: [],
 			acessHistory: {furniture_id: [], rental_id: []}
 		};
 
@@ -99,6 +101,14 @@ let exportedMethods = {
 		return user;
 	},
 
+	async getUserByUserName(userName) {
+		if (!verifier.validString(userName)) throw "userName is not a valid string.";
+		const userCollection = await users();
+		let user = await userCollection.findOne({ userName: userName });
+		if (user === null) throw `user not found with userName: ${userName}`;
+		return user;
+	},
+	
 	//////////////////////////////////////////////////////////////////
 	// Update
 	//////////////////////////////////////////////////////////////////

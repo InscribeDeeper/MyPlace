@@ -18,10 +18,6 @@
 
 # 待解决问题
 
-To 杨威：
-
--   在你这里面记得加一个 addRentalToUser 和 removeRentalToUser 的函数. 我发现我们这个 project 还是得用 sub-document 比较好可能？
-    -   A: 用 shareUtilsDB 中 的 toggle function
 
 ---
 ## overall features in JS
@@ -52,9 +48,9 @@ To 杨威：
 ```json
 (User = {
 	"_id": "user_collection_id_1",
-	"first_name": "sherlock",
-	"last_name": "holmes",
-	"user_name": "sh",
+	"firstName": "sherlock",
+	"lastName": "holmes",
+	"userName": "sh",
 	"age": 32,
 	"email": "sh@stevens.edu",
 	"hashed_pw": "encoding passwords",
@@ -64,6 +60,7 @@ To 杨威：
 	"selfSummary": "",
 	"favor_furniture_id": ["furniture_id1", "furniture_id4"], 
 	"favor_rental_id": ["rental_id1", "rental_id5"], 
+	"acessHistory": {"furniture_id": [], "rental_id": []}
 })
 ```
 
