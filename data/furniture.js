@@ -31,7 +31,8 @@ async function createFurniture(userId, category, location, price, description, p
 	// const userCollection = await users();
 	let newFurniture = {
 		_id: uuid.v4().toString(),
-		book_id: userId,
+		user_id: userId,
+		name: "???",
 		comment_id: [],
 		category,
 		location,
@@ -44,8 +45,8 @@ async function createFurniture(userId, category, location, price, description, p
 		sold,
 		contact,
 	};
-	// console.log(typeof newBook._id + "book")
-	// console.log("error1");
+
+
 	const newInsertedFurniture = await furnitureCollection.insertOne(newFurniture);
 	if (newInsertedFurniture.insertedCount === 0) throw "Insert failed!";
 	

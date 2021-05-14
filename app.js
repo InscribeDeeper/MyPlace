@@ -4,33 +4,31 @@ const static = express.static(__dirname + "/public");
 const configRoutes = require("./routes");
 const session = require("express-session"); // which generate session ID and save on client browser cache
 const exphbs = require("express-handlebars");
-// const cookieParser = require("cookie-parser");
-// app.use(cookieParser()); // which will generate req.cookies
 
-// edit default views directory and file suffix
-// var path = require('path');
-// var express = require('express');
-// var app = express();
-// var http = require('http').Server(app);
+const handlebarsInstance = exphbs.create({
+	defaultLayout: "main",
+	// Specify helpers which are only registered on this instance.
+	helpers: {
+		asJSON: (obj, spacing) => {
+			if (typeof spacing === "number") return new Handlebars.SafeString(JSON.stringify(obj, null, spacing));
 
-// var handlebars = require('express-handlebars').create({
-//   layoutsDir: path.join(__dirname,"views/layouts"),
-//   partialsDir: path.join(__dirname,"views/partials"),
-//   defaultLayout: 'layout',
-//   extname: 'hbs'
-// });
-
-// app.engine('hbs', handlebars.engine);
-// app.set('view engine', 'hbs');
-// app.set('views', path.join(__dirname,"views"));
-
-const handlebarsInstance = exphbs.create({ defaultLayout: "main" });
+			return new Handlebars.SafeString(JSON.stringify(obj));
+		},
+		checkListMem: function (elem, target) {
+			if (elem && target) {
+				return target.includes(elem);
+			} else return false;
+		},
+		checkListLengthZero: function (arr) {
+			return arr.length == 0;
+		},
+	},
+	partialsDir: ["views/partials/"],
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/public", static); // 这个有什么用?? 表明所有用到的client side js?
-
-
 
 app.use(
 	session({
@@ -58,9 +56,8 @@ app.use("/private", (req, res, next) => {
 			partial: "errors-script",
 		});
 	} else {
-		next(); 
+		next();
 	}
-	
 });
 
 // Logging Middleware
@@ -111,7 +108,6 @@ app.use("/rental/new", async (req, res, next) => {
 	}
 	next();
 });
-
 
 app.engine("handlebars", handlebarsInstance.engine);
 app.set("view engine", "handlebars");

@@ -1,69 +1,80 @@
-{{!-- 可以添加功能, 让用户输入的东西保留 --}}
+{{! 可以添加功能, 让用户输入的东西保留 }}
 <div class="container mt-3 col-6">
-    <h1 class="h3 mb-3 fw-normal">Sign Up for MyPlace</h1>
-    <form method="POST" action="/users/signup" id="signup-form" onsubmit="submitButton.disabled = true; return true;">
-        <div class="form-row">
-            <div class="form-group col-6">
-                <label for="firstName" class="sr-only"></label>
-                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name">
-                <div class="invalid-feedback">
-                    First name cannot be empty
-                </div>
-            </div>
-            <div class="form-group col-6">
-                <label for="lastName" class="sr-only"></label>
-                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name">
-                <div class="invalid-feedback">
-                    Last name cannot be empy
-                </div>
-            </div>
-        </div>
+	<h1 class="h3 mb-3 fw-normal">Sign Up for MyPlace</h1>
+	<form method="POST" action="/users/signup" id="signup-form" onsubmit="submitButton.disabled = true; return true;">
+		<div class="form-row">
+			<div class="form-group col-6">
+				<label for="firstName" class="sr-only"></label>
+				<input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" value="{{reqInput.firstName}}" />
+				<div class="invalid-feedback">
+					First name cannot be empty
+				</div>
+			</div>
+			<div class="form-group col-6">
+				<label for="lastName" class="sr-only"></label>
+				<input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" value="{{reqInput.lastName}}" />
+				<div class="invalid-feedback">
+					Last name cannot be empy
+				</div>
+			</div>
+		</div>
 
-        <div class="form-group">
-            <label for="userName" class="sr-only"></label>
-            <input type="text" class="form-control" id="userName" name="userName" placeholder="User Name">
-            <div class="invalid-feedback">
-                Username cannot be empty
-            </div>
-        </div>
+		<div class="form-group">
+			<label for="userName" class="sr-only"></label>
+			<input type="text" class="form-control" id="userName" name="userName" placeholder="User Name" value="{{reqInput.userName}}" />
+			<div class="invalid-feedback">
+				Username cannot be empty
+			</div>
+		</div>
 
-        <div class="form-group">
-            <label for="password" class="sr-only"></label>
-            <input class="form-control" id="password" name="password" type="password" placeholder="Password">
-            <div class="invalid-feedback">
-                Password cannot be empty
-            </div>
-        </div>
+		<div class="form-group">
+			<label for="password" class="sr-only"></label>
+			<input class="form-control" id="password" name="password" type="password" placeholder="Password" value="{{reqInput.password}}" />
+			<div class="invalid-feedback">
+				Password cannot be empty
+			</div>
+		</div>
 
-        <div class="form-group">
-            <label for="email" class="sr-only"></label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
-            <div class="invalid-feedback">
-                Email address cannot be empty
-            </div>
-        </div>
+		<div class="form-group">
+			<label for="email" class="sr-only"></label>
+			<input type="email" class="form-control" id="email" name="email" placeholder="Email Address" value="{{reqInput.email}}" />
+			<div class="invalid-feedback">
+				Email address cannot be empty
+			</div>
+		</div>
 
-        <div class="form-group">
-            <label for="age" class="sr-only"></label>
-            <input type="number" class="form-control" id="age" name="age" placeholder="Age">
-            <div class="invalid-feedback">
-                Age cannot be empty
-            </div>
-        </div>
+		<div class="form-group">
+			<label for="age" class="sr-only"></label>
+			<input type="number" class="form-control" id="age" name="age" placeholder="Age" value="{{reqInput.age}}" />
+			<div class="invalid-feedback">
+				Age cannot be empty
+			</div>
+		</div>
 
-        <div class="form-group">
-            {{!-- 这部分的div可以设置的大一些 --}}
-            <label for="selfSummary" class="sr-only"></label>
-            <input type="number" class="form-control" id="selfSummary" name="selfSummary" placeholder="selfSummary">
-            <div class="invalid-feedback">
-                selfSummary could be empty, but not recommend
-            </div>
-        </div>
+		<div class="form-group">
+			{{! 这部分的div可以设置的大一些 }}
+			<label for="selfSummary" class="sr-only"></label>
+			<input
+				type="number"
+				class="form-control"
+				id="selfSummary"
+				name="selfSummary"
+				placeholder="selfSummary could be empty, but not recommend"
+				value="{{reqInput.selfSummary}}"
+			/>
+			<div class="invalid-feedback">
+				selfSummary could be empty, but not recommend
+			</div>
+		</div>
 
+		<button class="btn btn-primary" type="submit" name="submitButton" id="submitButton">Create an account</button>
 
-        <button class="btn btn-primary" type="submit" name="submitButton" id="submitButton">Create an account</button>
-        {{#each errors}}
-        <div class="error font-italic">{{this}}</div>
-        {{/each}}
-    </form>
+		{{#if hasErrors}}
+			<ul class="error-list">
+				{{#each errors}}
+					<li><div class="error font-italic">{{this}}</div></li>
+				{{/each}}
+			</ul>
+		{{/if}}
+	</form>
 </div>

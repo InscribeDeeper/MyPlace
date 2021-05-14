@@ -27,6 +27,7 @@ router.get("/login", async (req, res) => {
 		title: "Log In",
 		authenticated: false,
 		partial: "login-script",
+		reqInput: req.body
 	});
 	// }
 });
@@ -40,6 +41,7 @@ router.get("/signup", async (req, res) => {
 			title: "Sign Up",
 			authenticated: false,
 			partial: "signup-script",
+			reqInput: req.body
 		});
 	}
 });
@@ -51,15 +53,18 @@ router.post("/login", async (req, res) => {
 	let myUser = null;
 
 	let errors = [];
+	errInfo = ["Invalid userName or password"];
 
 	if (!verifier.validString(userName) || !verifier.validString(password)) {
-		errors.push("Invalid userName or password");
+		// errors.push("Invalid userName or password");
+		errors = errInfo;
 	}
 
 	try {
 		myUser = await userData.getUserByUserName(userName);
 	} catch (e) {
-		errors.push("userName or password does not match.");
+		// errors.push("userName or password does not match.");
+		errors = errInfo;
 	}
 
 	// user exist
@@ -68,6 +73,7 @@ router.post("/login", async (req, res) => {
 			title: "Log In",
 			partial: "login-script",
 			errors: errors,
+			reqInput: req.body
 		});
 	}
 
@@ -83,11 +89,13 @@ router.post("/login", async (req, res) => {
 			res.redirect("/private");
 		}
 	} else {
-		errors.push("userName or password does not match");
+		// errors.push("userName or password does not match");
+		errors = errInfo;
 		return res.status(401).render("users/login", {
 			title: "Log In",
 			partial: "login-script",
 			errors: errors,
+			reqInput: req.body
 		});
 	}
 });
@@ -99,7 +107,7 @@ router.post("/signup", async (req, res) => {
 	const password = xss(req.body.password);
 	const email = xss(req.body.email);
 	const selfSummary = xss(req.body.selfSummary);
-	let age = parseInt(xss(req.body.age));
+	const age = parseInt(xss(req.body.age));
 
 	// console.log(userName);
 	// console.log(typeof userName);
@@ -119,14 +127,14 @@ router.post("/signup", async (req, res) => {
 			authenticated: false,
 			title: "Sign Up",
 			partial: "signup-script",
+			hasErrors: true,
 			errors: errors,
+			reqInput: req.body
 		});
 	}
 
 	try {
 		const user = await userData.createUser(userName, firstName, lastName, age, email, password, selfSummary);
-		// console.log("route users/signup")
-		// console.log(user)
 		req.session.user = user.userName;
 		let temp = req.session.previousRoute; // bring back to previous page before login
 		if (temp) {
@@ -141,7 +149,9 @@ router.post("/signup", async (req, res) => {
 			authenticated: false,
 			title: "Sign Up",
 			partial: "signup-script",
+			hasErrors: true,
 			errors: errors,
+			reqInput: req.body
 		});
 	}
 });

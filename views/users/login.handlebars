@@ -1,17 +1,17 @@
 <div class="container col-3 mt-3 text-center">
-    <img src="../../public/images/myplace_logo.png" class="fluid-image mb-3" width="297" height="94" alt="company-image">
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-    <form method="POST" action="/users/login" id="login-form" onsubmit="submitButton.disabled = true; return true">
-        <label class="sr-only" for="userName">Username</label>
-        <input class="form-control rounded-0" type="text" id="userName" name="userName" placeholder="Username">
-        <label class="sr-only" for="password">Password</label>
-        <input class="form-control mb-4 rounded-0" type="password" id="password" name="password" placeholder="Password">
-        <div class="invalid-feedback mb-3">
-            Username and/or passsword cannot be empty
-        </div>
-        <button type="submit" name="submitButton" id="submitButton" class="btn btn-primary w-100">Sign In</button>
-        {{#each errors}}
-            <div class = "error font-italic" id="errors">{{this}}</div>
-        {{/each}}
-    </form>
+	<img src="../../public/images/myplace_logo.png" class="fluid-image mb-3" width="297" height="94" alt="company-image" />
+	<h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+	<form method="POST" action="/users/login" id="login-form" onsubmit="submitButton.disabled = true; return true">
+		<label class="sr-only" for="userName">Username</label>
+		<input class="form-control rounded-0" type="text" id="userName" name="userName" placeholder="Username" value="{{reqInput.userName}}" />
+		<label class="sr-only" for="password">Password</label>
+		<input class="form-control mb-4 rounded-0" type="password" id="password" name="password" placeholder="Password" value="{{reqInput.password}}" />
+		<div class="invalid-feedback mb-3">
+			Username and/or passsword cannot be empty
+		</div>
+		<button type="submit" name="submitButton" id="submitButton" class="btn btn-primary w-100">Sign In</button>
+		{{#each errors}}
+			<div class="error font-italic" id="errors">{{this}}</div>
+		{{/each}}
+	</form>
 </div>

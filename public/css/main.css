@@ -235,3 +235,7 @@ li.borderless{
 a:hover {
   text-decoration: none;
 }
+
+.input-label{
+  border: 1px solid #ced4da;
+}
