@@ -5,7 +5,6 @@ const uuid = require("uuid");
 const verifier = require("./verify");
 const toggleFn = require("../data/shareUtilsDB");
 
-
 async function getFurnitureById(id) {
 	const furnitureCollection = await furniture();
 	const theFurniture = await furnitureCollection.findOne({ _id: id });
@@ -19,7 +18,7 @@ async function createFurniture(userId, category, location, price, description, p
 	// add to collection
 	// if (!verifier.validString(category)) throw "First name is not a valid string.";
 	if (!verifier.validString(location)) throw "Last name is not a valid string.";
-	if (!verifier.validNum(price)) throw "Price is not a valid number.";
+	if (!verifier.validNum(parseInt(price))) throw "Price is not a valid number.";
 	if (!verifier.validString(description)) throw "userName is not a valid string.";
 	// if (!verifier.validString(photo)) throw "photo is not a valid string.";
 	if (!verifier.validString(purchase_link)) throw "purchase_link is not a valid string.";
@@ -45,22 +44,21 @@ async function createFurniture(userId, category, location, price, description, p
 		contact,
 	};
 
-
 	const newInsertedFurniture = await furnitureCollection.insertOne(newFurniture);
 	if (newInsertedFurniture.insertedCount === 0) throw "Insert failed!";
-	
+
 	await toggleFn.toggleFurnitureToUser(userId, newFurniture._id); // ???
 	return await this.getFurnitureById(newInsertedFurniture.insertedId);
 }
 
-async function getAllFurnitures(){
+async function getAllFurnitures() {
 	const furnitureCollection = await furniture();
 	const furnitureList = await furnitureCollection.find({}).toArray();
-	if(!furnitureList) throw 'No furniture in database';
+	if (!furnitureList) throw "No furniture in database";
 	return furnitureList;
 }
 
-async function updataFurniture(furnitureId, updatedInfo){
+async function updataFurniture(furnitureId, updatedInfo) {
 	if (!verifier.validString(furnitureId)) throw "User id is not a valid string.";
 
 	const furnitureCollection = await furniture();
@@ -68,37 +66,34 @@ async function updataFurniture(furnitureId, updatedInfo){
 	let updatingInfo = {
 		category: updatedInfo.category,
 		location: updatedInfo.location,
-		price:    updatedInfo.price,
+		price: updatedInfo.price,
 		description: updatedInfo.description,
 		photos: updatedInfo.photos,
 		likes: theFurniture.likes,
 		dislikes: theFurniture.dislikes,
 		purchase_link: updatedInfo.purchase_link,
 		sold: theFurniture.sold,
-		contact: updatedInfo.contact
-	}
-	const updatedFurniture = await furnitureCollection.updateOne(
-          {_id: id},
-          {$set: updatingInfo}
-     )
-	if(!updatedFurniture.matchedCount && !updatedFurniture.motifiedCount) throw 'updated failed.'
-	
+		contact: updatedInfo.contact,
+	};
+	const updatedFurniture = await furnitureCollection.updateOne({ _id: id }, { $set: updatingInfo });
+	if (!updatedFurniture.matchedCount && !updatedFurniture.motifiedCount) throw "updated failed.";
+
 	return await this.getFurnitureById;
 }
 
-async function deleteFurniture(id){
-     if(!verifier.validString(id)) throw 'id is undefined';
-     
-     const furnitureCollection = await furnitrue();
-     const deletionInfo = await furnitureCollection.deleteOne({_id:id});
-     if(deletionInfo.deletedCount == 0) throw `Furniture, ${id}, can not be deleted.`
+async function deleteFurniture(id) {
+	if (!verifier.validString(id)) throw "id is undefined";
 
-     return true;
+	const furnitureCollection = await furnitrue();
+	const deletionInfo = await furnitureCollection.deleteOne({ _id: id });
+	if (deletionInfo.deletedCount == 0) throw `Furniture, ${id}, can not be deleted.`;
+
+	return true;
 }
 module.exports = {
 	getFurnitureById,
 	createFurniture,
 	getAllFurnitures,
 	updataFurniture,
-	deleteFurniture
+	deleteFurniture,
 };

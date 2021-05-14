@@ -114,14 +114,22 @@ router.post("/new", async (req, res) => {
 		});
 	}
 
+	// get user
+	const userName = req.session.user;
+	try {
+		myUser = await userData.getUserByUserName(userName);
+	} catch (e) {
+		errors.push("userName or password is not valid.");
+	}
+
 	try {
 		const newFurniture = await furnitureData.createFurniture(
-			req.params._id,
+			myUser._id,
 			category,
 			location,
 			price,
 			description,
-			photos,
+			photo_link,
 			0,
 			0,
 			purchase_link,
@@ -216,6 +224,7 @@ router.get("/:id", async (req, res) => {
 		// furniture.noTouchPayment = ((furniture.noTouchPayment / numReviews) * 100).toFixed(2);
 		// furniture.outdoorSeating = ((furniture.outdoorSeating / numReviews) * 100).toFixed(2);
 
+
 		// Get the furniture's photos from calling Yelp API
 		// const client = yelp.client(apiKey);
 		// const matchRequest = {
@@ -226,7 +235,7 @@ router.get("/:id", async (req, res) => {
 		//     country: 'US'
 		// };
 
-		// Get the furniture's photos from calling googleMap API
+		// // Get the furniture's photos from calling googleMap API
 		// const matchRes = await client.businessMatch(matchRequest);
 		// const jsonRes = matchRes.jsonBody;
 		// let results = jsonRes.businesses;
@@ -237,6 +246,9 @@ router.get("/:id", async (req, res) => {
 		//     const jsonRes2 = businessRes.jsonBody;
 		//     photos = jsonRes2.photos;
 		// }
+
+		
+
 
 		photos = null;
 
