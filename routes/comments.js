@@ -7,6 +7,14 @@ const commentData = data.comments;
 const verify = require('../data/verify');
 const xss = require('xss');
 
+
+router.get('/', async(req, res) => {
+    // Redirect the user to login page if they attempt to create a review without logging in 
+    // Use req.session to store the redirect address after logging in
+    res.render('comments/create')
+    })
+
+
 router.get('/addComment/:id', async(req, res) => {
     // Redirect the user to login page if they attempt to create a review without logging in 
     // Use req.session to store the redirect address after logging in

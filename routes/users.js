@@ -23,11 +23,11 @@ router.get("/login", async (req, res) => {
 	// if (req.session.user) {
 	// 	res.redirect("/private");
 	// } else {
-		res.render("users/login", {
-			title: "Log In",
-			authenticated: false,
-			partial: "login-script",
-		});
+	res.render("users/login", {
+		title: "Log In",
+		authenticated: false,
+		partial: "login-script",
+	});
 	// }
 });
 
@@ -73,19 +73,15 @@ router.post("/login", async (req, res) => {
 
 	// password compare
 	let match = await bcrypt.compare(password, myUser.hashed_pw);
-	// console.log('match :' + match)
 	if (match) {
 		req.session.user = myUser.userName; // record into session.user
-
-		// console.log(myUser)
-		// console.log(req.session.user )
 		let temp = req.session.previousRoute; // bring back to previous page before login
-		// if (temp) {
-		// 	req.session.previousRoute = "";
-		// 	res.redirect(temp);
-		// } else {
+		if (temp) {
+			req.session.previousRoute = "";
+			res.redirect(temp);
+		} else {
 			res.redirect("/private");
-		// }
+		}
 	} else {
 		errors.push("userName or password does not match");
 		return res.status(401).render("users/login", {
@@ -97,7 +93,6 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/signup", async (req, res) => {
-
 	const firstName = xss(req.body.firstName);
 	const lastName = xss(req.body.lastName);
 	const userName = xss(req.body.userName);
@@ -111,14 +106,13 @@ router.post("/signup", async (req, res) => {
 	// console.log(req.body);
 	let errors = [];
 
-	if (!verifier.validString(firstName)) errors.push( "First name is not a valid string.");
-	if (!verifier.validString(lastName)) errors.push( "Last name is not a valid string.");
-	if (!verifier.validEmail(email)) errors.push( "Email is not a valid string.");
-	if (!verifier.validString(userName)) errors.push( "userName is not a valid string.");
-	if (!verifier.validAge(age)) errors.push( "Age must be a positive integer");
-	if (!verifier.validPassword(password)) errors.push( "Password can only contain [a-z][0-9][A-Z][_-], and length range [6, 16]");
+	if (!verifier.validString(firstName)) errors.push("First name is not a valid string.");
+	if (!verifier.validString(lastName)) errors.push("Last name is not a valid string.");
+	if (!verifier.validEmail(email)) errors.push("Email is not a valid string.");
+	if (!verifier.validString(userName)) errors.push("userName is not a valid string.");
+	if (!verifier.validAge(age)) errors.push("Age must be a positive integer");
+	if (!verifier.validPassword(password)) errors.push("Password can only contain [a-z][0-9][A-Z][_-], and length range [6, 16]");
 	// if (!verifier.validString(selfSummary)) error.push( "selfSummary is not a valid string.");
-	
 
 	if (errors.length > 0) {
 		return res.status(401).render("users/signup", {
@@ -134,7 +128,13 @@ router.post("/signup", async (req, res) => {
 		// console.log("route users/signup")
 		// console.log(user)
 		req.session.user = user.userName;
-		res.redirect("/"); // to landing
+		let temp = req.session.previousRoute; // bring back to previous page before login
+		if (temp) {
+			req.session.previousRoute = "";
+			res.redirect(temp);
+		} else {
+			res.redirect("/");
+		}
 	} catch (e) {
 		errors.push(e);
 		return res.status(401).render("users/signup", {
