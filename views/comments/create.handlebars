@@ -4,12 +4,13 @@
 {{!-- post 完之后, 要创建对应的数据库, 并且关联对应的 furnitureId 或者 rentalId --}}
 <div class="container col-8 mt-5">
     <div class="container mb-4">
-        <a href="/restaurants/{{restaurant._id}}" class="text-decoration-none text-dark font-weight-bold">
-            <h1>{{restaurant.name}}</h1>
+        <a href="/furnitures/{{furniture._id}}" class="text-decoration-none text-dark font-weight-bold">
+            <h1>{{furniture.name}}</h1>
         </a>
     </div>
+    
     <div class="container review-input-box">
-        <form method="POST" action="/reviews/writeareview/{{restaurant._id}}" id="review-form" novalidate>
+        <form method="POST" action="/comments/addComment/{{furniture._id}}" id="review-form" novalidate>
             <div class="container">
                 {{!-- <div class="row">
                     <div class="col form-group">
@@ -48,7 +49,7 @@
                  --}}
                 <div class="form-group mw-100%">
                     <label for="review-text"></label>
-                    <textarea name="reviewText" class="form-control form-control-lg" id="review-text" cols="30" rows="10" placeholder="This spot is serving meal kits, as well as offering delivery during COVID. I’m so glad! Of course nothing beats the in-person experience, but delivery is a great second option right now. The food was a little cold, but I understand this is a new operation for them..."></textarea>
+                    <textarea name="reviewText" class="form-control form-control-lg" id="review-text" cols="30" rows="10" placeholder="What do you think of this: "></textarea>
                     <div class="invalid-feedback">
                         Please enter your review
                     </div>

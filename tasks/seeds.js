@@ -73,9 +73,21 @@ async function main() {
     const commentId = comment._id
     console.log(commentId);
 
-    // toggle furniture into the userId
-    // await toggleFn.toggleFurnitureToUser(userOneId, furniture1Id);
-    // await toggleFn.toggleFurnitureToUser(userOneId, furniture2Id);
+    var comment1 = await commentData.addComments(
+        user_id = userOneId,
+        comment = 'This prodsdfasfsuct is no doubt a garbage, do watch out!',
+        report_count = 1,
+        helpful_count = 10
+    );
+    const commentId1 = comment1._id
+    console.log(commentId1);
+
+     
+    await toggleFn.toggleCommentToFurniture(furniture2Id, commentId) 
+    await toggleFn.toggleCommentToFurniture(furniture2Id, commentId1)
+        // toggle furniture into the userId
+        // await toggleFn.toggleFurnitureToUser(userOneId, furniture1Id);
+        // await toggleFn.toggleFurnitureToUser(userOneId, furniture2Id);
 
     // create comments
     // toggle comments into the furniture

@@ -12,9 +12,9 @@ router.get('/', async(req, res) => {
     // Redirect the user to login page if they attempt to create a review without logging in 
     // Use req.session to store the redirect address after logging in
     res.render('comments/create')
-    })
+})
 
-
+//应该放入furniture下
 router.get('/addComment/:id', async(req, res) => {
     // Redirect the user to login page if they attempt to create a review without logging in 
     // Use req.session to store the redirect address after logging in
@@ -37,14 +37,19 @@ router.get('/addComment/:id', async(req, res) => {
         });
     }
 
+
     try { //pull评论
-        const comment = await commentData.getCommentById(furnitureId);
-        res.render('reviews/create', {
+        const furniture = await furnitureData.getFurnitureById(furnitureId);
+        let commentsIdList = furniture.comment_id
+
+        const comment = await commentData.getCommentById(commentsIdList[0]);
+
+        res.render('comments/create', {
             partial: 'write-a-review-script',
             title: 'Write a Review',
             authenticated: req.session.user ? true : false,
             user: req.session.user,
-            restaurant: restaurant
+            furniture: furniture
         });
     } catch (e) {
         errors.push(e)
@@ -60,53 +65,49 @@ router.get('/addComment/:id', async(req, res) => {
 // User should only be able to access POST route after logging in
 router.post('/addComment/:id', async(req, res) => {
     // Validate input in this route before sending to server
-    let restaurantId = xss(req.params.id.trim());
-    if (!verify.validString(restaurantId)) res.render('errors/errror', { errorMessage: "Invalid restaurant id." });
 
-    // Everything in req.body is a string
-    const newRating = parseInt(xss(req.body.reviewRating));
-    const newPrice = parseInt(xss(req.body.reviewPrice));
-    const newDistanced = xss(req.body.distancedTables);
-    const newMasked = xss(req.body.maskedEmployees);
-    const newPayment = xss(req.body.noTouchPayment);
-    const newSeating = xss(req.body.outdoorSeating);
-    const newReviewText = xss(req.body.reviewText);
 
-    const newMetrics = {
-        rating: newRating,
-        price: newPrice,
-        distancedTables: !!newDistanced,
-        maskedEmployees: !!newMasked,
-        noTouchPayment: !!newPayment,
-        outdoorSeating: !!newSeating
-    };
+    let furnitureId = xss(req.params.id.trim());
+    if (!verify.validString(furnitureId)) res.render('errors/errror', { errorMessage: "Invalid furniture id." });
+    console.log('1')
+        // Everything in req.body is a string
+    const username = req.session.user
+    console.log('2')
+    console.log(username)
+    myUser  =  await  userData.getUserByUserName(username); 
+    const userId = myUser._id
+    const comment = xss(req.body.reviewText);
 
-    // Route-side input validation
-    let errors = [];
-    if (!req.session.user) errors.push('User is not logged in!');
-    if (!verify.validRating(newMetrics.rating)) errors.push('Invalid review rating.');
-    if (!verify.validRating(newMetrics.price)) errors.push('Invalid review price.');
-    if (!verify.validString(newReviewText)) errors.push('Invalid review text.');
+    console.log('3')
+        //test later
+        // Route-side input validation
+        // let errors = [];
+        // if (!req.session.user) errors.push('User is not logged in!');
+        // if (!verify.validRating(newMetrics.rating)) errors.push('Invalid review rating.');
+        // if (!verify.validRating(newMetrics.price)) errors.push('Invalid review price.');
+        // if (!verify.validString(newReviewText)) errors.push('Invalid review text.');
 
-    if (errors.length > 0) {
-        res.render('errors/error', {
-            title: 'Write a Review',
-            errors: errors,
-            partial: 'errors-script'
-        });
-        return;
-    }
-
+    // if (errors.length > 0) {
+    //     res.render('errors/error', {
+    //         title: 'Write a Review',
+    //         errors: errors,
+    //         partial: 'errors-script'
+    //     });
+    //     return;
+    // }
+    console.log('1')
     try {
-        const restaurant = await restaurantData.getRestaurantById(restaurantId);
-        const review = await reviews.createReview(req.session.user._id, restaurantId, newReviewText, newMetrics);
-        res.redirect(`../../restaurants/${restaurantId}`);
+        await commentData.addComments(userId, comment);
+        res.json({  error: comment })
+            //res.redirect(`../../furniture/${furnitureId}`);
+        console.log(comment)
     } catch (e) {
         errors.push(e);
-        res.status(500).render('errors/error', {
-            errors: errors,
-            partial: 'errors-script'
-        });
+        // res.status(500).render('errors/error', {
+        //     errors: errors,
+        //     partial: 'errors-script'
+        // });
+        res.status(500).json({  error:  e  });
     }
 });
 

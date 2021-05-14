@@ -39,7 +39,7 @@ async function addComments(user_id, comment) {
     if (newInsertedComments.insertedCount === 0) throw 'No Comment(s) input';
 
     await shareUtilsDB.toggleCommentToUser(user_id, newComments._id);
-    return await this.getByCommentId(newInsertedComments.insertedId);
+    return await this.getCommentById(newInsertedComments.insertedId);
 }
 
 
