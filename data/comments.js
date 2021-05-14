@@ -3,7 +3,6 @@ const mongoCollections = require('../config/mongoCollections');
 const comments = mongoCollections.comments;
 const uuid = require('uuid');
 const verifier = require("./verify");
-const shareUtilsDB = require("./shareUtilsDB");
 
 
 async function getCommentById(id) {
@@ -20,8 +19,8 @@ async function addComments(user_id, comment) {
     //用户是不是不应该有权限input report_count 和 helpful_count，是不是应该只保留前两个参数,
     //如果存储的是userid的话，如何实现读取当前登录用户的id
     if (!verifier.validString(comment)) throw 'Invalid Comment'
-    if (!verifier.validNum(report_count)) throw 'Invalid Report Count'
-    if (!verifier.validNum(helpful_count)) throw 'Invalid Helpful Count'
+    // if (!verifier.validNum(report_count)) throw 'Invalid Report Count'
+    // if (!verifier.validNum(helpful_count)) throw 'Invalid Helpful Count'
 
     const commentsCollection = await comments()
 
@@ -37,8 +36,6 @@ async function addComments(user_id, comment) {
 
     const newInsertedComments = await commentsCollection.insertOne(newComments);
     if (newInsertedComments.insertedCount === 0) throw 'No Comment(s) input';
-
-    await shareUtilsDB.toggleCommentToUser(user_id, newComments._id);
     return await this.getCommentById(newInsertedComments.insertedId);
 }
 

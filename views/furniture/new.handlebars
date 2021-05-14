@@ -20,7 +20,7 @@
 
 		<div class="form-group">
 			<label for="price" class="input-label">Price</label>
-			<input type="text" class="form-control" id="price-input" name="price" placeholder="Enter furniture price" />
+			<input type="number" class="form-control" id="price-input" name="price" placeholder="Enter furniture price" />
 			<div class="invalid-feedback">
 				Please provide a valid price
 			</div>
@@ -28,7 +28,7 @@
 
 		<div class="form-group" id="furniture-input-div">
 			<label for="photo" class="input-label">Description</label>
-			<input type="text" class="form-control" id="description-input" name="description" placeholder="Enter furniture description" />
+			<input type="text" class="form-control" id="description-input" name="description" placeholder="Enter furniture description" value={{furniture}} />
 			<div class="invalid-feedback">
 				Please provide a valid description
 			</div>
