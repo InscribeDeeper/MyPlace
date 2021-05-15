@@ -10,10 +10,9 @@
 7. 添加add favorite
 8. review history通过点击botton ajax进入route删除review(s), untoggle 从furniture rental user
 9. 删除favorite *
-10. 看别的用户的信息,通过单独的furniture page定位特定userId的profile
-11. 修改furniture views的link db
-16. 修改description 修改创建的东西，提供botton create/edit/delete
-18. Dark Mode
+10. 看别的用户的信息,通过单独的furniture page定位特定userId的profile --> 在furniture 界面 输出用户的名字, 通过名字, 可以进入profile
+16. 修改description 修改创建的东西，提供botton create/edit/delete✅
+18. Dark Mode * 
 
 ## Shaobo/YX
 12. Funiture/Rental [# of comment], [price] botton feature ✅
@@ -24,7 +23,9 @@
 
 15. Samples准备，ref seeds_temp
 
-16. Rental 不加名字修改views search name -》 search location✅
+16. Rental 不加名字修改views search name 》 search location✅
+
+11. 修改furniture views的link db
 
 17. ranking JS by like/dislike
 
