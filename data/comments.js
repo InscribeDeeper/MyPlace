@@ -19,8 +19,8 @@ async function addComments(user_id, comment) {
     //用户是不是不应该有权限input report_count 和 helpful_count，是不是应该只保留前两个参数,
     //如果存储的是userid的话，如何实现读取当前登录用户的id
     if (!verifier.validString(comment)) throw 'Invalid Comment'
-    // if (!verifier.validNum(report_count)) throw 'Invalid Report Count'
-    // if (!verifier.validNum(helpful_count)) throw 'Invalid Helpful Count'
+        // if (!verifier.validNum(report_count)) throw 'Invalid Report Count'
+        // if (!verifier.validNum(helpful_count)) throw 'Invalid Helpful Count'
 
     const commentsCollection = await comments()
 
@@ -70,8 +70,8 @@ async function updateComment(commentId, updatedInfo) { //不包括点赞点踩�
     const theComment = getCommentById(commentId)
     let updatingInfo = {
         comment: updatedInfo.comment,
-        report_count: theComment.reports,
-        helpful_count: theComment.helpful
+        reportLog: theComment.reports,
+        helpfulLog: theComment.helpful
     }
     const updatedComment = await commentCollection.updateOne({ _id: id }, { $set: updatingInfo })
     if (!updatedComment.matchedCount && !updatedComment.motifiedCount) throw 'updated failed.'
@@ -80,10 +80,40 @@ async function updateComment(commentId, updatedInfo) { //不包括点赞点踩�
 }
 
 
+async function helpfulComment(commentId, userId) {
+    if (!verifier.validString(commentId)) throw "User id is not a valid string.";
+    if (!verifier.validString(userId)) throw "User id is not a valid string.";
+
+    const commentCollection = await comment();
+
+    const updatedInfo = await commentCollection.updateOne({ _id: commentId }, { $addToSet: { helpfulLog: userId } });
+    if (updatedInfo.modifiedCount === 0) throw "Could not add userId to helpfulLog";
+
+    updatedComment = await getCommentById(commentId)
+    return updatedComment.helpfulLog.length
+}
+
+
+async function reportComment(commentId, userId) {
+    if (!verifier.validString(commentId)) throw "User id is not a valid string.";
+    if (!verifier.validString(userId)) throw "User id is not a valid string.";
+
+    const commentCollection = await comment();
+
+    const updatedInfo = await commentCollection.updateOne({ _id: commentId }, { $addToSet: { reportLog: userId } });
+    if (updatedInfo.modifiedCount === 0) throw "Could not add userId to reportLog";
+
+    updatedComment = await getCommentById(commentId)
+    return updatedComment.reportLog.length
+}
+
+
 module.exports = {
     getCommentById,
     addComments,
     getAllComments,
     deleteComment,
-    updateComment
+    updateComment,
+    helpfulComment,
+    reportComment
 }
