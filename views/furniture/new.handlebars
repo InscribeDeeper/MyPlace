@@ -12,7 +12,7 @@
 
 		<div class="form-group">
 			<label for="location" class="input-label">Location</label>
-			<input type="text" class="form-control" id="location-input" name="location" placeholder="Enter furniture address" />
+			<input type="text" class="form-control" id="location-input" name="location" placeholder="Enter furniture address" value="{{reqInput.location}}"/>
 			<div class="invalid-feedback">
 				Please provide a valid location
 			</div>
@@ -20,7 +20,7 @@
 
 		<div class="form-group">
 			<label for="price" class="input-label">Price</label>
-			<input type="number" class="form-control" id="price-input" name="price" placeholder="Enter furniture price" />
+			<input type="number" class="form-control" id="price-input" name="price" placeholder="Enter furniture price" value="{{reqInput.price}}"/>
 			<div class="invalid-feedback">
 				Please provide a valid price
 			</div>
@@ -28,7 +28,7 @@
 
 		<div class="form-group" id="furniture-input-div">
 			<label for="photo" class="input-label">Description</label>
-			<input type="text" class="form-control" id="description-input" name="description" placeholder="Enter furniture description" value={{furniture}} />
+			<input type="text" class="form-control" id="description-input" name="description" placeholder="Enter furniture description" value="{{reqInput.description}}" />
 			<div class="invalid-feedback">
 				Please provide a valid description
 			</div>
@@ -36,7 +36,7 @@
 
 		<div class="form-group">
 			<label for="photo_link" class="input-label">Link photo</label>
-			<input type="text" class="form-control" id="photo-input" name="photo_link" placeholder="Enter furniture photo link" />
+			<input type="text" class="form-control" id="photo-input" name="photo_link" placeholder="Enter furniture photo link" value="{{reqInput.photos}}"/>
 			<div class="invalid-feedback">
 				Please provide a valid external photo link
 			</div>
@@ -44,7 +44,7 @@
 
 		<div class="form-group">
 			<label for="purchase_link" class="input-label">Purchase link</label>
-			<input type="text" class="form-control" id="purchase_link-input" name="purchase_link" placeholder="Enter the product purchase link" />
+			<input type="text" class="form-control" id="purchase_link-input" name="purchase_link" placeholder="Enter the product purchase link" value="{{reqInput.purchase_link}}"/>
 			<div class="invalid-feedback">
 				Please provide a valid purchase-link
 			</div>
@@ -52,7 +52,7 @@
 
 		<div class="form-group">
 			<label for="photo" class="input-label">Contact</label>
-			<input type="text" class="form-control" id="contact-input" name="contact" placeholder="Enter contact" />
+			<input type="text" class="form-control" id="contact-input" name="contact" placeholder="Enter contact" value="{{reqInput.contact}}"/>
 			<div class="invalid-feedback">
 				Please provide a valid contact
 			</div>

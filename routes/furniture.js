@@ -114,6 +114,8 @@ router.post("/new", async (req, res) => {
 		});
 	}
 
+	
+
 	try {
 		const newFurniture = await furnitureData.createFurniture(
 			req.params._id,
