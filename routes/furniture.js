@@ -7,55 +7,6 @@ const commentData = data.comments;
 const verify = require("../data/verify");
 const xss = require("xss");
 
-// let category = [
-// 	"American",
-// 	"Breakfast",
-// 	"Brunch",
-// 	"Chinese",
-// 	"Fast Food",
-// 	"Italian",
-// 	"Mexican",
-// 	"Thai",
-// 	"Korean",
-// 	"Middle-Eastern",
-// 	"Indian",
-// 	"Soul Food",
-// 	"French",
-// 	"Japanese",
-// 	"Vietnamese",
-// 	"Mediterranean",
-// 	"Cuban",
-// 	"Sichuan",
-// 	"Greek",
-// 	"Halal",
-// 	"Other",
-// ];
-// category.sort();
-
-// Route for the page of all restaurants
-// /furniture  需要显示所有的 furniture的list, 是一个 table, 包含大部分furniture的 属性
-// router.get('/', async (req, res) => {
-
-// const restaurants = await restaurantData.getAllRestaurants();
-// restaurants.forEach(async (restaurant)=>{
-//     allReviews = await reviewData.getAllReviewsOfRestaurant(restaurant._id);
-//     numReviews = allReviews.length;
-//     restaurant.rating = (restaurant.rating / numReviews).toFixed(2);
-//     restaurant.price = (restaurant.price / numReviews).toFixed(2);
-//     if (numReviews === 0) {
-//         restaurant.rating = 'No Reviews';
-//         restaurant.price = 'No Reviews';
-//     }
-// });
-// return res.render('restaurants/list', {
-//     authenticated: req.session.user ? true : false, // 这里会进行 认证
-//     user: req.session.user,
-//         title: 'All Restaurants',
-//         partial: 'restaurants-list-script',
-//         restaurants: restaurants
-// });
-// });
-
 router.get("/", async(req, res) => {
     const allFurnitures = await furnitureData.getAllFurnitures();
     return res.render("furniture/list", {
@@ -90,7 +41,7 @@ router.post("/new", async(req, res) => {
     let purchase_link = xss(req.body.purchase_link);
     let contact = xss(req.body.contact);
     let latitude = xss(req.body.latitude);
-	let longtitude = xss(req.body.longtitude);
+	let longitude = xss(req.body.longitude);
 
     let errors = [];
 
@@ -102,7 +53,7 @@ router.post("/new", async(req, res) => {
     if (!purchase_link) errors.push("purchase_link strongly recommended");
     if (!contact) errors.push("No contact");
     if (!latitude) errors.push("latitude is required");
-    if (!longtitude) errors.push("longtitude is required");
+    if (!longitude) errors.push("longtitude is required");
 
     // const allRestaurants = await restaurantData.getAllRestaurants();
     // for (let x of allRestaurants) {
