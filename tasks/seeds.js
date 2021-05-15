@@ -113,7 +113,7 @@ async function main() {
     await toggleFn.toggleCommentToUser(userOneId, commentId1)
 
 
-    Comparefurniture2Id = await commentData.getFurnitureIDbyCommentID(commentId)
+    Comparefurniture2Id = await commentData.getFurnitureByCommentID(commentId)
     // console.log("Comparefurniture2Id     " + Comparefurniture2Id)
     // console.log("furniture2Id     " + furniture2Id)
         // toggle furniture into the userId
