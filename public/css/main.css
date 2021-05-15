@@ -11,7 +11,7 @@
 }
 
 .btn-primary:hover {
-  background-color: rgb(164, 166, 197);
+  background-color: rgb(68, 93, 177);
   border-color:rgb(243, 237, 237);
   color:white
 }
@@ -43,50 +43,13 @@ body {
 body {
 	background: #fff;
 }
-/* 
-body.dark-mode{
-	background: #111;
-	color: #fff;
-} */
 
-/* body.dark-mode li.list-group-item>a{
-  color: #3b85ff;
-}
-body:not(.dark-mode) li.list-group-item>a{
-  color: #0072ed;
-}
-
-body.dark-mode li.list-group-item,
-body.dark-mode .card{
-	background: #222;
-} */
 
 .jumbotron{
   background-color: rgba(212, 173, 188, 0.514);
-  background-image: linear-gradient(#ffffff, #7c8296)
+  background-image: linear-gradient(#d8d9dd, #32437c)
 }
 
-/* body.dark-mode .dollar{
-  color: lightgreen;
-}
-
-body.dark-mode .text-secondary>span{
-  color: lightyellow;
-}
-
-body.dark-mode .card-header{
-	background: #333;
-}
-
-body.dark-mode tr.clickable-row>td,
-body.dark-mode input:disabled::placeholder{
-	color: #eee;
-}
-
-body.dark-mode .form-control{
-	background: #020202;
-	color: #fff; */
-/* } */
 
 /* The switch - the box around the slider */
 .switch {
@@ -96,7 +59,7 @@ body.dark-mode .form-control{
   display: inline-block;
   width: 60px;
   height: 34px;
-  background-color:#692643
+  background-color:#262b69
 }
 
 /* Hide default HTML checkbox */
@@ -295,3 +258,4 @@ body {
 .ml-2 {
   color:#000000;
 }
+

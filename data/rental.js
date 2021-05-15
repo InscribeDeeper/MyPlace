@@ -16,16 +16,21 @@ const ExportedMethods = {
         
 
         if (!verifier.validString(location)) throw "Location is not a valid string.";
-        if (!verifier.validNum(parseInt(price))) throw "Price is not a valid number.";
+        if (!verifier.validNum(parseFloat(price))) throw "Price is not a valid number.";
         if (!verifier.validNum(parseInt(bedroom))) throw "Bedtoom is not a valid number.";
         if (!verifier.validNum(parseInt(bathroom))) throw "Bathroom is not a valid number.";
-        if (!verifier.validNum(parseInt(space))) throw "Space is not a valid number.";
+        if (!verifier.validNum(parseFloat(space))) throw "Space is not a valid number.";
         if (!verifier.validString(description)) throw "Description is not a valid string.";
         // if (!verifier.validString(photo)) throw "photo is not a valid string.";
         if (!verifier.validString(utility)) throw "utlity is not a valid string.";
-        // if (!verifier.validBoolean(sold)) throw "Sold should be a boolean";
         // if (!verifier.validString(contact)) throw "contact should be a string";
 
+        price = parseFloat(price);
+        longitute = parseFloat(longitute);
+        latitute = parseFloat(latitute);
+        bathroom = parseInt(bathroom);
+        bedroom = parseInt(bedroom)
+        space = parseFloat (space)
 
         const rentalCollection = await rental()
 
