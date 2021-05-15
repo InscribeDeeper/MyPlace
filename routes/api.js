@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const data = require('../data');
-const reviewData = data.reviews;
-const restaurantData = data.restaurants;
 const commentData = data.comments;
 const userData = data.users;
 const verifier = require('../data/verify');
 const xss = require('xss');
 let { ObjectId } = require('mongodb');
 
-router.post('/delete/:id', async function (req,res){
+router.post('/deleteComment/:id', async function (req,res){
     const rid = xss(req.body.id.trim())
     const parsedId = ObjectId(rid)
     const delReview = await reviewData.deleteReview(rid);

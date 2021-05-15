@@ -219,21 +219,18 @@ router.get("/:id", async(req, res) => {
             current.reported = eachCommment.report; // checkListMem ../user._id this.reported
 
             // let allsubComments = await commentData.getAllCommentsOfReview(eachCommment._id);
+            allsubComments = [{firstName:"F", lastName:"L", text:"this is sub comments by FL"}, 
+                                {firstName: "A",lastName: "B", text:"this is sub comments by AB"}]
             let subComments = [];
-            // for (let eachsubcomment of allsubComments) {
-            //     let currentComment = {};
-            //     let {firstName, lastName, age} = await userData.getUserById(eachsubcomment[0]);
-            //     currentComment.name = firstName + ' ' + lastName;
-            //     currentComment.age = age;
-            //     currentComment.text = comment.text
-            //     subComments.push(currentComment);
-            // }
+            for (let eachsubcomment of allsubComments) {
+                let currentSubComment = {};
+                // let {firstName, lastName, age} = await userData.getUserById(currentSubComment[0]);
+                let {firstName, lastName, text} = eachsubcomment
+                currentSubComment.name = firstName + ' ' + lastName;
+                currentSubComment.text = text
+                subComments.push(currentSubComment);
+            }
             current.subcomments = subComments;
-
-            // let max = 5;
-            // current.filledStars = verify.generateList(current.metrics.rating);
-            // current.unfilledStars = verify.generateList(max - current.metrics.rating);
-            // current.filledDollars = verify.generateList(current.metrics.price);
             allCommentsProcessed.push(current);
         }
 

@@ -66,10 +66,9 @@ router.post("/update", async (req, res) => {
 
 router.get("/", async (req, res) => {
 	const userName = req.session.user;
-	console.log("private route");
-	console.log(userName);
+	// console.log("private route");
+	// console.log(userName);
 	myUser = await userData.getUserByUserName(userName);
-	// myUser._id
 
 	//###########################
 	// My Reviews History
