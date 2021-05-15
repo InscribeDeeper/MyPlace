@@ -91,6 +91,13 @@ async function main() {
      
     await toggleFn.toggleCommentToFurniture(furniture2Id, commentId) 
     await toggleFn.toggleCommentToFurniture(furniture2Id, commentId1)
+    await toggleFn.toggleCommentToUser(userOneId, commentId) 
+    await toggleFn.toggleCommentToUser(userOneId, commentId1)
+
+
+    Comparefurniture2Id = await commentData.getFurnitureIDbyCommentID(commentId)
+    // console.log("Comparefurniture2Id     " + Comparefurniture2Id)
+    // console.log("furniture2Id     " + furniture2Id)
         // toggle furniture into the userId
         // await toggleFn.toggleFurnitureToUser(userOneId, furniture1Id);
         // await toggleFn.toggleFurnitureToUser(userOneId, furniture2Id);
