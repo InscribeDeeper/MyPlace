@@ -1,6 +1,7 @@
 const mongoCollections = require("../config/mongoCollections");
 const users = mongoCollections.users;
-const furnitures  =  mongoCollections.furniture;
+const  furnitures  =  mongoCollections.furniture;
+const  rentals  =  mongoCollections.rental;
 const verifier = require("./verify");
 
 async function getUserById(user_id) {
@@ -78,6 +79,7 @@ async  function  toggleCommentToFurniture(furniture_id,  comment_id)  {  �
 }
 
 
+
 async  function  untoggleCommentToFurniture(furniture_id,  comment_id)  {    
     if  (!verifier.validString(comment_id))  throw  "comment_id id is not a valid string.";    
     if  (!verifier.validString(furniture_id))  throw  "furniture_id id is not a valid string.";
@@ -99,6 +101,30 @@ async  function  untoggleCommentToFurniture(furniture_id,  comment_id)  { �
 // 	return await getUserById(user_id);
 // }
 
+
+async  function  toggleCommentToRental(rental_id,  comment_id)  {    
+    if  (!verifier.validString(comment_id))  throw  "comment_id id is not a valid string.";    
+    if  (!verifier.validString(rental_id))  throw  "rental_id id is not a valid string.";
+
+    const  rentalCollection  =  await  rentals();    
+    const  updatedInfo  =  await  rentalCollection.updateOne({  _id:  rental_id  },   {  $addToSet:  {  comments_id:  comment_id  }  });    
+    if  (updatedInfo.modifiedCount  ===  0)  throw  "Could not update rental_id in User collection successfully.";    
+    return  await  rentals(rental_id);
+}
+
+
+
+async  function  untoggleCommentToRental(rental_id,  comment_id)  {    
+    if  (!verifier.validString(comment_id))  throw  "comment_id id is not a valid string.";    
+    if  (!verifier.validString(rental_id))  throw  "rental_id id is not a valid string.";
+
+
+    const  rentalCollection  =  await  rentals();    
+    const  updatedInfo  =  await  rentalCollection.updateOne({  _id:  rental_id  },   {  $pull:  {  comments_id:  comment_id  }  });    
+    if  (updatedInfo.modifiedCount  ===  0)  throw  "Could not update rental_id in User collection successfully.";    
+    return  await  rentals(rental_id);
+}
+
 module.exports = {
     toggleRentalToUser,
     toggleCommentToUser,
@@ -107,5 +133,7 @@ module.exports = {
     untoggleCommentToUser,
     untoggleFurnitureToUser,
     toggleCommentToFurniture,
-    untoggleCommentToFurniture
+    untoggleCommentToFurniture,
+    toggleCommentToRental,
+    untoggleCommentToRental
 };
