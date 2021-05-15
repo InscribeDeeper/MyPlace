@@ -62,15 +62,21 @@ function fNum(id,col,compareFn=(a,b)=>a>=b) {
     }
 }
 
-var rsb = document.getElementById("rsb");
-var rsd = document.getElementById("rsd");
-var psb = document.getElementById("psb");
-var psd = document.getElementById("psd");
-rsd.innerHTML = rsb.value;
-psd.innerHTML = psb.value;
-rsb.oninput = function() {
-  rsd.innerHTML = this.value;
+var bedn = document.getElementById("bedn");
+var bedd = document.getElementById("bedd");
+var bathn = document.getElementById("bathn");
+var bathd = document.getElementById("bathd");
+var pn = document.getElementById("pn");
+var pd = document.getElementById("pd");
+bedd.innerHTML = bedn.value;
+bathd.innerHTML = bathn.value;
+pd.innerHTML = pn.value;
+bathn.oninput = function() {
+  bathd.innerHTML = this.value;
 }
-psb.oninput = function() {
-  psd.innerHTML = this.value;
+bedn.oninput = function() {
+    bedd.innerHTML = this.value;
+  }
+pn.oninput = function() {
+    pd.innerHTML = this.value;
 }
