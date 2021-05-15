@@ -110,7 +110,7 @@ async function reportComment(commentId, userId) {
 }
 
 
-async function getFurnitureIdbyCommentId(commentId) {
+async function getFurnitureIDbyCommentId(commentId) {
     if (!verifier.validString(commentId)) throw "User id is not a valid string.";
 
     const furnitureCollection = await furniture();
@@ -121,7 +121,7 @@ async function getFurnitureIdbyCommentId(commentId) {
 }
 
 
-async function getRentalIdbyCommentId(commentId) {
+async function getRentalIDbyCommentId(commentId) {
     if (!verifier.validString(commentId)) throw "User id is not a valid string.";
 
     const rentalCollection = await rental();
@@ -140,6 +140,6 @@ module.exports = {
     updateComment,
     helpfulComment,
     reportComment,
-    getFurnitureIdbyCommentId,
-    getRentalIdbyCommentId
+    getFurnitureIDbyCommentId,
+    getRentalIDbyCommentId
 }
