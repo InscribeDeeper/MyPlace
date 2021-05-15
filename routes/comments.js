@@ -62,6 +62,11 @@ router.get('/addComment/:id', async(req, res) => {
 });
 
 
+router.post('/report/:id', async(req, res) => {
+    userName = req.session.user 
+    
+})
+
 // User should only be able to access POST route after logging in
 router.post('/addComment/:id', async(req, res) => {
     // Validate input in this route before sending to server
