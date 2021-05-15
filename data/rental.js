@@ -11,7 +11,7 @@ const ExportedMethods = {
 
     //CREATE
    
-    async createRental(location, price, bedroom, bathroom, space, description, photos, utility, like, dislike, labels, contact, userId) {
+    async createRental(location, price, bedroom, bathroom, space, description, photos, utility, like, dislike, labels, contact, longitute, latitute, userId) {
 
         if (!verifier.validString(location)) throw "Location is not a valid string.";
         if (!verifier.validNum(price)) throw "Price is not a valid number.";
@@ -40,6 +40,8 @@ const ExportedMethods = {
             dislike: dislike, 
             labels: labels, 
             contact: contact,
+            longitute: longitute,
+            latitute: latitute,
             _id: uuid.v4()
         }
         const insertInfo = await rentalCollection.insertOne(newRental)
