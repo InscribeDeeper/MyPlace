@@ -1,52 +1,105 @@
 <div class="container mt-3 col-5">
-    <h1>Create a new restaurant</h1>
-    <form method="POST" action="/restaurants/new" id="restaurant-form" class="needs-validation" novalidate>
-        <div class="form-group">
-            <label for="restaurant-name-input">Name</label>
-            <input type="text" class="form-control" id="restaurant-name-input" name="name" placeholder="Enter restaurant name">
-            <div class="valid-feedback">
+	<h1>Create a New Rental</h1>
+	<form method="POST" action="/rental/new" id="rental-form" onsubmit="submitButton.disabled = true; return true;">
 
-            </div>
-            <div class="invalid-feedback">
-                Please provide a valid restaurant name
-            </div>
-        </div>
+		<div class="form-group">
+			<label for="location" class="input-label">Location</label>
+			<input type="text" class="form-control" id="location-input" name="location" placeholder="Enter rental address" value="{{reqInput.location}}"/>
+			<div class="invalid-feedback">
+				Please provide a valid location
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="category" class="input-label">Labels</label>
+			<input type = "text" list="labels" name="label" id="label-input">
+			<datalist id="labels">
+  			<option value="Warm">
+  			<option value="Cheap">
+  			<option value="Big">
+  			<option value="Luxury">
+			<option value="House">
+  			<option value="Apartment">
+			<option value="Condo">
+  			<option value="Cute">
+			</datalist>
+			{{!-- <input type="text" class="form-control" id="category-input" name="category" placeholder="Enter rental category" /> --}}
+			<div class="invalid-feedback">
+				Please provide a valid rental label
+			</div>
+
+		</div>
+
+		
+
+		<div class="form-group">
+			<label for="price" class="input-label">Price</label>
+			<input type="number" class="form-control" id="price-input" name="price" placeholder="Enter rental price" value="{{reqInput.price}}"/>
+			<div class="invalid-feedback">
+				Please provide a valid price
+			</div>
+		</div>
+
         <div class="form-group">
-            <label for="restaurant-address-input">Address</label>
-            <input type="text" class="form-control" id="restaurant-address-input" name="address" placeholder="Enter restaurant address">
-            <div class="invalid-feedback">
-                Please provide a valid address 
-            </div>
-        </div>
+			<label for="bed" class="input-label">Bedrooms</label>
+			<input type="number" class="form-control" id="bed-input" name="bed" placeholder="Enter rental bedrooms" value="{{reqInput.bedroom}}"/>
+			<div class="invalid-feedback">
+				Please provide a valid bed
+			</div>
+		</div>
+
         <div class="form-group">
-            <label for="cuisine-type-select">Cuisine Type</label>
-            <select name="cuisine" id="cuisine-type-select" class="form-control">
-                <option value="" selected>Select cuisine type</option>
-                {{#each cuisines}}
-                    <option value="{{this}}">{{this}}</option>
-                {{/each}}
-            </select>
-            <div class="invalid-feedback">
-                Please select a cuisine type
-            </div>
-        </div>
-        <div class="form-group" id="cuisine-input-div">
-            <label for="restaurant-cuisine-input">Cuisine Type</label>
-            <input type="text" class="form-control" id="restaurant-cuisine-input" name="cuisineInput" placeholder="Enter cuisine type">
-            <div class="invalid-feedback">
-                Please provide a valid cuisine 
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="restaurant-link-input">External Link to Yelp</label>
-            <input type="text" class="form-control" id="restaurant-link-input" name="link" placeholder="Enter external link">
-            <div class="invalid-feedback">
-                Please provide a valid external link e.g. https://www.yelp.com/biz/bobs-burgers-hoboken
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary" name="submitButton" id="submitButton">Create New Restaurant</button>
-        {{#each errors}}
-            <div class = "error font-italic">{{this}}</div>
-        {{/each}}
-    </form>
+			<label for="bath" class="input-label">Bathrooms</label>
+			<input type="number" class="form-control" id="bath-input" name="bath" placeholder="Enter rental bathrooms" value="{{reqInput.bathroom}}"/>
+			<div class="invalid-feedback">
+				Please provide a valid bath
+			</div>
+		</div>
+
+		<div class="form-group" id="rental-input-div">
+			<label for="description" class="input-label">Description</label>
+			<input type="text" class="form-control" id="description-input" name="description" placeholder="Enter rental description" value="{{reqInput.description}}" />
+			<div class="invalid-feedback">
+				Please provide a valid description
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="photo_link" class="input-label">Link photo</label>
+			<input type="text" class="form-control" id="photo-input" name="photo_link" placeholder="Enter rental photo link" value="{{reqInput.photo_link}}"/>
+			<div class="invalid-feedback">
+				Please provide a valid external photo link
+			</div>
+		</div>
+
+        <div class="form-group" id="rental-input-div">
+			<label for="description" class="input-label">Utility</label>
+			<input type="text" class="form-control" id="description-input" name="description" placeholder="Enter rental description" value="{{reqInput.description}}" />
+			<div class="invalid-feedback">
+				Please provide a valid description
+			</div>
+		</div>
+
+		
+
+		<div class="form-group">
+			<label for="photo" class="input-label">Contact</label>
+			<input type="text" class="form-control" id="contact-input" name="contact" placeholder="Enter contact" value="{{reqInput.contact}}"/>
+			<div class="invalid-feedback">
+				Please provide a valid contact
+			</div>
+		</div>
+
+		<button class="btn btn-primary" type="submit" name="submitButton" id="submitButton">Submit!</button>
+
+		{{#if hasErrors}}
+			<ul class="error-list">
+				{{#each errors}}
+					<li>
+						{{this}}
+					</li>
+				{{/each}}
+			</ul>
+		{{/if}}
+	</form>
 </div>

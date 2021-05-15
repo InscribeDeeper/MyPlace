@@ -31,7 +31,7 @@ async function createFurniture(userId, name, category, location, price, descript
 		_id: uuid.v4().toString(),
 		user_id: userId,
 		name,
-		comment_id: [],
+		comments_id: [],
 		category,
 		location,
 		price,

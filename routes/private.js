@@ -1,73 +1,92 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const verifier = require('../data/verify');
+const verifier = require("../data/verify");
 const data = require("../data");
+const { furniture } = require("../config/mongoCollections");
 const userData = data.users;
 const commentData = data.comments;
+const furnitureData = data.furniture;
+const rentalData = data.rental;
 
+router.get("/", async (req, res) => {
+	const userName = req.session.user;
+	console.log("private route");
+	console.log(userName);
+	myUser = await userData.getUserByUserName(userName);
+	// myUser._id
 
-router.get('/', async(req, res) =>{
-    const userName = req.session.user;	
-    console.log("private route")
-    console.log(userName)
-    myUser = await userData.getUserByUserName(userName);
-    // myUser._id
+	//###########################
+	// My Reviews History
+	// this.name; this.type, this.text
+	//###########################
+	let reviewHistory = [];
+	const myComments = myUser.comments_id || [];
+	for (let eachCommmentID of myComments) {
+		eachCommment = await commentData.getCommentById(eachCommmentID);
 
-    const commentsIdList = myUser.comments_id || [];
+		current = {};
+		current_furniture_id = await commentData.getFurnitureIDbyCommentID(eachCommment._id);
+		current_rental_id = await commentData.getRentalIDbyCommentID(eachCommment._id);
 
-    if (commentsIdList.length > 0) {
-        allComments = await Promise.all(
-            commentsIdList.map(async (x) => {
-                return await commentData.getCommentById(x);
-            })
-        );
-    }
+		if (current_furniture_id) {
+			item_type = "Furniture";
+			current_furniture = await furnitureData.getFurnitureById(current_furniture_id);
+			item_name = current_furniture.name;
+			item_id = current_furniture._id;
+		} else {
+			item_type = "Rental";
+			current_rental = await furnitureDrentalDataata.getRentalById(current_rental_id);
+			item_name = current_rental.name;
+			item_id = current_rental._id;
+		}
 
-    
+		current._id = item_id;
+		current.name = item_name;
+		current.type = item_type;
+		current.text = eachCommment.comment;
+		reviewHistory.push(current);
+	}
 
-    // // Combine restaurants and reviews into one array for easier access
-    // let restaurantNames = [];
-    // for (let comment of allComments){
-    //     通过comment id 找到 furniture_id
-    //     // let rest = await restaurants.getRestaurantById(comment.restaurantId);
-    //     restaurantNames.push(rest.name);
-    // }
+	//###########################
+	// My ownedFurnitures
+	// this.name; this.type, this.text
+	//###########################
+	let ownedFurnitures = [];
+	const myFurnitures = myUser.furniture_id || [];
+	for (let eachFurnitureID of myFurnitures) {
+        current = {};
+		current_furniture = await furnitureData.getFurnitureById(eachFurnitureID);
+        current.likes = current_furniture.likes
+        current.num_comments = current_furniture.comments_id.length
 
-    // let reviewRest = [];
-    // for (let i = 0; i < userReviews.length; i++) {
-    //     let currentReview = userReviews[i];
-    //     let max = 5;
-    //     let price = currentReview.metrics.price;
-    //     let rating = currentReview.metrics.rating
-        
-    //     reviewRest.push({
-    //         review: currentReview, 
-    //         restaurant: restaurantNames[i],
-    //         filledStars: verifier.generateList(rating),
-    //         unfilledStars: verifier.generateList(max-rating),
-    //         filledDollars: verifier.generateList(price)
-    //     });
-    // }
+	}
+	//###########################
+	// My favoritedFurnitures
+	// this.name; this.type, this.text
+	//###########################
+	let favoritedFurnitures = [];
+	const ownedFurnituresIdList = myUser.furniture_id || [];
+	for (let eachCommmentID of myComments) {
+		eachCommment = await commentData.getCommentById(eachCommmentID);
 
-    // // Get restaurant names of user's favorited restaurants
-    // let favRestaurants = [];
-    // for (let restaurantId of userData.favoritedRestaurants){
-    //     let rest = await restaurants.getRestaurantById(restaurantId);
-    //     favRestaurants.push({
-    //         id: restaurantId, 
-    //         name: rest.name
-    //     });
-    // }
+		current = {};
+		current_furniture = await commentData.getFurnitureIDbyCommentID(eachCommment._id);
+		current_rental = await commentData.getRentalIDbyCommentID(eachCommment._id);
+		item = current_furniture || current_rental;
+		current.name = item.name;
+		current.type = current_furniture ? "Furniture" : "Rental";
+		current.text = eachCommment.comment;
+		reviewHistory.push(current);
+	}
 
-
-    return res.render('users/myProfile', {
-        authenticated: true,
-        partial: 'user-info-script',
-        title: 'Your Profile',
-        user: myUser,
-        favRestaurants: myUser.email,
-        reviews: myUser.selfSummary
-    });
+	return res.render("users/myProfile", {
+		authenticated: true,
+		partial: "user-info-script",
+		title: "Your Profile",
+		user: myUser,
+		favRestaurants: myUser.email,
+		reviews: myUser.selfSummary,
+	});
 });
 
 module.exports = router;
