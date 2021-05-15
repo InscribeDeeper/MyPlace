@@ -19,41 +19,18 @@ async function createFurniture(userId, name, category, location, price, descript
     if (!verifier.validString(name)) throw "userId is not a valid user id.";
     if (!verifier.validString(category)) throw "userId is not a valid user id.";
     if (!verifier.validString(location)) throw "Last name is not a valid string.";
-    if (!verifier.validNum(parseFloat(price))) throw "Price is not a valid number.";
+    if (!parseFloat(price)) throw "Price is not a valid number.";
     if (!verifier.validString(description)) throw "userName is not a valid string.";
     if (!verifier.validString(photo)) throw "photo is not a valid string.";
     if (!verifier.validString(purchase_link)) throw "purchase_link is not a valid string.";
     if (!verifier.validBoolean(sold)) throw "Sold should be a boolean";
-    if (!count) throw "contact should be a string or a number";
-    if (!verifier.validNum(parseFloat(latitudeFloat))) throw "latitude is not a valid number.";
-    if (!verifier.validNum(parseFloat(longitudeFloat))) throw "longtitude is not a valid number.";
+    if (!contact) throw "contact should be a string or a number";
+    if (!parseFloat(latitudeFloat)) throw "latitude is not a valid number.";
+    if (!parseFloat(longitudeFloat)) throw "longtitude is not a valid number.";
 
-<<<<<<< HEAD
-	let latitude = parseFloat(latitudeFloat);
-	let longitude = parseFloat(longitudeFloat);
-	const furnitureCollection = await furniture();
-	// const userCollection = await users();
-	let newFurniture = {
-		_id: uuid.v4().toString(),
-		user_id: userId,
-		name,
-		comments_id: [],
-		category,
-		location,
-		price,
-		description,
-		photos,
-		likes, // 储存userId
-		dislikes, // 储存userId
-		purchase_link,
-		sold,
-		contact,
-		latitude,
-		longitude
-	};
-=======
     let latitude = parseFloat(latitudeFloat);
     let longitude = parseFloat(longitudeFloat);
+    price = parseFloat(price);
     const furnitureCollection = await furniture();
     // const userCollection = await users();
     let newFurniture = {
@@ -74,7 +51,6 @@ async function createFurniture(userId, name, category, location, price, descript
         latitude,
         longitude
     };
->>>>>>> f4d900ea1dca4cee4670786f02ea499e8c5bea3b
 
     const newInsertedFurniture = await furnitureCollection.insertOne(newFurniture);
     if (newInsertedFurniture.insertedCount === 0) throw "Insert failed!";
