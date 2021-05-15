@@ -79,20 +79,6 @@ router.get("/new", async(req, res) => {
     });
 });
 
-<<<<<<< HEAD
-router.post("/new", async (req, res) => {
-	// 上传新建
-	let name = xss(req.body.name);
-	let category = xss(req.body.category);
-	let location = xss(req.body.location);
-	let price = xss(req.body.price);
-	let description = xss(req.body.description);
-	let photo_link = xss(req.body.photo_link);
-	let purchase_link = xss(req.body.purchase_link);
-	let contact = xss(req.body.contact);
-	let latitude = xss(req.body.latitude);
-	let longtitude = xss(req.body.longtitude);
-=======
 router.post("/new", async(req, res) => {
     // 上传新建
     let name = xss(req.body.name);
@@ -103,7 +89,6 @@ router.post("/new", async(req, res) => {
     let photo_link = xss(req.body.photo_link);
     let purchase_link = xss(req.body.purchase_link);
     let contact = xss(req.body.contact);
->>>>>>> ac103cc195c6f9bd5667b833a26d4fc57c8b4a97
 
     let errors = [];
 
@@ -133,7 +118,6 @@ router.post("/new", async(req, res) => {
         });
     }
 
-<<<<<<< HEAD
 	const userName = req.session.user;
 	try {
 		myUser = await userData.getUserByUserName(userName);
@@ -158,27 +142,7 @@ router.post("/new", async(req, res) => {
 			contact,
 			latitude,
 			longtitude
-		);
-=======
-    try {
-        // console.log("suc")
-        const newFurniture = await furnitureData.createFurniture(
-            myUser._id,
-            name,
-            category,
-            location,
-            price,
-            description,
-            photo_link,
-            0,
-            0,
-            purchase_link,
-            false,
-            contact
-        );
->>>>>>> ac103cc195c6f9bd5667b833a26d4fc57c8b4a97
-
-        res.redirect(`/furniture`);
+		)
     } catch (e) {
         // console.log("fail")
         return res.render("furniture/new", {
@@ -239,15 +203,6 @@ router.get("/:id", async(req, res) => {
         for (let eachCommment of allComments) {
             let current = {};
 
-<<<<<<< HEAD
-			let commentedUser = await userData.getUserById(eachCommment.user_id); // get each comment's owner
-			// current.id = review._id;
-			current.name = commentedUser.first_name + " " + commentedUser.last_name;
-			current.age = commentedUser.age;
-			current.text = eachCommment.comment;
-			current.helpful = eachCommment.helpful;
-			current.reported = eachCommment.report; // checkListMem ../user._id this.reported
-=======
             let commentedUser = await userData.getUserById(eachCommment.user_id); // get each comment's owner
             current._id = eachCommment._id;
             current.name = commentedUser.firstName + " " + commentedUser.lastName;
@@ -255,7 +210,6 @@ router.get("/:id", async(req, res) => {
             current.text = eachCommment.comment;
             current.helpful = eachCommment.helpful;
             current.reported = eachCommment.report; // checkListMem ../user._id this.reported
->>>>>>> ac103cc195c6f9bd5667b833a26d4fc57c8b4a97
 
             // let allsubComments = await commentData.getAllCommentsOfReview(eachCommment._id);
             let subComments = [];
