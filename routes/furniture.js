@@ -153,9 +153,13 @@ router.get("/:id", async(req, res) => {
                 })
             );
         }
+        // ##################################
+        // allCommentsProcessed 
+        // this.name; this.text; this._id; 
+        // ##################################
 
         var allCommentsProcessed = [];
-        var userArr = [];
+
         for (let eachCommment of allComments) {
             let current = {};
 
@@ -220,7 +224,7 @@ router.get("/:id", async(req, res) => {
             partial: "furnitures-single-script",
             title: "Furniture",
             authenticated: req.session.user ? true : false,
-            user: userArr, // obj
+            user: myUser, // obj
             furniture: furniture, // obj
             comments: allCommentsProcessed, // arr
             photos: photos,

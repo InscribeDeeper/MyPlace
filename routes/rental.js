@@ -169,7 +169,6 @@ router.get("/:id", async (req, res) => {
 		}
 
 		var allCommentsProcessed = [];
-		var userArr = [];
 		for (let eachCommment of allComments) {
 			let current = {};
 
@@ -198,7 +197,7 @@ router.get("/:id", async (req, res) => {
 			partial: "rentals-single-script",
 			title: "Rental",
 			authenticated: req.session.user ? true : false,
-			user: userArr, // obj
+			user: myUser, // obj
 			rental: rental, // obj
 			comments: allCommentsProcessed, // arr
 			photos: photos,
