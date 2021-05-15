@@ -11,7 +11,7 @@ const xss = require("xss");
 router.get("/", async (req, res) => {
 	const allRental = await rentalData.getAllRental();
 	return res.render("rental/list", {
-		category: category,
+		
 		title: "All Rentals",
 		rental: allRental,
 		authenticated: req.session.user ? true : false,
