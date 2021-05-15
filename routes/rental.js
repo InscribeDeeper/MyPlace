@@ -11,7 +11,7 @@ const xss = require("xss");
 router.get("/", async (req, res) => {
 	const allRental = await rentalData.getAllRental();
 	return res.render("rental/list", {
-		category: category,
+		
 		title: "All Rentals",
 		rental: allRental,
 		authenticated: req.session.user ? true : false,
@@ -44,6 +44,8 @@ router.post("/new", async (req, res) => {
     let utility = xss(req.body.utility);
 	let labels = xss(req.body.labels);
 	let contact = xss(req.body.contact);
+	let longitute = xss(req.body.longitute);
+	let latitute = xss(req.body.latitute);
     //location longitute latitute like dislike???
 
 	let errors = [];
@@ -73,9 +75,16 @@ router.post("/new", async (req, res) => {
 		});
 	}
 
+	const userName = req.session.user;
 	try {
+		myUser = await userData.getUserByUserName(userName);
+	} catch (e) {
+		errors.push("userName or password is not valid.");
+	}
+
+	try {
+		console.log("sucess")
 		const newRental = await rentalData.createRental(
-			
 			location,
 			price,
             bedroom,
@@ -88,12 +97,15 @@ router.post("/new", async (req, res) => {
 			0,
 			labels,
 			contact,
-            longitutue,
+            longitute,
             latitute,
             myUser._id
 		);
-		res.redirect(`/rental`);
+		console.log("sucess1")
+		res.redirect(`/rental/list`);
+		console.log("sucess2")
 	} catch (e) {
+		console.log("fial")
 		return res.render("rental/new", {
 			title: "New Rental",
 			authenticated: req.session.user ? true : false,

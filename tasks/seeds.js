@@ -29,7 +29,25 @@ async function main() {
     userOne = await userData.updateUserInfo((id = userOneId), (newUserInfo = { age: 200, email: "hey.weiyang@gmail.com" }));
     userOne = await userData.updateUserPassword((id = userOneId), (password = "123456"));
     console.log(userOneId);
+    const newRental = await rentalData.createRental(
+        "location",
+        1,
+        1,
+        2,
+        3,
+        "description",
+        "ddd",
+        "d",
+        0,
+        0,
+        "ff",
+        1,
+        1,
+        1,
+        userOneId
+    );
 
+    console.log(newRental)
     // create furniture
     var furniture1 = await furnitureData.createFurniture(
         userOneId,

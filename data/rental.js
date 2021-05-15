@@ -21,7 +21,7 @@ const ExportedMethods = {
         if (!verifier.validString(description)) throw "Description is not a valid string.";
         // if (!verifier.validString(photo)) throw "photo is not a valid string.";
         if (!verifier.validString(utility)) throw "utlity is not a valid string.";
-        if (!verifier.validBoolean(sold)) throw "Sold should be a boolean";
+        // if (!verifier.validBoolean(sold)) throw "Sold should be a boolean";
         // if (!verifier.validString(contact)) throw "contact should be a string";
 
 
