@@ -1,3 +1,41 @@
 <script src="/public/js/rentalSingle.js"></script>
-<script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy6Qr24mWhnjUZphB0KftY8-BSzGDMV9E&callback=initMap">
-</script>
+{{!-- <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy6Qr24mWhnjUZphB0KftY8-BSzGDMV9E&callback=initMap">
+</script> --}}
+
+
+<!--The div element for the map -->
+<div id="map"></div>
+    <style type="text/css">
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 320px;
+        /* The height is 400 pixels */
+        width: 100%;
+        /* The width is the width of the web page */
+      }
+    </style>
+    <script>
+      // Initialize and add the map
+      function initMap() {
+        // The location of Uluru
+        const uluru = { lat: {{rental.latitude}}, lng: {{rental.longtitude}} };
+        // The map, centered at Uluru
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 15,
+          center: uluru,
+        });
+        // The marker, positioned at Uluru
+        const marker = new google.maps.Marker({
+          position: uluru,
+          map: map,
+        });
+      }
+    </script>
+    
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy6Qr24mWhnjUZphB0KftY8-BSzGDMV9E&callback=initMap"
+      async
+    ></script>
+    
