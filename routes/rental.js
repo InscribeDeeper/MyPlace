@@ -136,8 +136,8 @@ router.get("/:id", async (req, res) => {
 	}
 
 	try {
-		const rental = await furnitureData.getRentalById(rentalID);
-		const commentsIdList = furniture.comments_id || [];
+		const rental = await rentalData.getRentalById(rentalID);
+		const commentsIdList = rental.comments_id || [];
 
 		if (commentsIdList.length > 0) {
 			allComments = await Promise.all(
