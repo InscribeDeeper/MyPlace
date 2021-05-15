@@ -44,7 +44,8 @@ const ExportedMethods = {
             labels: labels, 
             contact: contact,
             longitute: longitute,
-            latitute: latitute
+            latitute: latitute,
+            comments_id: []
         }
         const insertInfo = await rentalCollection.insertOne(newRental)
         if (insertInfo.insertedCount === 0) throw 'Could not add a rental post';
