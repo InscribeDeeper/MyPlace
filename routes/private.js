@@ -35,7 +35,7 @@ router.get("/", async (req, res) => {
 			item_id = current_furniture._id;
 		} else {
 			item_type = "Rental";
-			current_rental = await furnitureDrentalDataata.getRentalById(current_rental_id);
+			current_rental = await rentalData.getRentalById(current_rental_id);
 			item_name = current_rental.name;
 			item_id = current_rental._id;
 		}
