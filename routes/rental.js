@@ -46,6 +46,13 @@ router.post("/new", async (req, res) => {
 	let contact = xss(req.body.contact);
 	let longitute = xss(req.body.longitute);
 	let latitute = xss(req.body.latitute);
+
+	price = parseFloat(price);
+	longitute = parseFloat(longitute);
+	latitute = parseFloat(latitute);
+	bathroom = parseInt(bathroom);
+	bedroom = parseInt(bedroom)
+	space = parseFloat (space)
     
 
 	let errors = [];
