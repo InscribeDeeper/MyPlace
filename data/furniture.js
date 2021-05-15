@@ -43,7 +43,8 @@ async function createFurniture(userId, name, category, location, price, descript
 		sold,
 		contact,
 		latitude,
-		longtitude
+		longtitude,
+		comments_id: [],
 	};
 
 	const newInsertedFurniture = await furnitureCollection.insertOne(newFurniture);
