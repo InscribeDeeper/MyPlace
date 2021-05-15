@@ -12,7 +12,7 @@
 
 		<div class="form-group">
 			<label for="category" class="input-label">Category</label>
-			<input type = "text" list="categories" name="category" id="category-input">
+			<input type = "text" list="categories" name="category" id="category-input" value="{{reqInput.category}}">
 			<datalist id="categories">
   			<option value="table">
   			<option value="chair">
@@ -79,18 +79,18 @@
 		</div>
 
 		<div class="form-group">
-			<label for="photo" class="input-label">Contact</label>
-			<input type="number" class="form-control" id="lattitude-input" name="lattitude" placeholder="Enter contact" value="{{reqInput.lattitude}}"/>
+			<label for="photo" class="input-label">Latitude</label>
+			<input type="number" class="form-control" id="lattitude-input" name="latitude" placeholder="Enter contact" value="{{reqInput.lattitude}}"/>
 			<div class="invalid-feedback">
-				Please provide a valid contact
+				Please provide a valid latitude
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label for="photo" class="input-label">Contact</label>
+			<label for="photo" class="input-label">Longtitude</label>
 			<input type="number" class="form-control" id="longtitude-input" name="longtitude" placeholder="Enter contact" value="{{reqInput.longtitude}}"/>
 			<div class="invalid-feedback">
-				Please provide a valid contact
+				Please provide a valid longtitude
 			</div>
 		</div>
 
