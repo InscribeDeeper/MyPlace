@@ -71,6 +71,14 @@
 		</div>
 
 		<div class="form-group">
+			<label for="description" class="input-label">Description </label>
+			<input type="text" class="form-control" id="description-input" name="description" placeholder="Enter description" value="{{reqInput.description}}"/>
+			<div class="invalid-feedback">
+				Please provide a valid description
+			</div>
+		</div>
+
+		<div class="form-group">
 			<label for="utility" class="input-label">Utilities </label>
 			<input type="text" class="form-control" id="utility-input" name="utility" placeholder="Enter utility" value="{{reqInput.utility}}"/>
 			<div class="invalid-feedback">

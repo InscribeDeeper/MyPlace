@@ -104,7 +104,7 @@ router.post("/new", async (req, res) => {
             myUser._id
 		);
 		
-		res.redirect(`/rental/list`);
+		res.redirect(`/rental`);
 		
 	} catch (e) {
 		console.log("fial")
