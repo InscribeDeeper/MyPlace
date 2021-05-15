@@ -9,12 +9,12 @@
 
     <div class="row">
         <div class="col col-4">
-            <label for="myInput"></label>
-            <input type="text" class="form-control" id="myInput" onkeyup="fName('myInput',0)" placeholder="Search Furniture Name">
+            <label for="furniture-name"></label>
+            <input type="text" class="form-control" id="furniture-name" onkeyup="searchFromList('furniture-name',1)" placeholder="Search Furniture Name">
         </div>
         <div class="col col-4">
-            <label for="myInput_2"></label>
-            <input type="text" class="form-control" id="myInput_2" onkeyup="fName('myInput_2',2)" placeholder="Search Furnitures Category">
+            <label for="category-name"></label>
+            <input type="text" class="form-control" id="category-name" onkeyup="searchFromList('category-name',2)" placeholder="Search Furnitures Category">
         </div>
     </div>
 
@@ -29,7 +29,7 @@
         <div class="col col-4">
             <div class="price-slider w-100">
                 <label for="psb" class="font-weight-bold">Price below: <span id="psd" class="ml-2"></span></label>
-                <input value="5" min="1" max="5" step="0.1" type="range" id="psb" onmouseup="fNum('psb',4,(a,b)=>a<=b)" onkeyup="fNum('psb',4,(a,b)=>a<=b)"> 
+                <input value="50" min="1" max="100" step="1" type="range" id="psb" onmouseup="fNum('psb',4,(a,b)=>a<=b)" onkeyup="fNum('psb',4,(a,b)=>a<=b)"> 
             </div>
         </div>
     </div>
@@ -39,26 +39,27 @@
     <table class="table table-hover">
     <thead class="thead-light">
         <tr>
-            <th scope="col">Furniture Name</th>
+            <th scope="col">Picture</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
             <th scope="col">Location</th>
             <th scope="col">Price</th>
             <th scope="col">Likes</th>
             <th scope="col">Dislikes</th>
-            <th scope="col">furnitureID in DB link</th>
         </tr>
     </thead>
     <tbody>
         {{#each furniture}}
         {{!-- 需要绑定AJAX link上去 --}}
         <tr class="clickable-row" id="{{this._id}}" data-href="/furniture/{{this._id}}">
-            {{!-- <td><img src = '{{this.photos}}'></td> --}}
+            <td><img src = '{{this.photos}}' alt={{this.name}} width="150" height="100"></td>
             <td>{{this.name}}</td>
-            {{!-- <td>{{this.name}}</td> --}}
+            <td>{{this.category}}</td>
             <td>{{this.location}}</td>
             <td>{{this.price}}</td>
             <td>{{this.likes}}</td>
             <td>{{this.dislikes}}</td>
-            <td><a href= "/furniture/{{this._id}}">{{this._id}}</a></td>
+            
         </tr>
         {{/each}}
     </tbody>
