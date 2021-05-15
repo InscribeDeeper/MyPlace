@@ -28,30 +28,6 @@ async function createFurniture(userId, name, category, location, price, descript
     if (!verifier.validNum(parseFloat(latitudeFloat))) throw "latitude is not a valid number.";
     if (!verifier.validNum(parseFloat(longitudeFloat))) throw "longtitude is not a valid number.";
 
-<<<<<<< HEAD
-	let latitude = parseFloat(latitudeFloat);
-	let longitude = parseFloat(longitudeFloat);
-	const furnitureCollection = await furniture();
-	// const userCollection = await users();
-	let newFurniture = {
-		_id: uuid.v4().toString(),
-		user_id: userId,
-		name,
-		comments_id: [],
-		category,
-		location,
-		price,
-		description,
-		photos,
-		likes, // 储存userId
-		dislikes, // 储存userId
-		purchase_link,
-		sold,
-		contact,
-		latitude,
-		longitude
-	};
-=======
     let latitude = parseFloat(latitudeFloat);
     let longitude = parseFloat(longitudeFloat);
     const furnitureCollection = await furniture();
@@ -74,7 +50,6 @@ async function createFurniture(userId, name, category, location, price, descript
         latitude,
         longitude
     };
->>>>>>> f4d900ea1dca4cee4670786f02ea499e8c5bea3b
 
     const newInsertedFurniture = await furnitureCollection.insertOne(newFurniture);
     if (newInsertedFurniture.insertedCount === 0) throw "Insert failed!";
