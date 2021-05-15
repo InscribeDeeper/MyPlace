@@ -1,6 +1,8 @@
 //Jiaqing Wang
 const mongoCollections = require('../config/mongoCollections');
 const comments = mongoCollections.comments;
+const furniture = mongoCollections.furniture;
+const rental = mongoCollections.rental
 const uuid = require('uuid');
 const verifier = require("./verify");
 
@@ -108,6 +110,28 @@ async function reportComment(commentId, userId) {
 }
 
 
+async function getFurnitureIdbyCommentId(commentId) {
+    if (!verifier.validString(commentId)) throw "User id is not a valid string.";
+
+    const furnitureCollection = await furniture();
+    const furnitureInfo = await furnitureCollection.find({ commentsId: { $eq: commentId } })
+
+    furnitureId = furnitureInfo._id
+    return furnitureId
+}
+
+
+async function getRentalIdbyCommentId(commentId) {
+    if (!verifier.validString(commentId)) throw "User id is not a valid string.";
+
+    const rentalCollection = await rental();
+    const rentalInfo = await rentalCollection.find({ commentsId: { $eq: commentId } })
+
+    rentalId = rentalInfo._id
+    return rentalId
+}
+
+
 module.exports = {
     getCommentById,
     addComments,
@@ -115,5 +139,7 @@ module.exports = {
     deleteComment,
     updateComment,
     helpfulComment,
-    reportComment
+    reportComment,
+    getFurnitureIdbyCommentId,
+    getRentalIdbyCommentId
 }
