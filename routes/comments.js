@@ -63,9 +63,35 @@ router.get('/addComment/:id', async(req, res) => {
 
 
 router.post('/report/:id', async(req, res) => {
-    userName = req.session.user 
-    
+    const userName = req.session.user
+    myUser = await userData.getUserByUserName(userName); 
+    const userId = myUser._id
+    const commentId = xss(req.params.id.trim());
+
+    try {
+        reported = await commentData.reportComment(commentId, userId);
+    } catch (e) {
+        errors.push(e);
+        res.status(500).json({  error:  e  });
+    }
 })
+
+
+router.post('/helpful/:id', async(req, res) => {
+    const userName = req.session.user
+    myUser = await userData.getUserByUserName(userName); 
+    const userId = myUser._id
+    const commentId = xss(req.params.id.trim());
+
+    try {
+        reported = await commentData.helpfulComment(commentId, userId);
+    } catch (e) {
+        errors.push(e);
+        res.status(500).json({  error:  e  });
+    }
+})
+
+
 
 // User should only be able to access POST route after logging in
 router.post('/addComment/:id', async(req, res) => {
@@ -75,10 +101,12 @@ router.post('/addComment/:id', async(req, res) => {
     let furnitureId = xss(req.params.id.trim());
     if (!verify.validString(furnitureId)) res.render('errors/errror', { errorMessage: "Invalid furniture id." });
     // Everything in req.body is a string
-    const username = req.session.user
-    myUser  =  await  userData.getUserByUserName(username); 
+    const userName = req.session.user
+    myUser  = await  userData.getUserByUserName(userName); 
     const userId = myUser._id
     const comment = xss(req.body.reviewText);
+
+
 
 
     try {
