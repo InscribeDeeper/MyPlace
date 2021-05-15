@@ -74,7 +74,7 @@ let exportedMethods = {
 			rental_id: [],
 			favor_furniture_id: [],
 			favor_rental_id: [],
-			acessHistory: {furniture_id: [], rental_id: []}
+			acessHistory: { furniture_id: [], rental_id: [] },
 		};
 
 		const usersCollection = await users();
@@ -108,7 +108,7 @@ let exportedMethods = {
 		if (user === null) throw `user not found with userName: ${userName}`;
 		return user;
 	},
-	
+
 	//////////////////////////////////////////////////////////////////
 	// Update
 	//////////////////////////////////////////////////////////////////
@@ -118,20 +118,34 @@ let exportedMethods = {
 
 		let updatedUserData = {};
 
-		if (newUserInfo.userName) {
-			if (!verifier.validString(newUserInfo.userName)) throw "userName is not a valid string.";
-			userName = newUserInfo.userName.toLowerCase();
-			if (await this.DuplicateCheck_userName(userName)) throw "This userName is already taken.";
-			updatedUserData.userName = userName;
+		if (newUserInfo.firstName) {
+			firstName = newUserInfo.firstName;
+			if (!verifier.validString(firstName)) throw "First name is not a valid string.";
+			updatedUserData.firstName = firstName;
 		}
 
-		if (newUserInfo.email) {
-			if (!verifier.validEmail(newUserInfo.email)) throw "Email is not a valid string.";
-			email = newUserInfo.email.toLowerCase();
-			if (await this.DuplicateCheck_email(email)) throw "This email is already taken.";
-			updatedUserData.email = email;
+		if (newUserInfo.lastName) {
+			lastName = newUserInfo.lastName;
+			if (!verifier.validString(lastName)) throw "First name is not a valid string.";
+			updatedUserData.lastName = lastName;
 		}
+
+		// if (newUserInfo.userName) {
+		// 	if (!verifier.validString(newUserInfo.userName)) throw "userName is not a valid string.";
+		// 	userName = newUserInfo.userName.toLowerCase();
+		// 	if (await this.DuplicateCheck_userName(userName)) throw "This userName is already taken.";
+		// 	updatedUserData.userName = userName;
+		// }
+
+		// if (newUserInfo.email) {
+		// 	if (!verifier.validEmail(newUserInfo.email)) throw "Email is not a valid string.";
+		// 	email = newUserInfo.email.toLowerCase();
+		// 	if (await this.DuplicateCheck_email(email)) throw "This email is already taken.";
+		// 	updatedUserData.email = email;
+		// }
+
 		if (newUserInfo.age) {
+			age = parseInt(newUserInfo.age);
 			if (!verifier.validAge(age)) throw "Age must be a positive integer";
 			updatedUserData.age = age;
 		}

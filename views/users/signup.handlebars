@@ -36,6 +36,15 @@
 		</div>
 
 		<div class="form-group">
+			<label for="password" class="sr-only"></label>
+			<input class="form-control" id="passwordRe" name="passwordRe" type="password" placeholder="Reinput Password" value="{{reqInput.passwordRe}}" />
+			<div class="invalid-feedback" id="password_compare">
+				Password cannot be empty
+			</div>
+		</div>
+
+
+		<div class="form-group">
 			<label for="email" class="sr-only"></label>
 			<input type="email" class="form-control" id="email" name="email" placeholder="Email Address" value="{{reqInput.email}}" />
 			<div class="invalid-feedback">
@@ -55,7 +64,7 @@
 			{{! 这部分的div可以设置的大一些 }}
 			<label for="selfSummary" class="sr-only"></label>
 			<input
-				type="number"
+				type="text"
 				class="form-control"
 				id="selfSummary"
 				name="selfSummary"
