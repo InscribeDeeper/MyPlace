@@ -134,6 +134,7 @@ router.post("/new", async(req, res) => {
         await furnitureData.createFurniture(
             myUser._id,
             name,
+            [],
             category,
             location,
             price,
