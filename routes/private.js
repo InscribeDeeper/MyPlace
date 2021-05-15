@@ -8,6 +8,62 @@ const commentData = data.comments;
 const furnitureData = data.furniture;
 const rentalData = data.rental;
 
+// updating information
+
+router.get("/update", async (req, res) => {
+	const userName = req.session.user;
+	myUser = await userData.getUserByUserName(userName);
+	// myUser._id
+	return res.render("users/updateProfile", {
+		authenticated: true,
+		partial: "signup-script",
+		title: "Your Profile",
+		reqInput: myUser,
+	});
+});
+
+router.post("/update", async (req, res) => {
+	const userName = req.session.user;
+	const reqInput = req.body;
+	myUser = await userData.getUserByUserName(userName);
+	let errors = [];
+
+	let updatedUserData = {};
+	updatedUserData.firstName = reqInput.firstName;
+	updatedUserData.lastName = reqInput.lastName;
+	updatedUserData.age = reqInput.age;
+	updatedUserData.selfSummary = reqInput.selfSummary;
+
+	if (reqInput.passwordRe !== reqInput.password) {
+		errors.push("password is not consistent with two input");
+	} else {
+		try {
+			await userData.updateUserPassword(myUser._id, reqInput.password);
+		} catch (e) {
+			errors.push(e);
+		}
+	}
+
+	try {
+		await userData.updateUserInfo(myUser._id, updatedUserData);
+	} catch (e) {
+		errors.push(e);
+	}
+
+	if (errors.length > 0) {
+		return res.status(401).render("users/updateProfile", {
+			authenticated: true,
+			title: "Update Profile",
+			partial: "signup-script",
+			hasErrors: true,
+			errors: errors,
+			reqInput: myUser,
+		});
+	} else {
+		res.redirect("/private");
+	}
+});
+
 router.get("/", async (req, res) => {
 	const userName = req.session.user;
 	console.log("private route");
@@ -24,7 +80,7 @@ router.get("/", async (req, res) => {
 
 	for (let eachCommmentID of myComments) {
 		eachCommment = await commentData.getCommentById(eachCommmentID);
-		console.log(eachCommment);
+		// console.log(eachCommment);
 		current = {};
 		current_furniture = await commentData.getFurnitureByCommentID(eachCommment._id);
 		current_rental = await commentData.getRentalByCommentID(eachCommment._id);

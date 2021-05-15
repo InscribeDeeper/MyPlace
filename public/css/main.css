@@ -286,6 +286,11 @@ body {
   border-left-color: #692643;
 }
 
+
+#selfSummary{
+  height: 300px;
+}
+
 .ml-2 {
   color:#692643;
 }

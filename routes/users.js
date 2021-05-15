@@ -27,7 +27,7 @@ router.get("/login", async (req, res) => {
 		title: "Log In",
 		authenticated: false,
 		partial: "login-script",
-		reqInput: req.body
+		reqInput: req.body,
 	});
 	// }
 });
@@ -41,7 +41,7 @@ router.get("/signup", async (req, res) => {
 			title: "Sign Up",
 			authenticated: false,
 			partial: "signup-script",
-			reqInput: req.body
+			reqInput: req.body,
 		});
 	}
 });
@@ -73,7 +73,7 @@ router.post("/login", async (req, res) => {
 			title: "Log In",
 			partial: "login-script",
 			errors: errors,
-			reqInput: req.body
+			reqInput: req.body,
 		});
 	}
 
@@ -95,7 +95,7 @@ router.post("/login", async (req, res) => {
 			title: "Log In",
 			partial: "login-script",
 			errors: errors,
-			reqInput: req.body
+			reqInput: req.body,
 		});
 	}
 });
@@ -105,6 +105,7 @@ router.post("/signup", async (req, res) => {
 	const lastName = xss(req.body.lastName);
 	const userName = xss(req.body.userName);
 	const password = xss(req.body.password);
+	const passwordRe = xss(req.body.passwordRe);
 	const email = xss(req.body.email);
 	const selfSummary = xss(req.body.selfSummary);
 	const age = parseInt(xss(req.body.age));
@@ -120,6 +121,8 @@ router.post("/signup", async (req, res) => {
 	if (!verifier.validString(userName)) errors.push("userName is not a valid string.");
 	if (!verifier.validAge(age)) errors.push("Age must be a positive integer");
 	if (!verifier.validPassword(password)) errors.push("Password can only contain [a-z][0-9][A-Z][_-], and length range [6, 16]");
+	if (password !== passwordRe) errors.push("password is not consistent with two input");
+
 	// if (!verifier.validString(selfSummary)) error.push( "selfSummary is not a valid string.");
 
 	if (errors.length > 0) {
@@ -129,7 +132,7 @@ router.post("/signup", async (req, res) => {
 			partial: "signup-script",
 			hasErrors: true,
 			errors: errors,
-			reqInput: req.body
+			reqInput: req.body,
 		});
 	}
 
@@ -151,7 +154,7 @@ router.post("/signup", async (req, res) => {
 			partial: "signup-script",
 			hasErrors: true,
 			errors: errors,
-			reqInput: req.body
+			reqInput: req.body,
 		});
 	}
 });
