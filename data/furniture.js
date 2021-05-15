@@ -14,7 +14,7 @@ async function getFurnitureById(id) {
 }
 
 // async function CreateFurniture(category, location, price, description, photos, purchase_link, sold, contact) {
-async function createFurniture(userId, category, location, price, description, photos, likes, dislikes, purchase_link, sold, contact) {
+async function createFurniture(userId, name, category, location, price, description, photos, likes, dislikes, purchase_link, sold, contact) {
 	// add to collection
 	// if (!verifier.validString(category)) throw "First name is not a valid string.";
 	if (!verifier.validString(location)) throw "Last name is not a valid string.";
@@ -30,7 +30,7 @@ async function createFurniture(userId, category, location, price, description, p
 	let newFurniture = {
 		_id: uuid.v4().toString(),
 		user_id: userId,
-		name: "???",
+		name,
 		comment_id: [],
 		category,
 		location,

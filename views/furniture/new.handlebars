@@ -3,11 +3,31 @@
 	<form method="POST" action="/furniture/new" id="furniture-form" onsubmit="submitButton.disabled = true; return true;">
 
 		<div class="form-group">
+			<label for="location" class="input-label">Name</label>
+			<input type="text" class="form-control" id="name-input" name="name" placeholder="Enter furniture address" value="{{reqInput.name}}"/>
+			<div class="invalid-feedback">
+				Please provide a valid name
+			</div>
+		</div>
+
+		<div class="form-group">
 			<label for="category" class="input-label">Category</label>
-			<input type="text" class="form-control" id="category-input" name="category" placeholder="Enter furniture category" />
+			<input type = "text" list="categories" name="category" id="category-input">
+			<datalist id="categories">
+  			<option value="table">
+  			<option value="chair">
+  			<option value="sports">
+  			<option value="outdoor">
+			<option value="handmade">
+  			<option value="pet-supply">
+			<option value="tools">
+  			<option value="health">
+			</datalist>
+			{{!-- <input type="text" class="form-control" id="category-input" name="category" placeholder="Enter furniture category" /> --}}
 			<div class="invalid-feedback">
 				Please provide a valid furniture category
 			</div>
+
 		</div>
 
 		<div class="form-group">
@@ -36,7 +56,7 @@
 
 		<div class="form-group">
 			<label for="photo_link" class="input-label">Link photo</label>
-			<input type="text" class="form-control" id="photo-input" name="photo_link" placeholder="Enter furniture photo link" value="{{reqInput.photos}}"/>
+			<input type="text" class="form-control" id="photo-input" name="photo_link" placeholder="Enter furniture photo link" value="{{reqInput.photo_link}}"/>
 			<div class="invalid-feedback">
 				Please provide a valid external photo link
 			</div>

@@ -9,8 +9,9 @@
 # 即先用python文件写好 命令行调用的方法, 然后在联系这里
 
 
-
+import pymongo
 import sys
+
 for i in range(len(sys.argv)):
     print('arg'+str(i),sys.argv[i])
-
+    

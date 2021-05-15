@@ -7,30 +7,30 @@ const commentData = data.comments;
 const verify = require("../data/verify");
 const xss = require("xss");
 
-let category = [
-	"American",
-	"Breakfast",
-	"Brunch",
-	"Chinese",
-	"Fast Food",
-	"Italian",
-	"Mexican",
-	"Thai",
-	"Korean",
-	"Middle-Eastern",
-	"Indian",
-	"Soul Food",
-	"French",
-	"Japanese",
-	"Vietnamese",
-	"Mediterranean",
-	"Cuban",
-	"Sichuan",
-	"Greek",
-	"Halal",
-	"Other",
-];
-category.sort();
+// let category = [
+// 	"American",
+// 	"Breakfast",
+// 	"Brunch",
+// 	"Chinese",
+// 	"Fast Food",
+// 	"Italian",
+// 	"Mexican",
+// 	"Thai",
+// 	"Korean",
+// 	"Middle-Eastern",
+// 	"Indian",
+// 	"Soul Food",
+// 	"French",
+// 	"Japanese",
+// 	"Vietnamese",
+// 	"Mediterranean",
+// 	"Cuban",
+// 	"Sichuan",
+// 	"Greek",
+// 	"Halal",
+// 	"Other",
+// ];
+// category.sort();
 
 // Route for the page of all restaurants
 // /furniture  需要显示所有的 furniture的list, 是一个 table, 包含大部分furniture的 属性
@@ -59,7 +59,7 @@ category.sort();
 router.get("/", async (req, res) => {
 	const allFurnitures = await furnitureData.getAllFurnitures();
 	return res.render("furniture/list", {
-		category: category,
+		// category: category,
 		title: "All Furnitures",
 		furniture: allFurnitures,
 		authenticated: req.session.user ? true : false,
@@ -81,6 +81,7 @@ router.get("/new", async (req, res) => {
 
 router.post("/new", async (req, res) => {
 	// 上传新建
+	let name = xss(req.body.name);
 	let category = xss(req.body.category);
 	let location = xss(req.body.location);
 	let price = xss(req.body.price);
@@ -91,6 +92,7 @@ router.post("/new", async (req, res) => {
 
 	let errors = [];
 
+	if (!name) errors.push("Invalid furniture name.");
 	if (!category) errors.push("Invalid furniture category.");
 	if (!location) errors.push("Invalid location.");
 	if (!price) errors.push("No price added.");
@@ -117,8 +119,10 @@ router.post("/new", async (req, res) => {
 	}
 
 	try {
+		// console.log("suc")
 		const newFurniture = await furnitureData.createFurniture(
 			myUser._id,
+			name,
 			category,
 			location,
 			price,
@@ -130,8 +134,10 @@ router.post("/new", async (req, res) => {
 			false,
 			contact
 		);
+
 		res.redirect(`/furniture`);
 	} catch (e) {
+		// console.log("fail")
 		return res.render("furniture/new", {
 			title: "New Furniture",
 			authenticated: req.session.user ? true : false,
@@ -191,8 +197,8 @@ router.get("/:id", async (req, res) => {
 			let current = {};
 
 			let commentedUser = await userData.getUserById(eachCommment.user_id); // get each comment's owner
-			// current.id = review._id;
-			current.name = commentedUser.first_name + " " + commentedUser.last_name;
+			current._id = eachCommment._id;
+			current.name = commentedUser.firstName + " " + commentedUser.lastName;
 			current.age = commentedUser.age;
 			current.text = eachCommment.comment;
 			current.helpful = eachCommment.helpful;

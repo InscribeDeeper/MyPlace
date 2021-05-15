@@ -3,7 +3,7 @@ const router = express.Router();
 const verifier = require('../data/verify');
 const data = require("../data");
 const userData = data.users;
-
+const commentData = data.comments;
 
 
 router.get('/', async(req, res) =>{
@@ -11,15 +11,25 @@ router.get('/', async(req, res) =>{
     console.log("private route")
     console.log(userName)
     myUser = await userData.getUserByUserName(userName);
+    // myUser._id
 
+    const commentsIdList = myUser.comments_id || [];
 
+    if (commentsIdList.length > 0) {
+        allComments = await Promise.all(
+            commentsIdList.map(async (x) => {
+                return await commentData.getCommentById(x);
+            })
+        );
+    }
 
-    // const userReviews = await reviews.getAllReviewsOfUser(userData._id);
+    
 
-    // Combine restaurants and reviews into one array for easier access
+    // // Combine restaurants and reviews into one array for easier access
     // let restaurantNames = [];
-    // for (let review of userReviews){
-    //     let rest = await restaurants.getRestaurantById(review.restaurantId);
+    // for (let comment of allComments){
+    //     通过comment id 找到 furniture_id
+    //     // let rest = await restaurants.getRestaurantById(comment.restaurantId);
     //     restaurantNames.push(rest.name);
     // }
 

@@ -33,7 +33,8 @@ async function main() {
     // create furniture
     var furniture1 = await furnitureData.createFurniture(
         userOneId,
-        (category = ["f", "u"]),
+        (name = "1"),
+        (category = "table"),
         (location = "A"),
         (price = 20),
         (description = "good"),
@@ -49,7 +50,8 @@ async function main() {
 
     var furniture2 = await furnitureData.createFurniture(
         userOneId,
-        (category = ["f", "u"]),
+        (name = "2"),
+        (category = "chair"),
         (location = "A"),
         (price = 20),
         (description = "good"),
