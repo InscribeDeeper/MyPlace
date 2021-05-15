@@ -43,7 +43,9 @@ async function main() {
         (dislike = 3),
         (purchase_link = "www.link.com"),
         (sold = false),
-        (contact = 1500000000)
+        (contact = 1500000000),
+        (latitude = 1.1),
+        (longtitude = 1.1)
     );
     const furniture1Id = furniture1._id;
     console.log(furniture1Id);
@@ -60,7 +62,9 @@ async function main() {
         (dislike = 3),
         (purchase_link = "www.link.com"),
         (sold = false),
-        (contact = 1500000000)
+        (contact = 1500000000),
+        (latitude = 2.2),
+        (longtitude = 2.2)
     );
     const furniture2Id = furniture2._id;
     console.log(furniture2Id);
