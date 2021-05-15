@@ -116,8 +116,6 @@ router.post("/new", async (req, res) => {
 		});
 	}
 
-	
-
 	try {
 		const newFurniture = await furnitureData.createFurniture(
 			myUser._id,
@@ -134,7 +132,15 @@ router.post("/new", async (req, res) => {
 		);
 		res.redirect(`/furniture`);
 	} catch (e) {
-		res.status(500).json({ error: e });
+		return res.render("furniture/new", {
+			title: "New Furniture",
+			authenticated: req.session.user ? true : false,
+			user: req.session.user,
+			hasErrors: true,
+			errors: errors,
+			reqInput: req.body,
+			partial: "errors-script",
+		});
 	}
 });
 
@@ -220,7 +226,6 @@ router.get("/:id", async (req, res) => {
 		// furniture.noTouchPayment = ((furniture.noTouchPayment / numReviews) * 100).toFixed(2);
 		// furniture.outdoorSeating = ((furniture.outdoorSeating / numReviews) * 100).toFixed(2);
 
-
 		// Get the furniture's photos from calling Yelp API
 		// const client = yelp.client(apiKey);
 		// const matchRequest = {
@@ -242,9 +247,6 @@ router.get("/:id", async (req, res) => {
 		//     const jsonRes2 = businessRes.jsonBody;
 		//     photos = jsonRes2.photos;
 		// }
-
-		
-
 
 		photos = null;
 
