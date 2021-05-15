@@ -74,7 +74,7 @@ router.post("/new", async (req, res) => {
 	}
 
 	try {
-		const newFurniture = await furnitureData.createFurniture(
+		const newRental = await rentalData.createRental(
 			
 			location,
 			price,
@@ -92,7 +92,7 @@ router.post("/new", async (req, res) => {
             latitute,
             myUser._id
 		);
-		res.redirect(`/furniture`);
+		res.redirect(`/rental`);
 	} catch (e) {
 		return res.render("rental/new", {
 			title: "New Rental",
@@ -158,57 +158,18 @@ router.get("/:id", async (req, res) => {
 			current.age = commentedUser.age;
 			current.text = eachCommment.comment;
 			current.helpful = eachCommment.helpful;
-			current.reported = eachCommment.report; // checkListMem ../user._id this.reported
+			current.reported = eachCommment.report; 
 
-			// let allsubComments = await commentData.getAllCommentsOfReview(eachCommment._id);
 			let subComments = [];
-			// for (let eachsubcomment of allsubComments) {
-			//     let currentComment = {};
-			//     let {firstName, lastName, age} = await userData.getUserById(eachsubcomment[0]);
-			//     currentComment.name = firstName + ' ' + lastName;
-			//     currentComment.age = age;
-			//     currentComment.text = comment.text
-			//     subComments.push(currentComment);
-			// }
+			
 			current.subcomments = subComments;
 
-			// let max = 5;
-			// current.filledStars = verify.generateList(current.metrics.rating);
-			// current.unfilledStars = verify.generateList(max - current.metrics.rating);
-			// current.filledDollars = verify.generateList(current.metrics.price);
 			allCommentsProcessed.push(current);
 		}
 
-		// Calculate percentages for ratings based off of reviews
+	
 		const numComments = allCommentsProcessed.length;
-		// furniture.rating = (furniture.rating / numReviews).toFixed(2);
-		// furniture.price = (furniture.price / numReviews).toFixed(2);
-		// furniture.distancedTables = ((furniture.distancedTables / numReviews) * 100).toFixed(2);
-		// furniture.maskedEmployees = ((furniture.maskedEmployees / numReviews) * 100).toFixed(2);
-		// furniture.noTouchPayment = ((furniture.noTouchPayment / numReviews) * 100).toFixed(2);
-		// furniture.outdoorSeating = ((furniture.outdoorSeating / numReviews) * 100).toFixed(2);
-
-		// Get the furniture's photos from calling Yelp API
-		// const client = yelp.client(apiKey);
-		// const matchRequest = {
-		//     name: furniture.name,
-		//     address1: furniture.address,
-		//     city: 'Hoboken',
-		//     state: 'NJ',
-		//     country: 'US'
-		// };
-
-		// // Get the furniture's photos from calling googleMap API
-		// const matchRes = await client.businessMatch(matchRequest);
-		// const jsonRes = matchRes.jsonBody;
-		// let results = jsonRes.businesses;
-		// let result = results[0];
-		// let photos = [];
-		// if (results.length > 0) {
-		//     const businessRes = await client.business(result.id);
-		//     const jsonRes2 = businessRes.jsonBody;
-		//     photos = jsonRes2.photos;
-		// }
+		
 
 		photos = null;
 
