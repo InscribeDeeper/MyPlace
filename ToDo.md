@@ -1,3 +1,53 @@
+# 0515: 
+## JWang
+1. Comment点赞/举报按钮 Js AJAX (访问特定routes.api里面的routes，更新db内的comment下的两个list)
+2. Map Js script 导入经纬度 AJAX 通过furnitureId 获得经纬度 全在handlebar
+3. Modify existing comments *
+5. Layout 修改 参考另外一个proj css
+
+## WYang
+6. 修改myInfo
+7. 添加add favorite
+8. review history通过点击botton ajax进入route删除review(s), untoggle 从furniture rental user
+9. 删除favorite *
+10. 看别的用户的信息,通过单独的furniture page定位特定userId的profile
+11. 修改furniture views的link db
+16. 修改description 修改创建的东西，提供botton create/edit/delete
+18. Dark Mode
+
+## Shaobo/YX
+12. Funiture/Rental [# of comment], [price] botton feature
+4. Show pictures with given link
+13. Location, Bed/Bath Room, space, description, utiliies, label, contact.
+
+14. Filter by name, location, price, category.JS 看懂代码并修改
+
+15. Samples准备，ref seeds_temp
+
+16. Rental 不加名字修改views search name -》 search location
+
+17. ranking JS by like/dislike
+
+## Presentation, 8点钟开始ppt，
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 写route注意事项: 
 ## 在第一次写route的时候, 一定要先写好下面这个以方便之后调试. 
 - 因为可以清楚的输出当前的 方法和路径, 从而知道调试那个function. 或者知道是不是进入到了自己想要的 route
