@@ -85,7 +85,7 @@ router.post("/helpful/:id", async(req, res) => {
 });
 
 // User should only be able to access POST route after logging in
-router.post("/addFurnitureComment/:id", async(req, res) => {
+router.post("/addComment/:id", async(req, res) => {
     // Validate input in this route before sending to server
 
 
