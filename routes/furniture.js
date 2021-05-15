@@ -64,7 +64,7 @@ router.get("/", async (req, res) => {
 		furniture: allFurnitures,
 		authenticated: req.session.user ? true : false,
 		user: req.session.user,
-		partial: "furnitures-form-script",
+		partial: "restaurants-form-script",
 	});
 });
 
@@ -189,8 +189,8 @@ router.get("/:id", async (req, res) => {
 			let current = {};
 
 			let commentedUser = await userData.getUserById(eachCommment.user_id); // get each comment's owner
-			current._id = eachCommment._id;
-			current.name = commentedUser.firstName + " " + commentedUser.lastName;
+			// current.id = review._id;
+			current.name = commentedUser.first_name + " " + commentedUser.last_name;
 			current.age = commentedUser.age;
 			current.text = eachCommment.comment;
 			current.helpful = eachCommment.helpful;
