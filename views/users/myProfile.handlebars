@@ -1,66 +1,67 @@
 <div class="container">
-    <div class="row mb-5">
-        <div class="col card mt-3 shadow">
-            <div class="card-body">
-                <div class="container mb-3">
-                    <h1 class="card-title h3">My Info</h1>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="container row mb-3">
-                            <div class="col col-4">
-                                <label for="first-name" class="mr-3">First Name</label>
-                            </div>
-                            <div class="col">
-                                <input type="text" id="first-name" class="rounded p-1" placeholder="{{user.firstName}}" disabled>
-                            </div>
-                        </div>
-                        <div class="container row mb-3">
-                            <div class="col col-4">
-                                <label for="userName" class="mr-3">userName</label>
-                            </div>
-                            <div class="col">
-                                <input type="text" id="userName" class="rounded p-1" placeholder="{{user.userName}}" disabled>
-                            </div>
-                        </div>
-                        <div class="container row mb-3">
-                            <div class="col col-4">
-                                <label for="age">Age</label>
-                            </div>
-                            <div class="col">
-                                <input type="number" id="age" class="rounded p-1" placeholder="{{user.age}}" disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="container row mb-3">
-                            <div class="col col-4">
-                                <label for="last-name" class="mr-3">Last Name</label>
-                            </div>
-                            <div class="col">
-                                <input type="text" id="last-name" class="rounded p-1" placeholder="{{user.lastName}}" disabled>
-                            </div>
-                        </div>
-                        <div class="container row mb-3">
-                            <div class="col col-4">
-                                <label for="email">Email</label>
-                            </div>
-                            <div class="col">
-                                <input type="text" id="email" class="rounded p-1" placeholder="{{user.email}}" disabled>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mb-5">
-        <div class="col col-6 card shadow mr-4">
-            <div class="card-body">
-                <div class="container">
-                    <h2 class="card-title h3">Favorited Furnitures</h2>
-                </div>
-                {{!-- <div class="container">
+	<div class="row mb-5">
+		<div class="col card mt-3 shadow">
+			<div class="card-body">
+				<div class="container mb-3">
+					<h1 class="card-title h3">My Info</h1>
+				</div>
+				<div class="row">
+					<div class="col">
+						<div class="container row mb-3">
+							<div class="col col-4">
+								<label for="first-name" class="mr-3">First Name</label>
+							</div>
+							<div class="col">
+								<input type="text" id="first-name" class="rounded p-1" placeholder="{{user.firstName}}" disabled />
+							</div>
+						</div>
+						<div class="container row mb-3">
+							<div class="col col-4">
+								<label for="userName" class="mr-3">userName</label>
+							</div>
+							<div class="col">
+								<input type="text" id="userName" class="rounded p-1" placeholder="{{user.userName}}" disabled />
+							</div>
+						</div>
+						<div class="container row mb-3">
+							<div class="col col-4">
+								<label for="age">Age</label>
+							</div>
+							<div class="col">
+								<input type="number" id="age" class="rounded p-1" placeholder="{{user.age}}" disabled />
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="container row mb-3">
+							<div class="col col-4">
+								<label for="last-name" class="mr-3">Last Name</label>
+							</div>
+							<div class="col">
+								<input type="text" id="last-name" class="rounded p-1" placeholder="{{user.lastName}}" disabled />
+							</div>
+						</div>
+						<div class="container row mb-3">
+							<div class="col col-4">
+								<label for="email">Email</label>
+							</div>
+							<div class="col">
+								<input type="text" id="email" class="rounded p-1" placeholder="{{user.email}}" disabled />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row mb-5">
+		<div class="col col-6 card shadow mr-4">
+			<div class="card-body">
+				<div class="container">
+					<h2 class="card-title h3">Owned Furnitures</h2>
+				</div>
+				{{!-- <div class="container">
                     {{#if (checkListLengthZero favRestaurants)}}
                         <p class = "font-italic">None, go favorite some restaurants!</p>
                     {{else}}
@@ -73,14 +74,14 @@
                         </ul>
                     {{/if}}
                 </div> --}}
-            </div>
-        </div>
-        <div class="col card shadow">
-            <div class="card-body">
-                <div class="container">
-                    <h2 class="card-title h3">Favorited Rental Houses</h2>
-                </div>
-                {{!-- <div class="container">
+			</div>
+		</div>
+		<div class="col card shadow">
+			<div class="card-body">
+				<div class="container">
+					<h2 class="card-title h3">Owned Rental Houses</h2>
+				</div>
+				{{!-- <div class="container">
                     <div class="container">
                         <span class="font-weight-bold">Number of Favorited Restaurants:</span>
                         <span id="numFav" class="text-right">{{favRestaurants.length}}</span>
@@ -90,18 +91,58 @@
                         <span id="numReviews" class="text-right">{{reviews.length}}</span>
                     </div>
                 </div> --}}
-            </div>
-        </div>
-    </div>
-    <div class="row mb-5">
-        <div class="col card shadow">
-            <div class="card-body">
-                <div class="container">
-                    <h2 class="card-title h3">My Reviews</h2>
-                </div>
-                <div class="container">
-                    <ul class="list-group list-group-flush">
-                        {{!-- {{#each reviews}}
+			</div>
+		</div>
+	</div>
+
+	<div class="row mb-5">
+		<div class="col col-6 card shadow mr-4">
+			<div class="card-body">
+				<div class="container">
+					<h2 class="card-title h3">Favorited Furnitures</h2>
+				</div>
+				{{!-- <div class="container">
+                    {{#if (checkListLengthZero favRestaurants)}}
+                        <p class = "font-italic">None, go favorite some restaurants!</p>
+                    {{else}}
+                        <ul class = "list-group col-10 list-group-flush">  
+                        {{#each favRestaurants}}
+                            <li class = "list-group-item">
+                                <a href = "/restaurants/{{this.id}}"><span class="mr-2">&starf;</span>{{this.name}}</a>
+                            </li>
+                        {{/each}}
+                        </ul>
+                    {{/if}}
+                </div> --}}
+			</div>
+		</div>
+		<div class="col card shadow">
+			<div class="card-body">
+				<div class="container">
+					<h2 class="card-title h3">Favorited Rental Houses</h2>
+				</div>
+				{{!-- <div class="container">
+                    <div class="container">
+                        <span class="font-weight-bold">Number of Favorited Restaurants:</span>
+                        <span id="numFav" class="text-right">{{favRestaurants.length}}</span>
+                    </div>
+                    <div class="container">
+                        <span class="font-weight-bold">Number of Reviews:</span>
+                        <span id="numReviews" class="text-right">{{reviews.length}}</span>
+                    </div>
+                </div> --}}
+			</div>
+		</div>
+	</div>
+	<div class="row mb-5">
+		<div class="col card shadow">
+			<div class="card-body">
+				<div class="container">
+					<h2 class="card-title h3">My Reviews History</h2>
+				</div>
+				<div class="container">
+					<ul class="list-group list-group-flush">
+						{{!-- {{#each reviews}}
                         <li class="list-group-item borderless">
                             <div class="card container mb-5">
                                 <div class="card-header row">
@@ -218,9 +259,9 @@
                             </div>
                         </li>
                         {{/each}} --}}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

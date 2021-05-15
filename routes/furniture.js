@@ -64,7 +64,7 @@ router.get("/", async (req, res) => {
 		furniture: allFurnitures,
 		authenticated: req.session.user ? true : false,
 		user: req.session.user,
-		partial: "restaurants-form-script",
+		partial: "furnitures-list-script",
 	});
 });
 
@@ -75,6 +75,7 @@ router.get("/new", async (req, res) => {
 		user: req.session.user,
 		hasErrors: false,
 		errors: null,
+		partial: "furnitures-form-script",
 	});
 });
 
@@ -110,7 +111,8 @@ router.post("/new", async (req, res) => {
 			user: req.session.user,
 			hasErrors: true,
 			errors: errors,
-			reqInput: req.body
+			reqInput: req.body,
+			partial: "errors-script",
 		});
 	}
 
