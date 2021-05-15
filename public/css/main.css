@@ -1,6 +1,29 @@
 .btn-primary{
-  background-color:#0072ee;
+  background-color:#b3737e;
+  border-color: rgb(61, 9, 9);
+  
 }
+
+.btn-primary:link {
+  background-color: rgb(88, 39, 39);
+  border-color:rgb(243, 237, 237);
+  color:white
+}
+
+.btn-primary:hover {
+  background-color: rgb(122, 69, 69);
+  border-color:rgb(243, 237, 237);
+  color:white
+}
+
+.btn-primary:active {
+  background-color: rgb(189, 142, 173);
+  border-color:rgb(243, 237, 237);
+  color:rgb(29, 6, 6)
+}
+
+
+
 
 html,
 body {
@@ -26,7 +49,7 @@ body.dark-mode{
 	color: #fff;
 }
 
-body.dark-mode li.list-group-item>a{
+/* body.dark-mode li.list-group-item>a{
   color: #3b85ff;
 }
 body:not(.dark-mode) li.list-group-item>a{
@@ -36,13 +59,13 @@ body:not(.dark-mode) li.list-group-item>a{
 body.dark-mode li.list-group-item,
 body.dark-mode .card{
 	background: #222;
+} */
+
+.jumbotron{
+  background-color: rgba(212, 173, 188, 0.514);
 }
 
-body.dark-mode .jumbotron{
-  background-color: #222;
-}
-
-body.dark-mode .dollar{
+/* body.dark-mode .dollar{
   color: lightgreen;
 }
 
@@ -61,8 +84,8 @@ body.dark-mode input:disabled::placeholder{
 
 body.dark-mode .form-control{
 	background: #020202;
-	color: #fff;
-}
+	color: #fff; */
+/* } */
 
 /* The switch - the box around the slider */
 .switch {
@@ -72,6 +95,7 @@ body.dark-mode .form-control{
   display: inline-block;
   width: 60px;
   height: 34px;
+  background-color:#692643
 }
 
 /* Hide default HTML checkbox */
@@ -92,6 +116,7 @@ body.dark-mode .form-control{
   background-color: #444;
   -webkit-transition: .4s;
   transition: .4s;
+  
 }
 
 .slider:before {
@@ -137,11 +162,12 @@ input:checked + .slider:before {
 #myInput,
 #myInput_2 {
   background-repeat: no-repeat;
-  width: 640;
+  width: 300;
   font-size: 16px;
   padding: 12px 20px 12px 20px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
+  border: 1px solid rgba(58, 52, 52, 0.171);
+  margin-bottom: 6px;
+  
   display:block;
 }
 
@@ -172,7 +198,7 @@ input:checked + .slider:before {
 }
 
 .fa:hover{
-  background-color: lightgray;
+  background-color: rgb(218, 191, 191);
 }
 
 .reportbtn{
@@ -239,3 +265,21 @@ a:hover {
 .input-label{
   border: 1px solid #ced4da;
 }
+
+.rating-slider w-100 {
+  background-color: #692643;
+}
+
+
+a:link {color:#3a0813d0;}    
+a:visited {color:#3a0813d0;}  
+a:hover {color:#000000;} 
+a:active {color:#ffffff;}
+
+
+body {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+
