@@ -46,7 +46,7 @@ router.post("/new", async (req, res) => {
 	let contact = xss(req.body.contact);
 	let longitute = xss(req.body.longitute);
 	let latitute = xss(req.body.latitute);
-    //location longitute latitute like dislike???
+    
 
 	let errors = [];
 
@@ -61,7 +61,8 @@ router.post("/new", async (req, res) => {
 	if (!utility) errors.push("No utility added");
     if (!labels) errors.push("No labels added.");
 	if (!contact) errors.push("No contact");
-
+	if (!latitute) errors.push("No latitude.");
+	if (!longitute) errors.push("No contact");
 	
 	if (errors.length > 0) {
 		return res.render("rental/new", {
@@ -81,9 +82,10 @@ router.post("/new", async (req, res) => {
 	} catch (e) {
 		errors.push("userName or password is not valid.");
 	}
-
+	
 	try {
-		console.log("sucess")
+		
+		
 		const newRental = await rentalData.createRental(
 			location,
 			price,
@@ -101,9 +103,9 @@ router.post("/new", async (req, res) => {
             latitute,
             myUser._id
 		);
-		console.log("sucess1")
+		
 		res.redirect(`/rental/list`);
-		console.log("sucess2")
+		
 	} catch (e) {
 		console.log("fial")
 		return res.render("rental/new", {
