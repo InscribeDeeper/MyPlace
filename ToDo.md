@@ -6,7 +6,7 @@
 5. Layout 修改 参考另外一个proj css
 
 ## WYang
-6. 修改myInfo
+6. 修改myInfo ✅
 7. 添加add favorite
 8. review history通过点击botton ajax进入route删除review(s), untoggle 从furniture rental user
 9. 删除favorite *
