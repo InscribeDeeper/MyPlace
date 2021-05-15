@@ -13,7 +13,6 @@ async function getFurnitureById(id) {
 	return theFurniture;
 }
 
-// async function CreateFurniture(category, location, price, description, photos, purchase_link, sold, contact) {
 async function createFurniture(userId, name, category, location, price, description, photos, likes, dislikes, purchase_link, sold, contact, latitude, longtitude) {
 	// add to collection
 	// if (!verifier.validString(category)) throw "First name is not a valid string.";
