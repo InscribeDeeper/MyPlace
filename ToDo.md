@@ -16,7 +16,7 @@
 18. Dark Mode
 
 ## Shaobo/YX
-12. Funiture/Rental [# of comment], [price] botton feature 
+12. Funiture/Rental [# of comment], [price] botton feature ✅
 4. Show pictures with given link
 13. Location, Bed/Bath Room, space, description, utiliies, label, contact.✅
 
