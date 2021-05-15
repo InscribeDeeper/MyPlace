@@ -63,6 +63,7 @@ body.dark-mode .card{
 
 .jumbotron{
   background-color: rgba(212, 173, 188, 0.514);
+  background-image: linear-gradient(#cfc4c4, #ca9cb9)
 }
 
 /* body.dark-mode .dollar{
