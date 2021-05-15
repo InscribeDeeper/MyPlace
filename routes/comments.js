@@ -50,7 +50,7 @@ router.get('/addComment/:id', async(req, res) => {
             user: req.session.user,
             furniture: furniture
         });
-        
+
     } catch (e) {
         errors.push(e)
         res.status(500).render('errors/error', {
@@ -69,29 +69,12 @@ router.post('/addComment/:id', async(req, res) => {
     let errors = [];
     let furnitureId = xss(req.params.id.trim());
     if (!verify.validString(furnitureId)) res.render('errors/errror', { errorMessage: "Invalid furniture id." });
-        // Everything in req.body is a string
+    // Everything in req.body is a string
     const username = req.session.user
     myUser  =  await  userData.getUserByUserName(username); 
     const userId = myUser._id
     const comment = xss(req.body.reviewText);
 
-        //test later
-        // Route-side input validation
-        // let errors = [];
-        // if (!req.session.user) errors.push('User is not logged in!');
-        // if (!verify.validRating(newMetrics.rating)) errors.push('Invalid review rating.');
-        // if (!verify.validRating(newMetrics.price)) errors.push('Invalid review price.');
-        // if (!verify.validString(newReviewText)) errors.push('Invalid review text.');
-
-    // if (errors.length > 0) {
-    //     res.render('errors/error', {
-    //         title: 'Write a Review',
-    //         errors: errors,
-    //         partial: 'errors-script'
-    //     });
-    //     return;
-    // }
-    // await commentData.addComments(userId, comment);
 
     try {
         newComment = await commentData.addComments(userId, comment);
@@ -109,3 +92,22 @@ router.post('/addComment/:id', async(req, res) => {
 });
 
 module.exports = router;
+
+
+//test later
+// Route-side input validation
+// let errors = [];
+// if (!req.session.user) errors.push('User is not logged in!');
+// if (!verify.validRating(newMetrics.rating)) errors.push('Invalid review rating.');
+// if (!verify.validRating(newMetrics.price)) errors.push('Invalid review price.');
+// if (!verify.validString(newReviewText)) errors.push('Invalid review text.');
+
+// if (errors.length > 0) {
+//     res.render('errors/error', {
+//         title: 'Write a Review',
+//         errors: errors,
+//         partial: 'errors-script'
+//     });
+//     return;
+// }
+// await commentData.addComments(userId, comment);
