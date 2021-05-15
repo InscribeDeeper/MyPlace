@@ -1,6 +1,5 @@
 (function ($) {
 
-    // Make rows clickable
     $(".clickable-row").mouseup( (event) => {
         let href = event.currentTarget.getAttribute('data-href')
         console.log(href);
@@ -9,7 +8,7 @@
     });
 })(jQuery);
 
-function fName(id,col) {
+function searchFromList(id, col) {
     let input, filter, table, row, i, txtValue;
     input = document.getElementById(id);
     filter = input.value.toUpperCase();

@@ -89,6 +89,8 @@ router.post("/new", async(req, res) => {
     let photo_link = xss(req.body.photo_link);
     let purchase_link = xss(req.body.purchase_link);
     let contact = xss(req.body.contact);
+    let latitude = xss(req.body.latitude);
+	let longtitude = xss(req.body.longtitude);
 
     let errors = [];
 
@@ -99,6 +101,8 @@ router.post("/new", async(req, res) => {
     if (!photo_link) errors.push("photos strongly recommended");
     if (!purchase_link) errors.push("purchase_link strongly recommended");
     if (!contact) errors.push("No contact");
+    if (!latitude) errors.push("latitude is required");
+    if (!longtitude) errors.push("longtitude is required");
 
     // const allRestaurants = await restaurantData.getAllRestaurants();
     // for (let x of allRestaurants) {
@@ -118,9 +122,15 @@ router.post("/new", async(req, res) => {
         });
     }
 
+    const userName = req.session.user;
+	try {
+		myUser = await userData.getUserByUserName(userName);
+	} catch (e) {
+		errors.push("userName or password is not valid.");
+	}
+
     try {
-        // console.log("suc")
-        const newFurniture = await furnitureData.createFurniture(
+        await furnitureData.createFurniture(
             myUser._id,
             name,
             category,
@@ -132,7 +142,9 @@ router.post("/new", async(req, res) => {
             0,
             purchase_link,
             false,
-            contact
+            contact,
+            latitude,
+			longtitude
         );
 
         res.redirect(`/furniture`);

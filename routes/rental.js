@@ -104,7 +104,7 @@ router.post("/new", async (req, res) => {
             myUser._id
 		);
 		
-		res.redirect(`/rental/list`);
+		res.redirect(`/rental`);
 		
 	} catch (e) {
 		console.log("fial")
@@ -167,8 +167,8 @@ router.get("/:id", async (req, res) => {
 			let current = {};
 
 			let commentedUser = await userData.getUserById(eachCommment.user_id); // get each comment's owner
-			// current.id = review._id;
-			current.name = commentedUser.first_name + " " + commentedUser.last_name;
+			current._id = eachCommment._id;
+			current.name = commentedUser.firstName + " " + commentedUser.lastName;
 			current.age = commentedUser.age;
 			current.text = eachCommment.comment;
 			current.helpful = eachCommment.helpful;
