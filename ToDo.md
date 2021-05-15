@@ -77,7 +77,7 @@ rental界面(
 	(rental = {
 		"_id": "rental_id1",
 		"user_id": "user_collection_id_1",
-		"comment_id": ["comment_collection_id_101", "comment_collection_id_102"],
+		"comments_id": ["comment_collection_id_101", "comment_collection_id_102"],
 		"location": "123 Washington St",
 		"price": 1000,
 		"bedroom": 2,
@@ -141,7 +141,7 @@ rental界面(
 	"_id": "furniture_id1",
 	"user_id": "user_collection_id_1",
 	"name": "desktop",
-	"comment_id": ["comment_collection_id_1232", "comment_collection_id_1234"],
+	"comments_id": ["comment_collection_id_1232", "comment_collection_id_1234"],
 	"category": ["electronics", "computer"],
 	"location": "1253 Garden St",
 	"price": 10,

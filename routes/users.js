@@ -11,8 +11,8 @@ const userData = data.users;
     Why don't we use middleware for this?
 */
 router.get("/", async (req, res) => {
-	if (req.session.user) {
-		res.redirect("/landing/landing");
+	if (!req.session.user) {
+		res.redirect("users/login");
 	}
 });
 

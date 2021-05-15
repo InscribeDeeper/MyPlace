@@ -39,8 +39,6 @@ router.get("/addComment/:id", async (req, res) => {
 	try {
 		//pull评论
 		const furniture = await furnitureData.getFurnitureById(furnitureId);
-		// let commentsIdList = furniture.comment_id
-		// const comment = await commentData.getCommentById(commentsIdList[0]);
 		res.render("comments/create", {
 			partial: "write-a-review-script",
 			title: "Write a Review",
