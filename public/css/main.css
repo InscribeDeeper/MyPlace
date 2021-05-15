@@ -1,23 +1,23 @@
 .btn-primary{
-  background-color:#b3737e;
-  border-color: rgb(61, 9, 9);
+  background-color:#cecbcb;
+  border-color: rgb(177, 174, 190);
   
 }
 
 .btn-primary:link {
-  background-color: rgb(88, 39, 39);
+  background-color: rgb(72, 106, 156);
   border-color:rgb(243, 237, 237);
   color:white
 }
 
 .btn-primary:hover {
-  background-color: rgb(122, 69, 69);
+  background-color: rgb(164, 166, 197);
   border-color:rgb(243, 237, 237);
   color:white
 }
 
 .btn-primary:active {
-  background-color: rgb(189, 142, 173);
+  background-color: rgb(113, 133, 139);
   border-color:rgb(243, 237, 237);
   color:rgb(29, 6, 6)
 }
@@ -63,7 +63,7 @@ body.dark-mode .card{
 
 .jumbotron{
   background-color: rgba(212, 173, 188, 0.514);
-  background-image: linear-gradient(#cfc4c4, #ca9cb9)
+  background-image: linear-gradient(#ffffff, #7c8296)
 }
 
 /* body.dark-mode .dollar{
@@ -268,9 +268,9 @@ li.borderless{
 }
 
 
-a:link {color:#3a0813d0;}    
-a:visited {color:#3a0813d0;}  
-a:hover {color:#000000;} 
+a:link {color:#030b4ed0;}    
+a:visited {color:#0e2052d0;}  
+a:hover {color:#494949;} 
 a:active {color:#ffffff;}
 
 
@@ -284,7 +284,7 @@ body {
 } */
 
 .form-group.input-label {
-  border-left-color: #692643;
+  border-left-color: #262d69;
 }
 
 
@@ -293,5 +293,5 @@ body {
 }
 
 .ml-2 {
-  color:#692643;
+  color:#000000;
 }

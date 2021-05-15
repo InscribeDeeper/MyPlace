@@ -13,8 +13,9 @@
 
                 <span class = "error font-italic" hidden></span>
                 <h2 id="address" class="font-italic h5">{{rental.description}}</h2>
-                <h2 id="bedbath" class="font-italic h5">{{rental.bedroom}}B {{rental.bathroom}}B</h2>
-                <h2 class="text-secondary h5">{{rental.utility}}</h2>
+                <h2 id="bedbath" class="font-italic h5">Unit Type: {{rental.bedroom}}B {{rental.bathroom}}B</h2>
+                <h2 id="space" class="font-italic h5">Size: {{rental.space}} Sqrt</h2>
+                <h2 id="space" class="font-italic h5">Utilities: {{rental.utility}}</h2>
                 
                 
                 
@@ -22,15 +23,15 @@
              <div class="container">
                 <ul>
                     <li>Price: {{#if rental.price}}
-                    {{rental.price}} Dollar / year
+                    {{rental.price}} Dollar / month
                     {{else}}
                     It is free
                     {{/if}}
                     </li>
                     
-                    <li>labels: {{rental.labels}}</li>
+                    <li>Labels: {{rental.labels}}</li>
                     <li>Utilities: {{rental.utility}}</li>
-                    <li>contact: {{rental.contact}}</li>
+                    <li>Contact: {{rental.contact}}</li>
                 </ul>
                 <div class="container shadow-sm p-3 mb-5 border border-light rounded">
                 <h4 class="font-weight-bold">Images</h4>
