@@ -87,6 +87,7 @@ router.post("/helpful/:id", async (req, res) => {
 // User should only be able to access POST route after logging in
 router.post("/addComment/:id", async (req, res) => {
 	// Validate input in this route before sending to server
+	
 
 	let errors = [];
 	let furnitureId = xss(req.params.id.trim());
@@ -101,7 +102,10 @@ router.post("/addComment/:id", async (req, res) => {
 	try {
 		newComment = await commentData.addComments(userId, comment);
 		await toggleFn.toggleCommentToUser(userId, newComment._id);
+		// if ( req.session.previousRoute 是furniture 还是 rental)
 		await toggleFn.toggleCommentToFurniture(furnitureId, newComment._id);
+		// if ( req.session.previousRoute 是furniture 还是 rental)
+		
 		res.redirect(`../../furniture/${furnitureId}`);
 	} catch (e) {
 		errors.push(e);
