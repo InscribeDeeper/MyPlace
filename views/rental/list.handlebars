@@ -54,8 +54,8 @@
             <th scope="col">Bed</th>
             <th scope="col">Bath</th>
             <th scope="col">Likes</th>
-            <th scope="col">Dislikes</th>
-            <th scope="col">rentalID in DB link</th>
+            <th scope="col">Photos</th>
+            
         </tr>
     </thead>
     <tbody>
@@ -68,8 +68,8 @@
             <td>{{this.bedroom}}</td>
             <td>{{this.bathroom}}</td>
             <td>{{this.likes}}</td>
-            <td>{{this.dislikes}}</td>
-            <td><a href= "/rental/{{this._id}}">{{this._id}}</a></td>
+            <td>{{this.photo_link}}</td>
+            
         </tr>
         {{/each}}
     </tbody>
