@@ -76,7 +76,7 @@ app.use("/private", (req, res, next) => {
 
 // 访问流量 的时间统计 // 这些都可以作为 服务器的log 存起来
 app.use(async (req, res, next) => {
-	// console.log("req.originalUrl: " + req.originalUrl);
+	console.log("---------");
 	// console.log("req.session.user: " + req.session.user);
 	console.log(`[${new Date().toUTCString()}]: ${req.method} ${req.originalUrl} (${req.session.user ? "Authenticated User" : "Non-Authenticated User"}) `);
 
