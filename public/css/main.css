@@ -258,13 +258,9 @@ li.borderless{
   border: none;
 }
 
-a:hover {
-  text-decoration: none;
-}
 
-.input-label{
-  border: 1px solid #ced4da;
-}
+
+
 
 .rating-slider w-100 {
   background-color: #692643;
@@ -282,4 +278,11 @@ body {
   margin-right: 5%;
 }
 
+/* .form-group {
+  
+} */
+
+.form-group.input-label {
+  border-left-color: #692643;
+}
 

@@ -13,17 +13,13 @@
 		<div class="form-group">
 			<label for="label" class="input-label">Labels</label>
 			<input type = "text" list="labels" name="labels" id="label-input" value="{{reqInput.labels}}">
+			
 			<datalist id="labels">
-  			<option value="Warm">
-  			<option value="Cheap">
-  			<option value="Big">
-  			<option value="Luxury">
 			<option value="House">
   			<option value="Apartment">
 			<option value="Condo">
-  			<option value="Cute">
+  			
 			</datalist>
-			{{!-- <input type="text" class="form-control" id="category-input" name="category" placeholder="Enter rental category" /> --}}
 			<div class="invalid-feedback">
 				Please provide a valid rental label
 			</div>
@@ -63,11 +59,7 @@
 		</div>
 
 		<div class="form-group" id="rental-input-div">
-			<label for="description" class="input-label">Description</label>
-			<input type="text" class="form-control" id="description-input" name="description" placeholder="Enter rental description" value="{{reqInput.description}}" />
-			<div class="invalid-feedback">
-				Please provide a valid description
-			</div>
+			
 		</div>
 
 		<div class="form-group">
@@ -79,7 +71,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="utility" class="input-label">Utility</label>
+			<label for="utility" class="input-label">Utilities </label>
 			<input type="text" class="form-control" id="utility-input" name="utility" placeholder="Enter utility" value="{{reqInput.utility}}"/>
 			<div class="invalid-feedback">
 				Please provide a valid utility
