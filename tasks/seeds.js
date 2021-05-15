@@ -29,7 +29,25 @@ async function main() {
     userOne = await userData.updateUserInfo((id = userOneId), (newUserInfo = { age: 200, email: "hey.weiyang@gmail.com" }));
     userOne = await userData.updateUserPassword((id = userOneId), (password = "123456"));
     console.log(userOneId);
+    const newRental = await rentalData.createRental(
+        "location",
+        1,
+        1,
+        2,
+        3,
+        "description",
+        "ddd",
+        "d",
+        0,
+        0,
+        "ff",
+        1,
+        1,
+        1,
+        userOneId
+    );
 
+    console.log(newRental)
     // create furniture
     var furniture1 = await furnitureData.createFurniture(
         userOneId,
@@ -91,6 +109,13 @@ async function main() {
      
     await toggleFn.toggleCommentToFurniture(furniture2Id, commentId) 
     await toggleFn.toggleCommentToFurniture(furniture2Id, commentId1)
+    await toggleFn.toggleCommentToUser(userOneId, commentId) 
+    await toggleFn.toggleCommentToUser(userOneId, commentId1)
+
+
+    Comparefurniture2Id = await commentData.getFurnitureIDbyCommentID(commentId)
+    // console.log("Comparefurniture2Id     " + Comparefurniture2Id)
+    // console.log("furniture2Id     " + furniture2Id)
         // toggle furniture into the userId
         // await toggleFn.toggleFurnitureToUser(userOneId, furniture1Id);
         // await toggleFn.toggleFurnitureToUser(userOneId, furniture2Id);

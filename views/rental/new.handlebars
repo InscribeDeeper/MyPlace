@@ -11,8 +11,8 @@
 		</div>
 
 		<div class="form-group">
-			<label for="category" class="input-label">Labels</label>
-			<input type = "text" list="labels" name="label" id="label-input">
+			<label for="label" class="input-label">Labels</label>
+			<input type = "text" list="labels" name="labels" id="label-input" value="{{reqInput.labels}}">
 			<datalist id="labels">
   			<option value="Warm">
   			<option value="Cheap">
@@ -30,7 +30,13 @@
 
 		</div>
 
-		
+		<div class="form-group">
+			<label for="space" class="input-label">Space</label>
+			<input type="number" class="form-control" id="space-input" name="space" placeholder="Enter rental space" value="{{reqInput.space}}"/>
+			<div class="invalid-feedback">
+				Please provide a valid space
+			</div>
+		</div>
 
 		<div class="form-group">
 			<label for="price" class="input-label">Price</label>
@@ -42,7 +48,7 @@
 
         <div class="form-group">
 			<label for="bed" class="input-label">Bedrooms</label>
-			<input type="number" class="form-control" id="bed-input" name="bed" placeholder="Enter rental bedrooms" value="{{reqInput.bedroom}}"/>
+			<input type="number" class="form-control" id="bed-input" name="bedroom" placeholder="Enter rental bedrooms" value="{{reqInput.bedroom}}"/>
 			<div class="invalid-feedback">
 				Please provide a valid bed
 			</div>
@@ -50,7 +56,7 @@
 
         <div class="form-group">
 			<label for="bath" class="input-label">Bathrooms</label>
-			<input type="number" class="form-control" id="bath-input" name="bath" placeholder="Enter rental bathrooms" value="{{reqInput.bathroom}}"/>
+			<input type="number" class="form-control" id="bath-input" name="bathroom" placeholder="Enter rental bathrooms" value="{{reqInput.bathroom}}"/>
 			<div class="invalid-feedback">
 				Please provide a valid bath
 			</div>
@@ -72,21 +78,36 @@
 			</div>
 		</div>
 
-        <div class="form-group" id="rental-input-div">
-			<label for="description" class="input-label">Utility</label>
-			<input type="text" class="form-control" id="description-input" name="description" placeholder="Enter rental description" value="{{reqInput.description}}" />
+		<div class="form-group">
+			<label for="utility" class="input-label">Utility</label>
+			<input type="text" class="form-control" id="utility-input" name="utility" placeholder="Enter utility" value="{{reqInput.utility}}"/>
 			<div class="invalid-feedback">
-				Please provide a valid description
+				Please provide a valid utility
 			</div>
 		</div>
-
 		
 
 		<div class="form-group">
-			<label for="photo" class="input-label">Contact</label>
+			<label for="contact" class="input-label">Contact</label>
 			<input type="text" class="form-control" id="contact-input" name="contact" placeholder="Enter contact" value="{{reqInput.contact}}"/>
 			<div class="invalid-feedback">
 				Please provide a valid contact
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="longitute" class="input-label">Longitute</label>
+			<input type="number" class="form-control" id="longitute-input" name="longitute" placeholder="Enter longitute" value="{{reqInput.longitute}}"/>
+			<div class="invalid-feedback">
+				Please provide a valid longitute
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="latitute" class="input-label">Latitute</label>
+			<input type="number" class="form-control" id="latitute-input" name="latitute" placeholder="Enter latitute" value="{{reqInput.latitute}}"/>
+			<div class="invalid-feedback">
+				Please provide a valid latitute
 			</div>
 		</div>
 
