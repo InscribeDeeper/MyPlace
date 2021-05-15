@@ -43,11 +43,11 @@ body {
 body {
 	background: #fff;
 }
-
+/* 
 body.dark-mode{
 	background: #111;
 	color: #fff;
-}
+} */
 
 /* body.dark-mode li.list-group-item>a{
   color: #3b85ff;
