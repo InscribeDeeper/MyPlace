@@ -16,15 +16,15 @@
 18. Dark Mode
 
 ## Shaobo/YX
-12. Funiture/Rental [# of comment], [price] botton feature ✅
+12. Funiture/Rental [# of comment], [price] botton feature 
 4. Show pictures with given link
-13. Location, Bed/Bath Room, space, description, utiliies, label, contact.
+13. Location, Bed/Bath Room, space, description, utiliies, label, contact.✅
 
 14. Filter by name, location, price, category.JS 看懂代码并修改
 
 15. Samples准备，ref seeds_temp
 
-16. Rental 不加名字修改views search name -》 search location
+16. Rental 不加名字修改views search name -》 search location✅
 
 17. ranking JS by like/dislike
 
