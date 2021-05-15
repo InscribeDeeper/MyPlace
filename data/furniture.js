@@ -13,17 +13,23 @@ async function getFurnitureById(id) {
 	return theFurniture;
 }
 
-async function createFurniture(userId, name, category, location, price, description, photos, likes, dislikes, purchase_link, sold, contact, latitude, longtitude) {
+async function createFurniture(userId, name, category, location, price, description, photos, likes, dislikes, purchase_link, sold, contact, latitudeFloat, longitudeFloat) {
 	// add to collection
-	// if (!verifier.validString(category)) throw "First name is not a valid string.";
+	if (!verifier.validString(userId)) throw "userId is not a valid user id.";
+	if (!verifier.validString(name)) throw "userId is not a valid user id.";
+	if (!verifier.validString(category)) throw "userId is not a valid user id.";
 	if (!verifier.validString(location)) throw "Last name is not a valid string.";
-	if (!verifier.validNum(parseInt(price))) throw "Price is not a valid number.";
+	if (!verifier.validNum(parseFloat(price))) throw "Price is not a valid number.";
 	if (!verifier.validString(description)) throw "userName is not a valid string.";
-	// if (!verifier.validString(photo)) throw "photo is not a valid string.";
+	if (!verifier.validString(photo)) throw "photo is not a valid string.";
 	if (!verifier.validString(purchase_link)) throw "purchase_link is not a valid string.";
 	if (!verifier.validBoolean(sold)) throw "Sold should be a boolean";
-	// if (!verifier.validString(contact)) throw "contact should be a string";
+	if (!count) throw "contact should be a string or a number";
+	if (!verifier.validNum(parseFloat(latitudeFloat))) throw "latitude is not a valid number.";
+	if (!verifier.validNum(parseFloat(longitudeFloat))) throw "longtitude is not a valid number.";
 
+	let latitude = parseFloat(latitudeFloat);
+	let longitude = parseFloat(longitudeFloat);
 	const furnitureCollection = await furniture();
 	// const userCollection = await users();
 	let newFurniture = {
@@ -42,8 +48,12 @@ async function createFurniture(userId, name, category, location, price, descript
 		sold,
 		contact,
 		latitude,
+<<<<<<< HEAD
 		longtitude
 		
+=======
+		longitude
+>>>>>>> ShaoboLi2
 	};
 
 	const newInsertedFurniture = await furnitureCollection.insertOne(newFurniture);

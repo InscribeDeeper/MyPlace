@@ -8,6 +8,19 @@
     });
 })(jQuery);
 
+var rsb = document.getElementById("rsb");
+var rsd = document.getElementById("rsd");
+var psb = document.getElementById("psb");
+var psd = document.getElementById("psd");
+rsd.innerHTML = rsb.value;
+psd.innerHTML = psb.value;
+rsb.oninput = function() {
+  rsd.innerHTML = this.value;
+}
+psb.oninput = function() {
+  psd.innerHTML = this.value;
+}
+
 function searchFromList(id, col) {
     let input, filter, table, row, i, txtValue;
     input = document.getElementById(id);
@@ -59,17 +72,4 @@ function fNum(id,col,compareFn=(a,b)=>a>=b) {
         table.hidden=false;
         no_table.hidden=true;
     }
-}
-
-var rsb = document.getElementById("rsb");
-var rsd = document.getElementById("rsd");
-var psb = document.getElementById("psb");
-var psd = document.getElementById("psd");
-rsd.innerHTML = rsb.value;
-psd.innerHTML = psb.value;
-rsb.oninput = function() {
-  rsd.innerHTML = this.value;
-}
-psb.oninput = function() {
-  psd.innerHTML = this.value;
 }
