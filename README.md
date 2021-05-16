@@ -24,20 +24,26 @@ $ npm start
 ```
 
 ## Features
+User:
 1. Sign up your account by clicking Sign Up. / Log in your Account by clicking Log In.
-2. View all Rentals information by clicking "Check Out All Rentals".
-3. Create a new rental
-4. Enter all the information to create a new rental, and click Submit.
-5. Search rentals by location; Filter unit types by selecting numbers of bedrooms and bathrooms in the sliders; Filter maximum of price in the slider.
-6. View the rental by clicking on it in the table.
-7. View the details of the rental information including
+2. Click on Update Profile to update information of user.
+3. Click on My Profile to view information of user.
+Rental:
+5. View all Rentals information by clicking "Check Out All Rentals".
+6. Create a new rental
+7. Enter all the information to create a new rental, and click Submit.
+8. Search rentals by location; Filter unit types by selecting numbers of bedrooms and bathrooms in the sliders; Filter maximum of price in the slider.
+9. View the rental by clicking on it in the table.
+10. View the details of the rental information including
  - location, description, unit type, utilities, price, labels, contact, images, and Google Map.
-9. Back to the main page.
-10. Enter all the information to create a new rental, and click Submit.
-11. Search rentals by location; Filter unit types by selecting numbers of bedrooms and bathrooms in the sliders; Filter maximum of price in the slider.
-12. View the rental by clicking on it in the table.
-13. View the details of the rental information including
-8. location, description, unit type, utilities, price, labels, contact, images, and Google Map.
+11. Back to the main page.
+12. View all Rentals information by clicking "Check Out All Rentals".
+
+11. Enter all the information to create a new furniture, and click Submit.
+12. Search rentals by location; Filter unit types by selecting numbers of bedrooms and bathrooms in the sliders; Filter maximum of price in the slider.
+13. View the rental by clicking on it in the table.
+14. View the details of the rental information including
+15. location, description, unit type, utilities, price, labels, contact, images, and Google Map.
 
 ## Group Members:
 - Shaobo Li
