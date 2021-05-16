@@ -33,7 +33,7 @@ User:
 6. 用户的评论历史, 可以直接在profile界面删除. 
 7. 用户可以更新自己的profile infromation
 8. 特定密码如果输入和原来一样, 也会显示 和原来一样的 error 
-9. 密码检查如果不一致, 也会报错
+9. password checking
 
 
 Rental:
