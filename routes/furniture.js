@@ -102,7 +102,7 @@ router.post("/new", async(req, res) => {
     if (!purchase_link) errors.push("purchase_link strongly recommended");
     if (!contact) errors.push("No contact");
     if (!latitude) errors.push("latitude is required");
-    if (!longitude) errors.push("longtitude is required");
+    if (!longitude) errors.push("longitude is required");
 
     // const allRestaurants = await restaurantData.getAllRestaurants();
     // for (let x of allRestaurants) {
@@ -130,6 +130,8 @@ router.post("/new", async(req, res) => {
 	}
     latitude = parseFloat(latitude);
     longitude = parseFloat(longitude);
+    price = parseFloat(price);
+    
     try {
         await furnitureData.createFurniture(
             myUser._id,
