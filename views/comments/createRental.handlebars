@@ -1,7 +1,7 @@
-{{!-- update 评论的话,  直接 load 原有的comment,并且 populate 回来 --}}
-{{!-- 写评论单独的个网页, 其实也可以用 AJAX, 直接弹出一个窗口, 需要看lab11 --}}
-{{!-- 这里面具体的内容, 需要根据comments 的DB结构来修改, 基本上就是把所有的东西通过 form 能够让用户填进去 --}}
-{{!-- post 完之后, 要创建对应的数据库, 并且关联对应的 furnitureId 或者 rentalId --}}
+{{!-- Update comments, load the original comment directly, and populate back --))
+Write a comment on a separate webpage, in fact, you can also use AJAX, a window will pop up directly, you need to see lab11
+The specific content here needs to be according to the DB structure of the comments, which basically means that all things can be filled in by the user through the form
+After the post, create the corresponding database and associate the corresponding furnitureId or rentalId --}}
 <div class="container col-8 mt-5">
     <div class="container mb-4">
         <a href="/rental/{{rental._id}}" class="text-decoration-none text-dark font-weight-bold">
