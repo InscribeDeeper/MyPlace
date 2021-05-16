@@ -68,7 +68,7 @@ let exportedMethods = {
             userName: userName,
             age: age,
             hashed_pw: hashedPassword,
-            selfSummary: selfSummary | "want to know more about me?",
+            selfSummary: selfSummary || "want to know more about me?",
             comments_id: [],
             furniture_id: [],
             rental_id: [],

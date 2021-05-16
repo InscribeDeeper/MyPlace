@@ -52,9 +52,7 @@ async function deleteComment(id) {
 	const deletionInfo = await CommentCollection.deleteOne({ _id: id });
 	if (deletionInfo.deletedCount == 0) throw `Comment, ${id}, can not be deleted.`;
 
-	//移除用户下评论？
-	await shareUtilsDB.untoggleCommentToUser(userId, newComments._id);
-	return true;
+	return id;
 }
 
 async function updateComment(commentId, updatedInfo) {

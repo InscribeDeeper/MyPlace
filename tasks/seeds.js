@@ -56,7 +56,7 @@ async function main() {
         (location = "A"),
         (price = 20),
         (description = "good"),
-        (photos = []),
+        (photos = "https://images.craigslist.org/01111_9ZiDk6BDQ9lz_0kE0gw_600x450.jpg"),
         (like = 23),
         (dislike = 3),
         (purchase_link = "www.link.com"),
@@ -75,7 +75,7 @@ async function main() {
         (location = "A"),
         (price = 20),
         (description = "good"),
-        (photos = []),
+        (photos = "https://images.craigslist.org/00C0C_l0PR99SqHc5z_0oc0oc_600x450.jpg"),
         (like = 23),
         (dislike = 3),
         (purchase_link = "www.link.com"),
@@ -111,6 +111,12 @@ async function main() {
     await toggleFn.toggleCommentToFurniture(furniture2Id, commentId1)
     await toggleFn.toggleCommentToUser(userOneId, commentId) 
     await toggleFn.toggleCommentToUser(userOneId, commentId1)
+
+	//移除用户下评论？
+    await commentData.deleteComment(commentId1)
+	await toggleFn.untoggleCommentToUser(userOneId, commentId1);
+    await toggleFn.untoggleCommentToFurniture(furniture2Id, commentId1)
+
 
 
     Comparefurniture2Id = await commentData.getFurnitureByCommentID(commentId)
