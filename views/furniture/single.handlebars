@@ -36,8 +36,9 @@
                     <li>purchase_link: {{furniture.purchase_link}}</li>
                     <li>contact: {{furniture.contact}}</li>
                 </ul>
-            </div>
             
+            </div>
+
             <div class="mt-3">
                 <div class="row mb-4">
                     <div class="col-3">
@@ -61,7 +62,7 @@
                                         {{this.text}}
                                     </span>
                                 </p>
-                                <p class="commentt_id">this is comment_id: {{this._id}}</p>
+                                {{!-- <p class="commentt_id">this is comment_id: {{this._id}}</p> --}}
                             </div>
                             <div class = "dblclick container">
                                 {{#if (checkListMem ../user._id this.helpful)}}
