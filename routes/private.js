@@ -93,7 +93,7 @@ router.get("/", async (req, res) => {
 			item_name = current_rental.name;
 			item_id = current_rental._id;
 		}
-
+		current.comment_id = eachCommment._id
 		current._id = item_id;
 		current.name = item_name;
 		current.type = item_type;

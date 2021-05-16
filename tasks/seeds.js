@@ -112,6 +112,12 @@ async function main() {
     await toggleFn.toggleCommentToUser(userOneId, commentId) 
     await toggleFn.toggleCommentToUser(userOneId, commentId1)
 
+	//移除用户下评论？
+    await commentData.deleteComment(commentId1)
+	await toggleFn.untoggleCommentToUser(userOneId, commentId1);
+    await toggleFn.untoggleCommentToFurniture(furniture2Id, commentId1)
+
+
 
     Comparefurniture2Id = await commentData.getFurnitureByCommentID(commentId)
     // console.log("Comparefurniture2Id     " + Comparefurniture2Id)
