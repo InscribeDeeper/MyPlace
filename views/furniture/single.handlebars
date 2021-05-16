@@ -1,9 +1,11 @@
-{{!-- -I want to see the photos here
--To be able to see the address-googlemap
--To be able to see all the attributes related to furniture, call them out from the DB
-     -Need to call out all the corresponding comment id, and put it under the div, and list them all
--Specific layout can refer to some templates
--Because there is a corresponding rental id? --}}
+{{!-- 我们可以自己找一个比较好看的模板, 然后修改对应的内容
+
+- 这里要能看到 照片
+- 要能看到 地址 - googlemap
+- 要能看到所有和 furniture相关的属性, 从DB里面调出来的
+    - 需要把 对应的 comment id 全部调出来, 并且放到 div下面, 全部列出来
+- 具体的排版 可以参考某些模板
+- 因为有保存对应的 rental id? --}}
 
  <div class="container">
     <div class="row">
@@ -58,7 +60,6 @@
                                 <p class="text-left lead">
                                         {{this.text}}
                                 </p>
-                                {{!-- <p class="commentt_id">this is comment_id: {{this._id}}</p> --}}
                             </div>
                             <div class = "dblclick container">
                                 {{#if (checkListMem ../user._id this.helpful)}}
@@ -66,7 +67,7 @@
                                 {{else}}
                                 <i class = "helpfulbtn fa fa-thumbs-up" data-cid = "{{this._id}}" data-type = "Furniture"  data-uid = "{{../user._id}}" data-iid = "{{../furniture._id}}" ></i>
                                 {{/if}}
-                                <span class = "likes">{{this.helpful.length}}</span>
+                                <span class = "helpful">{{this.helpful.length}}</span>
                                 
                                 <div class = "float-right">
                                     {{#if (checkListMem ../user._id this.reported)}}

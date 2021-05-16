@@ -62,31 +62,7 @@
             
                 <ul class="list-group list-group-flush">
                     {{#each comments}}
-                    <li class="list-group-item mb-4">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col col-4 p-0">
-                                    <h4 class="font-weight-bold h5">{{this.name}}</h4>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <p class="text-left lead">
-                                        {{this.text}}
-                                </p>
-                         
-                            </div>
-                            <div class = "dblclick container">
-                                {{#if (checkListMem ../user._id this.helpful)}}
-                                <i class = "likebtn fa fa-thumbs-up filled" data-rid = "{{this.id}}" data-uid = "{{../user._id}}"></i>
-                                {{else}}
-                                <i class = "likebtn fa fa-thumbs-up" data-rid = "{{this.id}}" data-uid = "{{../user._id}}"></i>
-                                {{/if}}
-                                <span class = "likes">{{this.helpful.length}}</span>
-                            </div>
-                        </div>
-                    </li>
-
-
+                
                      <li class="list-group-item mb-4">
                         <div class="container">
                             <div class="row">
@@ -104,7 +80,7 @@
                                 {{else}}
                                 <i class = "helpfulbtn fa fa-thumbs-up" data-cid = "{{this._id}}" data-type = "Rental"  data-uid = "{{../user._id}}" data-iid = "{{../rental._id}}" ></i>
                                 {{/if}}
-                                <span class = "likes">{{this.helpful.length}}</span>
+                                <span class = "helpful">{{this.helpful.length}}</span>
                                 
                                 <div class = "float-right">
                                     {{#if (checkListMem ../user._id this.reported)}}
