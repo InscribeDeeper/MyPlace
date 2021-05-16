@@ -11,7 +11,7 @@ async function main() {
     await db.dropDatabase();
 
     //Add users
-    const u1 = await userData.createUser("abrown", "Anna", "Brown", 23, "anna@gmail.com", "password", "a good people")
+    const u9 = await userData.createUser("abrown", "Anna", "Brown", 23, "anna@gmail.com", "password", "a good people")
     const u2 = await userData.createUser("mpatric", "Mary", "Patricia", 24, "mpatric@gmail.com", "password", "a bad people")
     const u3 = await userData.createUser("jjohn", "Jennifer", "John", 26, "jjohn@gmail.com", "password", "a nice people")
     const u4 = await userData.createUser("mlinda", "Michael", "Linda", 33, "mlinda@gmail.com", "password", "a cool ")
@@ -19,7 +19,7 @@ async function main() {
     const u6 = await userData.createUser("jjssica", "Joseph", "Jessica", 35, "jjssica@gmail.com", "password", "strong")
     const u7 = await userData.createUser("tsarah", "Thomas", "Sarah", 43, "tsarah@gmail.com", "password", "a dark people")
     const u8 = await userData.createUser("achis", "Christopher", "Daniel", 13, "achis@gmail.com", "password", "quite young")
-    const u9 = await userData.createUser("admin", "ADMIN", "ADMIN", 1, "admin@gmail.com", "123456", "admin")
+    const u1 = await userData.createUser("admin", "ADMIN", "ADMIN", 1, "admin@gmail.com", "123456", "admin")
 
 
 

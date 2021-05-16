@@ -55,6 +55,7 @@
             <th scope="col">Bath</th>
             <th scope="col">Labels</th>
             <th scope="col">Likes</th>
+            <th scope="col">Dislikes</th>
             
         </tr>
     </thead>
@@ -68,7 +69,8 @@
             <td>{{this.bedroom}}</td>
             <td>{{this.bathroom}}</td>
             <td>{{this.labels}}</td>
-            <td>{{this.likes}}</td>
+            <td>{{this.like.length}}</td>
+            <td>{{this.dislike.length}}</td>
             
         </tr>
         {{/each}}
