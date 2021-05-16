@@ -1,43 +1,27 @@
 {{!-- 需要具备筛选功能 --}}
 
-<div class="container m-5">
-    <div class="row mb-4">
-        <div class="col">
-            <a href="/furniture/new" class="btn btn-primary ">Create a new furniture</a>
-        </div>
-    </div>
+<div>
+    <a href="/furniture/new" class="btn btn-primary ">Create a new furniture</a>
+    
+    <label for="furniture-name"></label>
+    <input type="text" class="form-control" id="furniture-name" onkeyup="searchFromList('furniture-name',1)" placeholder="Search Furniture Name">
+       
+    <label for="category-name"></label>
+    <input type="text" class="form-control" id="category-name" onkeyup="searchFromList('category-name',2)" placeholder="Search Furnitures Category">
+     
 
-    <div class="row">
-        <div class="col col-4">
-            <label for="furniture-name"></label>
-            <input type="text" class="form-control" id="furniture-name" onkeyup="searchFromList('furniture-name',1)" placeholder="Search Furniture Name">
-        </div>
-        <div class="col col-4">
-            <label for="category-name"></label>
-            <input type="text" class="form-control" id="category-name" onkeyup="searchFromList('category-name',2)" placeholder="Search Furnitures Category">
-        </div>
-    </div>
+    <div>
+        <label for="rsb" class="font-weight-bold">Likes above: <span id="rsd"></span></label>
+        <input value="1" min="1" max="100" step="1" type="range" id="rsb" onmouseup="fNum('rsb',5,(a,b)=>a>=b)" onkeyup="fNum('rsb',5, (a,b)=>a>=b)">
 
-
-    <div class="row">
-        <div class="col col-4">
-            <div class="rating-slider w-100">
-                <label for="rsb" class="font-weight-bold">Likes above: <span id="rsd" class="ml-2"></span></label>
-                <input value="1" min="1" max="100" step="1" type="range" id="rsb" onmouseup="fNum('rsb',5,(a,b)=>a>=b)" onkeyup="fNum('rsb',5, (a,b)=>a>=b)">
-            </div>
-        </div>
-        <div class="col col-4">
-            <div class="price-slider w-100">
-                <label for="psb" class="font-weight-bold">Price below: <span id="psd" class="ml-2"></span></label>
-                <input value="50" min="1" max="100" step="1" type="range" id="psb" onmouseup="fNum('psb',4,(a,b)=>a<=b)" onkeyup="fNum('psb',4,(a,b)=>a<=b)"> 
-            </div>
-        </div>
+        <label for="psb" class="font-weight-bold">Price below: <span id="psd"></span></label>
+        <input value="50" min="1" max="100" step="1" type="range" id="psb" onmouseup="fNum('psb',4,(a,b)=>a<=b)" onkeyup="fNum('psb',4,(a,b)=>a<=b)"> 
     </div>
 </div>
 
 <div class="container m-5">
     <table class="table table-hover">
-    <thead class="thead-light">
+    <thead class="thead-dark">
         <tr>
             <th scope="col">Picture</th>
             <th scope="col">Name</th>
@@ -57,15 +41,12 @@
             <td>{{this.category}}</td>
             <td>{{this.location}}</td>
             <td>{{this.price}}</td>
-            <td>{{this.likes}}</td>
-            <td>{{this.dislikes}}</td>
+            <td>{{this.likes.length}}</td>
+            <td>{{this.dislikes.length}}</td>
             
         </tr>
         {{/each}}
     </tbody>
 </table>
-</div>
-<div class="container m-5" id="no-result" hidden="">
-    <p><span class="fa fa-exclamation-circle">&#0160;</span>No results found</p>
 </div>
 

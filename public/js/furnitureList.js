@@ -1,14 +1,11 @@
-(function ($) {
+$(".clickable-row").mouseup( (event) => {
+    let href = event.currentTarget.getAttribute('data-href')
+    console.log(href);
+    console.log(window.location);
+    window.location = href;
+});
 
-    $(".clickable-row").mouseup( (event) => {
-        let href = event.currentTarget.getAttribute('data-href')
-        console.log(href);
-        console.log(window.location);
-        window.location = href;
-    });
-})(jQuery);
-
-var rsb = document.getElementById("rsb");
+var rsb = document.getElementById$("rsb");
 var rsd = document.getElementById("rsd");
 var psb = document.getElementById("psb");
 var psd = document.getElementById("psd");
@@ -25,7 +22,7 @@ function searchFromList(id, col) {
     let input, filter, table, row, i, txtValue;
     input = document.getElementById(id);
     filter = input.value.toUpperCase();
-    rows = document.getElementsByClassName("clickable-row");
+    let rows = document.getElementsByClassName("clickable-row");
     let c = 0;
     for (i = 0; i < rows.length; i++) {
         row = rows[i];
@@ -38,7 +35,7 @@ function searchFromList(id, col) {
         }
     }
     table = document.getElementsByClassName("m-5")[1];
-    no_table= document.getElementById("no-result");
+    let no_table= document.getElementById("no-result");
     if (c==0) {
         table.hidden=true;
         no_table.hidden=false;
@@ -51,7 +48,7 @@ function fNum(id,col,compareFn=(a,b)=>a>=b) {
     let input, filter, table, row, i, txtValue;
     input = document.getElementById(id);
     filter = parseFloat(input.value);
-    rows = document.getElementsByClassName("clickable-row");
+    let rows = document.getElementsByClassName("clickable-row");
     let c = 0;
     for (i = 0; i < rows.length; i++) {
         row = rows[i];
@@ -64,7 +61,7 @@ function fNum(id,col,compareFn=(a,b)=>a>=b) {
         }
     }
     table = document.getElementsByClassName("m-5")[1];
-    no_table= document.getElementById("no-result");
+    let no_table= document.getElementById("no-result");
     if (c==0) {
         table.hidden=true;
         no_table.hidden=false;

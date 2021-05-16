@@ -1,51 +1,67 @@
-# LHRFE
-CS 546 Final Project 
-
---- 
-
-Introduction
-
-The website is designed to make a platform to list second-hand furniture and rent lease sublets. Users can visit the website to find their desired products at a much cheaper price and the best place to live for pursuing their education or career future. Also, users can post their unwanted goods for extra gain and sublets an apartment.
-
-There is a potential market among students to handle used products and sublet apartments. Due to the pandemic, many students need to sublet their rents and sell their used goods. We want a website to make it easier for students to sell their goods for convenience.
-On the website, a secure environment is going to be provided for users to feed themselves with timely and accurate information and post goods’ information with no worry.
-
---- 
-
-DATABASE
-
-1. Users
-
-The user collection will store all users. Users can create names, usernames, passwords ages, email addresses, etc. In their profile. Users can also post their houses on rent, second-hand goods, and comments. All their posts and comments will be stored in arrays. 
-
-2. Rental House
-
-The rental house collection will contain all the posted rental sublets. Each of the sublets will be related to information about labels, locations, prices, room types, descriptions, photos, utilities, contacts. Comments, likes, dislikes will be updated after users add comments or click on “likes” or “dislikes” button.
-
-3. Furniture
-
-The furniture collection will contain all the posted second-hand furniture. Each of the goods will be related to information about categories, prices, locations, descriptions, photos, likes, dislikes, purchase links, contact, and sold or not. Comments, likes, dislikes will be updated after users add comments or click on “likes” or “dislikes” button.
-
-4. Comments
-
-The comments collection will contain all comments posted on individual furniture or individual rent. The comment will be a string. The value of “report_count” will be added by 1 after one user reports the specific comment. After the value of “report_count” reach 50, the comment will be hidden. The value of “helpful_count” will be added by 1 after one user click on the “helpful” button. 
-
-
---- 
+# CS 546 Final Project
+## MyPlace, the information exchange platform
 
 
 
+The routes will be running on http://localhost:3000
 
-## commit format
+You can create apartments or second-hand furniture for sell. Or get information of the rentals and furniture sold by others.
 
-- example: 
-    - Add xxx feature ( 新加入的需求 )
-    - Fix ( 修复 bug )
-    - Change ( 完成的任务 )
-    - Update ( 完成的任务，或者由于第三方模块变化而做的变化 )
-	- Update tensorboard launch command in colab
+# Run the Project
+1. clone this respository using git. Install the packages.
+```sh
+$ npm install
+```
+
+2. Start the MongoDB, run the seed command.
+```sh
+$ npm run seeds
+```
+
+3. Run the project
+```sh
+$ npm start
+```
+
+## Features
+User:
+1. Sign up your account by clicking Sign Up. / Log in your Account by clicking Log In.
+2. Click on Update Profile to update information of user.
+3. Click on My Profile to view information of user.
+4. Log out by clicking on "Logout".
+
+Rental:
+1. View all Rentals information by clicking "Check Out All Rentals".
+2. Create a new rental
+3. Enter all the information to create a new rental, and click Submit.
+4. Search rentals by location; Filter unit types by selecting numbers of bedrooms and bathrooms in the sliders; Filter by maximum of price in the slider.
+5. View the rental by clicking on it in the table.
+6. View the details of the rental information including
+ - location, description, unit type, utilities, price, labels, contact, images, and Google Map.
+7. Back to the main page.
+
+Furniture:
+1. View all Furnitures information by clicking "Check Out All Furniture".
+2. Create a new furniture
+3. Enter all the information to create a new furniture, and click Submit.
+4. Search rentals by name and categoty; Filter by maximum of price.
+5. View the furniture by clicking on it in the table.
+6. View the details of the furniture information including
+ - price, category, description, location, purchase_link, contact, images, and Google Map.
+7. Back to the main page.
+
+Comments:
+1. Click "Write a Review" on the detailed information page of rentals or furniture. 
+2. Write your review and click on "Post Review".
+3. You will see your review on the detailed information page of rentals or furniture.
 
 
----
-## Note:
-- 习惯: commit-> pull -> push
+
+## Group Members:
+- Shaobo Li
+- Jiaqing Wang
+- Yixuan Wang
+- Wei Yang
+
+
+
