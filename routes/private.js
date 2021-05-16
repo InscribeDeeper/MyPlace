@@ -134,38 +134,38 @@ router.get("/", async (req, res) => {
 		current.num_comments = current_furniture.comments_id.length;
 		favoritedFurnitures.push(current);
 	}
-
+	
 	//###########################
 	// My ownedRentals
 	// this._id, this.name, this.likes, this.num_comments
 	//###########################
 	let ownedRentals = [];
 	const myRentals = myUser.rental_id || [];
-	// for (let eachRentalID of myRentals) {
-	// 	current = {};
-	// 	current_rental = await rentalData.getRentalById(eachRentalID);
-	//     current._id = eachRentalID;
-	// 	current.name = current_rental.name;
-	// 	current.likes = current_rental.likes;
-	// 	current.num_comments = current_rental.comments_id.length;
-	// 	ownedRentals.push(current);
-	// }
+	for (let eachRentalID of myRentals) {
+		current = {};
+		current_rental = await rentalData.getRentalById(eachRentalID);
+	    current._id = eachRentalID;
+		current.name = current_rental.location;
+		current.likes = current_rental.like;
+		current.num_comments = current_rental.comments_id.length;
+		ownedRentals.push(current);
+	}
 
 	//###########################
 	// My favoritedRentals
 	// this._id, this.name, this.likes, this.num_comments
 	//###########################
 	let favoritedRentals = [];
-	const myFavRentals = myUser.rental_id || [];
-	// for (let eachRentalID of myFavRentals) {
-	// 	current = {};
-	// 	current_rental = await rentalData.getRentalById(eachRentalID);
-	//     current._id = eachRentalID;
-	// 	current.name = current_rental.name;
-	// 	current.likes = current_rental.likes;
-	// 	current.num_comments = current_rental.comments_id.length;
-	// 	favoritedRentals.push(current);
-	// }
+	const myFavRentals = myUser.favor_rental_id || [];
+	for (let eachRentalID of myFavRentals) {
+		current = {};
+		current_rental = await rentalData.getRentalById(eachRentalID);
+	    current._id = eachRentalID;
+		current.name = current_rental.location;
+		current.likes = current_rental.like;
+		current.num_comments = current_rental.comments_id.length;
+		favoritedRentals.push(current);
+	}
 
 	return res.render("users/myProfile", {
 		authenticated: true,
