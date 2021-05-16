@@ -28,25 +28,25 @@ a {
 
 
 .btn-primary{
-  background-color:#cecbcb;
-  border-color: rgb(177, 174, 190);
+  background-image:linear-gradient(#ffffff, #1e3568);
+  border-color: rgb(255, 255, 255);
   
 }
 
 .btn-primary:link {
-  background-color: rgb(72, 106, 156);
+  background-color: rgb(123, 139, 161);
   border-color:rgb(243, 237, 237);
   color:white
 }
 
 .btn-primary:hover {
-  background-color: rgb(68, 93, 177);
+  background-color: rgb(21, 37, 88);
   border-color:rgb(243, 237, 237);
   color:white
 }
 
 .btn-primary:active {
-  background-color: rgb(113, 133, 139);
+  
   border-color:rgb(243, 237, 237);
   color:rgb(29, 6, 6)
 }
@@ -79,15 +79,6 @@ body {
   
 }
 
-
-
-
-
-
-
-
-
-
 #myInput,
 #myInput_2 {
   background-repeat: no-repeat;
@@ -105,39 +96,7 @@ body {
   position: realtive;
 }
 
-.error{
-  color: #ee0000;
-}
 
-.fa.fa-thumbs-up{
-  font-size: 28px;
-  margin: 10px;
-}
-.fa.fa-thumbs-down{
-  font-size: 28px;
-  margin: 10px;
-}
-
-.fa.filled{
-  color: #f15c00;
-}
-
-.favbtn{
-  font-size: 35px;
-}
-
-.fa:hover{
-  background-color: rgb(218, 191, 191);
-}
-
-.reportbtn{
-  border-width: thin;
-  border-radius: 5px;
-}
-
-.reportbtn:focus{
-  outline: 0;
-}
 
 .float-right{
   float:right;
@@ -145,29 +104,13 @@ body {
 }
 
 .review-input-box{
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
-.float-right{
-  overflow: auto;
-  display: inline-block;
-}
 
-.check-mark {
-  fill: rgb(5, 168, 130);
-}
 
-.x-mark {
-  fill: rgb(255, 82, 61);
-}
 
-.star {
-  color:rgb(255, 82, 61);
-}
 
-.dollar {
-  color: #767676;
-}
 
 .report-text{
   margin: 5px;
@@ -203,17 +146,12 @@ a:active {color:#ffffff;}
 
 
 body {
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
-/* .form-group {
-  
-} */
 
-.form-group.input-label {
-  border-left-color: #262d69;
-}
+
 
 
 #selfSummary{
