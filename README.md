@@ -28,6 +28,7 @@ User:
 1. Sign up your account by clicking Sign Up. / Log in your Account by clicking Log In.
 2. Click on Update Profile to update information of user.
 3. Click on My Profile to view information of user.
+4. Log out by clicking on "Logout".
 
 Rental:
 1. View all Rentals information by clicking "Check Out All Rentals".
@@ -48,6 +49,12 @@ Furniture:
 6. View the details of the furniture information including
  - price, category, description, location, purchase_link, contact, images, and Google Map.
 7. Back to the main page.
+
+Comments:
+1. Click "Write a Review" on the detailed information page of rentals or furniture. 
+2. Write your review and click on "Post Review".
+3. You will see your review on the detailed information page of rentals or furniture.
+
 
 
 ## Group Members:
