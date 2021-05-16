@@ -29,6 +29,12 @@ User:
 2. Click on Update Profile to update information of user.
 3. Click on My Profile to view information of user.
 4. Log out by clicking on "Logout".
+5. profile 界面可以看 拥有的 item. 可以通过上面的name 或者 location 点进去那个特定的页面. 然后也可以看到当前那个家具或者rental likes数量和 comments数量. 如果这里没有拥有 furniture或者 rental的话, 可以直接通过那里的link 去创建一个 furniture
+6. 用户的评论历史, 可以直接在profile界面删除. 
+7. 用户可以更新自己的profile infromation
+8. 特定密码如果输入和原来一样, 也会显示 和原来一样的 error 
+9. 密码检查如果不一致, 也会报错
+
 
 Rental:
 1. View all Rentals information by clicking "Check Out All Rentals".
@@ -49,6 +55,7 @@ Furniture:
 6. View the details of the furniture information including
  - price, category, description, location, purchase_link, contact, images, and Google Map.
 7. Back to the main page.
+
 
 Comments:
 1. Click "Write a Review" on the detailed information page of rentals or furniture. 

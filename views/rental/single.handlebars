@@ -16,9 +16,9 @@
                 <h2 id="bedbath" class="display-5">Unit Type: {{rental.bedroom}}B {{rental.bathroom}}B</h2>
                 <h2 id="space" class="font-italic h5">Size: {{rental.space}} Sqrt</h2>
                 <h2 id="space" class="font-italic h5">Utilities: {{rental.utility}}</h2>
-            
-                
+
             </div>
+
              <div class="container">
                 <ul>
                     <li>Price: {{#if rental.price}}
@@ -39,12 +39,9 @@
                 {{else}}
                     <h4 class="h5 text-secondary">No images available...</h4>
                 {{/if}}
+                </div>
             </div>
 
-
-                
-            </div>
-            
 
             <div>
                 <div id="map-parent" class="container shadow-sm p-3 border border-light rounded">
@@ -70,15 +67,13 @@
                             <div class="row">
                                 <div class="col col-4 p-0">
                                     <h4 class="font-weight-bold h5">{{this.name}}</h4>
-                                    
                                 </div>
-                                
                             </div>
                             <div class="row mt-3">
                                 <p class="text-left lead">
                                         {{this.text}}
                                 </p>
-                                <p class="commentt_id"></p>
+                         
                             </div>
                             <div class = "dblclick container">
                                 {{#if (checkListMem ../user._id this.helpful)}}
@@ -87,8 +82,56 @@
                                 <i class = "likebtn fa fa-thumbs-up" data-rid = "{{this.id}}" data-uid = "{{../user._id}}"></i>
                                 {{/if}}
                                 <span class = "likes">{{this.helpful.length}}</span>
+                            </div>
+                        </div>
+                    </li>
 
+
+                     <li class="list-group-item mb-4">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col col-4 p-0">
+                                    <h4 class="font-weight-bold h5">{{this.name}}</h4>
+                                </div>
+                            <div class="row mt-3">
+                                <p class="text-left lead">
+                                        {{this.text}}
+                                </p>
+                            </div>
+                            <div class = "dblclick container">
+                                {{#if (checkListMem ../user._id this.helpful)}}
+                                <i class = "helpfulbtn fa fa-thumbs-up filled" data-cid = "{{this._id}}" data-type = "Rental"  data-uid = "{{../user._id}}" data-iid = "{{../rental._id}}" ></i>
+                                {{else}}
+                                <i class = "helpfulbtn fa fa-thumbs-up" data-cid = "{{this._id}}" data-type = "Rental"  data-uid = "{{../user._id}}" data-iid = "{{../rental._id}}" ></i>
+                                {{/if}}
+                                <span class = "likes">{{this.helpful.length}}</span>
                                 
+                                <div class = "float-right">
+                                    {{#if (checkListMem ../user._id this.reported)}}
+                                    <button class="btn btn-secondary reportbtn" data-cid = "{{this._id}}" data-type = "Rental"  data-uid = "{{../user._id}}" data-iid = "{{../rental._id}}" >
+                                        <i class = "fa fa-exclamation" aria-hidden = "true"></i>
+                                        <span class = "report-text">Unreport</span>
+                                    </button>
+                                    {{else}}
+                                    <button class="btn btn-danger active reportbtn" data-cid = "{{this._id}}" data-type = "Rental"  data-uid = "{{../user._id}}" data-iid = "{{../rental._id}}" >
+                                        <i class = "fa fa-exclamation" aria-hidden = "true"></i>
+                                        <span class = "report-text">Report</span>
+                                    </button>
+                                    {{/if}}
+                                </div>
+                                <div class = "error font-italic" hidden></div>
+                                <div class="msg alert alert-success" role="alert" hidden></div>
+                            </div>
+                            
+                        </div>
+                        <div class="container mb-5">
+                            <div class="card">
+                                <div class="card-header">
+                                    subcomments
+                                </div>
+                                <ul class="list-group" id="comment-list-{{this._id}}">
+                                    {{#each subcomments}} {{> comment_item}} {{/each}}
+                                </ul>
                             </div>
                         </div>
                     </li>

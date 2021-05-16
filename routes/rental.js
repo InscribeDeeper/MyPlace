@@ -155,6 +155,8 @@ router.get("/:id", async (req, res) => {
 			errors: errors,
 		});
 	}
+	const rental = await rentalData.getRentalById(rentalID);
+	const commentsIdList = rental.comments_id || [];
 
 	try {
 		const rental = await rentalData.getRentalById(rentalID);
