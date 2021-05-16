@@ -42,9 +42,9 @@
 			$.ajax(requestConfig).then(function (responseMessage) {
 				if (!responseMessage.unReport) {
 					btn.closest(".list-group-item").append("<li class = 'list-group-item error font-italic'>This review has been reported</li>");
-				} else{
-                    btn.closest(".list-group-item").append("<li class = 'list-group-item error font-italic'>This review has been Unreported</li>");
-                }
+				} else {
+					btn.closest(".list-group-item").append("<li class = 'list-group-item error font-italic'>This review has been Unreported</li>");
+				}
 
 				//toggle icon color and text
 				var reportText = btn.children(".report-text");
@@ -84,7 +84,7 @@
 					user_id: user_id,
 					type: type,
 				}),
-			}
+			};
 			$.ajax(requestConfig).then(function (responseMessage) {
 				// ajax能够访问 post 对应的数据 到数据库. 只是这里的数据库接口用的是 api/like/
 				updateHelpfulOnPage(btn, responseMessage);
@@ -95,7 +95,7 @@
 					other.removeClass("filled");
 				}
 				btn.toggleClass("filled");
-			})
+			});
 		} else {
 			showHelpfulError(btn);
 		}

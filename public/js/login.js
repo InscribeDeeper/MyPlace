@@ -1,5 +1,5 @@
 (function ($) {
-	let loginForm = $("#login-form"); 
+	let loginForm = $("#login-form");
 	let usernameInput = $("#userName");
 	let passwordInput = $("#password");
 	let submitButton = $("#submitButton");
@@ -25,9 +25,9 @@
 		}
 
 		if (!hasErrors) {
-			loginForm.unbind().submit(); 
+			loginForm.unbind().submit();
 		} else {
-			submitButton.prop("disabled", false); 
+			submitButton.prop("disabled", false);
 		}
 	});
 })(jQuery);

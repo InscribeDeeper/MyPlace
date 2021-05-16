@@ -93,7 +93,7 @@ router.get("/", async (req, res) => {
 			item_name = current_rental.location;
 			item_id = current_rental._id;
 		}
-		current.comment_id = eachCommment._id
+		current.comment_id = eachCommment._id;
 		current._id = item_id;
 		current.name = item_name;
 		current.type = item_type;
@@ -134,7 +134,7 @@ router.get("/", async (req, res) => {
 		current.num_comments = current_furniture.comments_id.length;
 		favoritedFurnitures.push(current);
 	}
-	
+
 	//###########################
 	// My ownedRentals
 	// this._id, this.name, this.likes, this.num_comments
@@ -144,7 +144,7 @@ router.get("/", async (req, res) => {
 	for (let eachRentalID of myRentals) {
 		current = {};
 		current_rental = await rentalData.getRentalById(eachRentalID);
-	    current._id = eachRentalID;
+		current._id = eachRentalID;
 		current.name = current_rental.location;
 		current.likes = current_rental.like;
 		current.num_comments = current_rental.comments_id.length;
@@ -160,7 +160,7 @@ router.get("/", async (req, res) => {
 	for (let eachRentalID of myFavRentals) {
 		current = {};
 		current_rental = await rentalData.getRentalById(eachRentalID);
-	    current._id = eachRentalID;
+		current._id = eachRentalID;
 		current.name = current_rental.location;
 		current.likes = current_rental.like;
 		current.num_comments = current_rental.comments_id.length;

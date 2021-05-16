@@ -60,6 +60,4 @@ router.post("/favorite/:rid/:uid", async function (req, res) {
 	});
 });
 
-
-
 module.exports = router;
