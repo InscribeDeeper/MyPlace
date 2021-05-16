@@ -19,6 +19,7 @@ async function main() {
     const u6 = await userData.createUser("jjssica", "Joseph", "Jessica", 35, "jjssica@gmail.com", "password", "strong")
     const u7 = await userData.createUser("tsarah", "Thomas", "Sarah", 43, "tsarah@gmail.com", "password", "a dark people")
     const u8 = await userData.createUser("achis", "Christopher", "Daniel", 13, "achis@gmail.com", "password", "quite young")
+    const u9 = await userData.createUser("admin", "ADMIN", "ADMIN", 0, "admin@gmail.com", "123456", "admin")
 
 
 
