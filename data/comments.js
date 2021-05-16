@@ -28,8 +28,8 @@ async function addComments(user_id, comment) {
 	const newComments = {
 		user_id: user_id,
 		comment: comment,
-		reports: initialUserIdList, //存userId，但是开始的时候是不是这俩都是空的应该
-		helpful: initialUserIdList,
+		reportLog: initialUserIdList, //存userId，但是开始的时候是不是这俩都是空的应该
+		helpfulLog: initialUserIdList,
 		_id: uuid.v4(),
 	};
 
@@ -60,7 +60,7 @@ async function updateComment(commentId, updatedInfo) {
 	if (!verifier.validString(commentId)) throw "User id is not a valid string.";
 
 	//Unfinished, should helpful_count and helpful_count store a count of likes or userid?
-	const commentCollection = await comment();
+	const commentCollection = await comments();
 
 	const theComment = getCommentById(commentId);
 	let updatingInfo = {
@@ -78,26 +78,30 @@ async function helpfulComment(commentId, userId) {
 	if (!verifier.validString(commentId)) throw "User id is not a valid string.";
 	if (!verifier.validString(userId)) throw "User id is not a valid string.";
 
-	const commentCollection = await comment();
+	const commentCollection = await comments();
 
 	const updatedInfo = await commentCollection.updateOne({ _id: commentId }, { $addToSet: { helpfulLog: userId } });
 	if (updatedInfo.modifiedCount === 0) throw "Could not add userId to helpfulLog";
 
 	updatedComment = await getCommentById(commentId);
-	return updatedComment.helpfulLog.length;
+	return updatedComment;
 }
 
 async function reportComment(commentId, userId) {
 	if (!verifier.validString(commentId)) throw "User id is not a valid string.";
 	if (!verifier.validString(userId)) throw "User id is not a valid string.";
 
-	const commentCollection = await comment();
+	const commentCollection = await comments();
+	unReport = false;
+	var updatedInfo = await commentCollection.updateOne({ _id: commentId }, { $addToSet: { reportLog: userId } });
+	if (updatedInfo.modifiedCount === 0) {
+		updatedInfo = await commentCollection.updateOne({ _id: commentId }, { $pull: { reportLog: userId } });
+		unReport = true;
+	}
 
-	const updatedInfo = await commentCollection.updateOne({ _id: commentId }, { $addToSet: { reportLog: userId } });
 	if (updatedInfo.modifiedCount === 0) throw "Could not add userId to reportLog";
-
 	updatedComment = await getCommentById(commentId);
-	return updatedComment.reportLog.length;
+	return unReport;
 }
 
 async function getFurnitureByCommentID(commentId) {

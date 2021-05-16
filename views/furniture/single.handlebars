@@ -57,32 +57,28 @@
                                 </div>
                             <div class="row mt-3">
                                 <p class="text-left lead">
-                                    <span>
                                         {{this.text}}
-                                    </span>
                                 </p>
-                                <p class="commentt_id">this is comment_id: {{this._id}}</p>
                             </div>
                             <div class = "dblclick container">
                                 {{#if (checkListMem ../user._id this.helpful)}}
-                                <i class = "likebtn fa fa-thumbs-up filled" data-rid = "{{this.id}}" data-uid = "{{../user._id}}"></i>
+                                <i class = "helpfulbtn fa fa-thumbs-up filled" data-cid = "{{this._id}}" data-type = "Furniture"  data-uid = "{{../user._id}}" data-iid = "{{../furniture._id}}" ></i>
                                 {{else}}
-                                <i class = "likebtn fa fa-thumbs-up" data-rid = "{{this.id}}" data-uid = "{{../user._id}}"></i>
+                                <i class = "helpfulbtn fa fa-thumbs-up" data-cid = "{{this._id}}" data-type = "Furniture"  data-uid = "{{../user._id}}" data-iid = "{{../furniture._id}}" ></i>
                                 {{/if}}
                                 <span class = "likes">{{this.helpful.length}}</span>
                                 
                                 <div class = "float-right">
                                     {{#if (checkListMem ../user._id this.reported)}}
-                                    <button class="btn btn-secondary reportbtn" data-rid = "{{this.id}}" data-uid = "{{../user._id}}" data-restid = "{{../furniture._id}}" >
+                                    <button class="btn btn-secondary reportbtn" data-cid = "{{this._id}}" data-type = "Furniture"  data-uid = "{{../user._id}}" data-iid = "{{../furniture._id}}" >
                                         <i class = "fa fa-exclamation" aria-hidden = "true"></i>
                                         <span class = "report-text">Unreport</span>
                                     </button>
                                     {{else}}
-                                    <button class="btn btn-danger active reportbtn" data-rid = "{{this.id}}" data-uid = "{{../user._id}}" data-restid = "{{../furniture._id}}" >
+                                    <button class="btn btn-danger active reportbtn" data-cid = "{{this._id}}" data-type = "Furniture"  data-uid = "{{../user._id}}" data-iid = "{{../furniture._id}}" >
                                         <i class = "fa fa-exclamation" aria-hidden = "true"></i>
                                         <span class = "report-text">Report</span>
                                     </button>
-                                    
                                     {{/if}}
                                 </div>
                                 <div class = "error font-italic" hidden></div>
@@ -95,7 +91,7 @@
                                 <div class="card-header">
                                     subcomments
                                 </div>
-                                <ul class="list-group" id="comment-list-{{this.id}}">
+                                <ul class="list-group" id="comment-list-{{this._id}}">
                                     {{#each subcomments}} {{> comment_item}} {{/each}}
                                 </ul>
                             </div>

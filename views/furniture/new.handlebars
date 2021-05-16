@@ -40,14 +40,14 @@
 
 		<div class="form-group">
 			<label for="price" class="input-label">Price</label>
-			<input type="text" class="form-control" id="price-input" name="price" placeholder="Enter furniture price" value="{{reqInput.price}}"/>
+			<input type="number" class="form-control" id="price-input" name="price" placeholder="Enter furniture price" value="{{reqInput.price}}"/>
 			<div class="invalid-feedback">
 				Please provide a valid price
 			</div>
 		</div>
 
 		<div class="form-group" id="furniture-input-div">
-			<label for="photo" class="input-label">Description</label>
+			<label for="description" class="input-label">Description</label>
 			<input type="text" class="form-control" id="description-input" name="description" placeholder="Enter furniture description" value="{{reqInput.description}}" />
 			<div class="invalid-feedback">
 				Please provide a valid description
@@ -71,7 +71,7 @@
 		</div>
 
 		<div class="form-group">
-			<label for="photo" class="input-label">Contact</label>
+			<label for="contact" class="input-label">Contact</label>
 			<input type="text" class="form-control" id="contact-input" name="contact" placeholder="Enter contact" value="{{reqInput.contact}}"/>
 			<div class="invalid-feedback">
 				Please provide a valid contact
@@ -79,18 +79,18 @@
 		</div>
 
 		<div class="form-group">
-			<label for="photo" class="input-label">Latitude</label>
-			<input type="text" class="form-control" id="lattitude-input" name="latitude" placeholder="Enter latitude" value="{{reqInput.latitude}}"/>
+			<label for="latitude" class="input-label">Latitude</label>
+			<input type="number" class="form-control" id="lattitude-input" name="latitude" placeholder="Enter contact" value="{{reqInput.lattitude}}"/>
 			<div class="invalid-feedback">
 				Please provide a valid latitude
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label for="photo" class="input-label">Longitude</label>
-			<input type="text" class="form-control" id="longtitude-input" name="longitude" placeholder="Enter longitude" value="{{reqInput.longitude}}"/>
+			<label for="longtitude" class="input-label">Longtitude</label>
+			<input type="number" class="form-control" id="longtitude-input" name="longtitude" placeholder="Enter contact" value="{{reqInput.longtitude}}"/>
 			<div class="invalid-feedback">
-				Please provide a valid longitude
+				Please provide a valid longtitude
 			</div>
 		</div>
 
@@ -107,5 +107,3 @@
 		{{/if}}
 	</form>
 </div>
-
-<footer>Designed by <br> WYang, JWang, SLi, YWang &copy 2021</footer>
