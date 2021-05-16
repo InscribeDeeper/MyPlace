@@ -105,29 +105,42 @@ router.get("/addRentalComment/:id", async(req, res) => {
 router.post("/report/:id", async(req, res) => {
     const userName = req.session.user;
     myUser = await userData.getUserByUserName(userName);
-    const userId = myUser._id;
+    const userId = myUser._id; // req.body.user_id
     const commentId = xss(req.params.id.trim());
+    const type = req.body.type
+    let errors = [];
 
-    try {
-        reported = await commentData.reportComment(commentId, userId);
-    } catch (e) {
-        errors.push(e);
-        res.status(500).json({ error: e });
-    }
+    unReport = await commentData.reportComment(commentId, userId);
+
+    res.status(200).json({
+		success: true,
+        unReport: unReport
+	});
 });
 
 router.post("/helpful/:id", async(req, res) => {
     const userName = req.session.user;
     myUser = await userData.getUserByUserName(userName);
-    const userId = myUser._id;
+    const userId = myUser._id; // req.body.user_id
     const commentId = xss(req.params.id.trim());
 
-    try {
-        reported = await commentData.helpfulComment(commentId, userId);
-    } catch (e) {
-        errors.push(e);
-        res.status(500).json({ error: e });
+    console.log("helpful route commentId" + commentId)
+
+    let errors = [];
+    try{
+        await commentData.helpfulComment(commentId, userId)
+    } catch(e){
+        errors.push("you have marked helpful")
     }
+        
+    myComment = await commentData.getCommentById(commentId)
+    helpfulNum = myComment.helpfulLog.length
+
+    
+    res.status(200).json({
+		success: true,
+        helpfulNum,
+	});
 });
 
 // User should only be able to access POST route after logging in
