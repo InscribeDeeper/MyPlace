@@ -46,6 +46,68 @@ async function main() {
     const R9 = await rentalData.createRental("1500 Washintwon Street", 2900, 1, 1, 800, "view of empire midtown", "https://images.craigslist.org/00P0P_d1o3JtEZkrJz_0dm0bc_600x450.jpg", "Wash Machine, Baker, Heater, Top Light", [u5._id, u4._id], [u7._id, u8._id], "nice neighbor", "2013432359", 40.7477496, -74.0302254, u5._id)
 
 
+    //Add Comments
+    const C1 = await commentData.addComments(u1._id, "this deal is actually good,comment to mark")
+    const C2 = await commentData.addComments(u2._id, "beatiful price!")
+    const C3 = await commentData.addComments(u3._id, "It looks good but the price is emmmm")
+    const C4 = await commentData.addComments(u4._id, "The owner is one of the most decent person I've every met")
+    const C7 = await commentData.addComments(u5._id, "comment to mark")
+    const C5 = await commentData.addComments(u6._id, "Spam information, again!")
+    const C8 = await commentData.addComments(u7._id, "ROCK!")
+    const C6 = await commentData.addComments(u8._id, "You know what, I'll take this deal! Where is the contact, oh I see")
+    const C9 = await commentData.addComments(u2._id, "I like it, but i dont have money, hold longer see if i can have it")
+    const C10 = await commentData.addComments(u1._id, "It seems good, I like it very much.")
+    const C11 = await commentData.addComments(u1._id, "who want to learn how to make money, go to www.trickyoupayplace.com to learn how to make money")
+    const C12 = await commentData.addComments(u1._id, "I know this. why are you selling this? take it down")
+
+    await toggleFn.toggleCommentToFurniture(F1._id, C1._id)
+    await toggleFn.toggleCommentToFurniture(F2._id, C2._id)
+    await toggleFn.toggleCommentToFurniture(F3._id, C3._id)
+    await toggleFn.toggleCommentToFurniture(F4._id, C4._id)
+    await toggleFn.toggleCommentToFurniture(F5._id, C4._id)
+    await toggleFn.toggleCommentToFurniture(F6._id, C6._id)
+    await toggleFn.toggleCommentToFurniture(F7._id, C7._id)
+    await toggleFn.toggleCommentToFurniture(F8._id, C8._id)
+
+
+    await toggleFn.toggleCommentToUser(u1._id, C1._id) //
+    await toggleFn.toggleCommentToUser(u2._id, C2._id) //
+    await toggleFn.toggleCommentToUser(u3._id, C3._id) //
+    await toggleFn.toggleCommentToUser(u4._id, C4._id) //
+    await toggleFn.toggleCommentToUser(u5._id, C7._id) //
+    await toggleFn.toggleCommentToUser(u6._id, C5._id) //
+    await toggleFn.toggleCommentToUser(u7._id, C8._id) //
+    await toggleFn.toggleCommentToUser(u8._id, C6._id)
+    await toggleFn.toggleCommentToUser(u2._id, C9._id)
+    await toggleFn.toggleCommentToUser(u1._id, C11._id)
+    await toggleFn.toggleCommentToUser(u1._id, C10._id)
+    await toggleFn.toggleCommentToUser(u1._id, C12._id)
+
+
+
+
+    await toggleFn.toggleCommentToRental(R1._id,  C1._id)
+    await toggleFn.toggleCommentToRental(R2._id,  C2._id)
+    await toggleFn.toggleCommentToRental(R3._id,  C3._id)
+    await toggleFn.toggleCommentToRental(R1._id,  C2._id)
+    await toggleFn.toggleCommentToRental(R2._id,  C3._id)
+    await toggleFn.toggleCommentToRental(R3._id,  C1._id)
+    await toggleFn.toggleCommentToRental(R1._id,  C3._id)
+    await toggleFn.toggleCommentToRental(R2._id,  C5._id)
+    await toggleFn.toggleCommentToRental(R3._id,  C6._id)
+    await toggleFn.toggleCommentToRental(R4._id,  C7._id)
+    await toggleFn.toggleCommentToRental(R5._id,  C9._id)
+    await toggleFn.toggleCommentToRental(R6._id,  C10._id)
+    await toggleFn.toggleCommentToRental(R7._id,  C11._id)
+    await toggleFn.toggleCommentToRental(R8._id,  C12._id)
+    await toggleFn.toggleCommentToRental(R9._id,  C4._id)
+
+
+    // toggleFn.toggleCommentToFurniture(furniture_id,  comment_id)
+    // toggleFn.toggleCommentToRental(rental_id,  comment_id)
+    // toggleFn.toggleCommentToUser(user_id, comment_id)
+
+
     console.log("Done seeding database");
     await db.serverConfig.close();
 }
