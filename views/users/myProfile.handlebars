@@ -91,7 +91,7 @@
 							{{#each ownedRentals}}
 								<li class="list-group-item">
 									<a href="/furniture/{{this._id}}"><span class="bold">&starf;</span>{{this.name}}</a>
-									<div>likes: {{this.likes}}</div>
+									<div>likes: {{this.likes.length}}</div>
 									<div>num_comments: {{this.num_comments}}</div>
 								</li>
 							{{/each}}
@@ -116,7 +116,7 @@
 							{{#each favoritedFurnitures}}
 								<li class="list-group-item">
 									<a href="/furniture/{{this._id}}"><span class="bold">&starf;</span>{{this.name}}</a>
-									<div>likes: {{this.likes}}</div>
+									<div>likes: {{this.likes.length}}</div>
 									<div>num_comments: {{this.num_comments}}</div>
 								</li>
 							{{/each}}
@@ -138,7 +138,7 @@
 							{{#each favoritedRentals}}
 								<li class="list-group-item">
 									<a href="/furniture/{{this._id}}"><span class="bold">&starf;</span>{{this.name}}</a>
-									<div>likes: {{this.likes}}</div>
+									<div>likes: {{this.likes.length}}</div>
 									<div>num_comments: {{this.num_comments}}</div>
 								</li>
 							{{/each}}
