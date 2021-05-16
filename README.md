@@ -28,15 +28,18 @@ User:
 1. Sign up your account by clicking Sign Up. / Log in your Account by clicking Log In.
 2. Click on Update Profile to update information of user.
 3. Click on My Profile to view information of user.
+
 Rental:
-5. View all Rentals information by clicking "Check Out All Rentals".
-6. Create a new rental
-7. Enter all the information to create a new rental, and click Submit.
-8. Search rentals by location; Filter unit types by selecting numbers of bedrooms and bathrooms in the sliders; Filter maximum of price in the slider.
-9. View the rental by clicking on it in the table.
-10. View the details of the rental information including
+1. View all Rentals information by clicking "Check Out All Rentals".
+2. Create a new rental
+3. Enter all the information to create a new rental, and click Submit.
+4. Search rentals by location; Filter unit types by selecting numbers of bedrooms and bathrooms in the sliders; Filter maximum of price in the slider.
+5. View the rental by clicking on it in the table.
+6. View the details of the rental information including
  - location, description, unit type, utilities, price, labels, contact, images, and Google Map.
-11. Back to the main page.
+7. Back to the main page.
+
+Furniture
 12. View all Rentals information by clicking "Check Out All Rentals".
 
 11. Enter all the information to create a new furniture, and click Submit.
