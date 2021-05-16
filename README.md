@@ -33,20 +33,22 @@ Rental:
 1. View all Rentals information by clicking "Check Out All Rentals".
 2. Create a new rental
 3. Enter all the information to create a new rental, and click Submit.
-4. Search rentals by location; Filter unit types by selecting numbers of bedrooms and bathrooms in the sliders; Filter maximum of price in the slider.
+4. Search rentals by location; Filter unit types by selecting numbers of bedrooms and bathrooms in the sliders; Filter by maximum of price in the slider.
 5. View the rental by clicking on it in the table.
 6. View the details of the rental information including
  - location, description, unit type, utilities, price, labels, contact, images, and Google Map.
 7. Back to the main page.
 
-Furniture
-12. View all Rentals information by clicking "Check Out All Rentals".
+Furniture:
+1. View all Furnitures information by clicking "Check Out All Furniture".
+2. Create a new furniture
+3. Enter all the information to create a new furniture, and click Submit.
+4. Search rentals by name and categoty; Filter by maximum of price.
+5. View the furniture by clicking on it in the table.
+6. View the details of the furniture information including
+ - price, category, description, location, purchase_link, contact, images, and Google Map.
+7. Back to the main page.
 
-11. Enter all the information to create a new furniture, and click Submit.
-12. Search rentals by location; Filter unit types by selecting numbers of bedrooms and bathrooms in the sliders; Filter maximum of price in the slider.
-13. View the rental by clicking on it in the table.
-14. View the details of the rental information including
-15. location, description, unit type, utilities, price, labels, contact, images, and Google Map.
 
 ## Group Members:
 - Shaobo Li
