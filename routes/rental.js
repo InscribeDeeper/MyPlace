@@ -193,7 +193,7 @@ router.get("/:id", async (req, res) => {
 		
 
 		photos = null;
-
+		console.log(rental)
 		res.render("rental/single", {
 			partial: "rentals-single-script",
 			title: "Rental",
@@ -202,6 +202,7 @@ router.get("/:id", async (req, res) => {
 			rental: rental, // obj
 			comments: allCommentsProcessed, // arr
 			photos: photos,
+			
 		});
 	} catch (e) {
 		errors.push(e);
