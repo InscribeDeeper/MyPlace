@@ -1,0 +1,35 @@
+node_modules
+npm-debug.log
+# 这将避免你的本地模块以及调试日志被拷贝进入到你的 Docker 镜像中，以至于把你镜像原有安装的模块给覆盖了。
+
+# docker build . -t wyang/myplace
+
+# docker run -p 8000:3000 -d wyang/myplace
+#  在上面的例子中，在容器中 Docker 把端口号 3000 映射到你机器上的 8000
+# 使用 -d 模式运行镜像将以分离模式运行 Docker 容器，使得容器在后台自助运行。开关符 -p 在容器中把一个公共端口导向到私有的端口，请用以下命令运行你之前构建的镜像：
+
+# # Get container ID
+# $ docker ps
+
+# # Print app output
+# $ docker logs <container id>
+
+# # Example
+# Running on http://localhost:8080
+
+# Enter the container
+# $ docker exec -it <container id> /bin/bash
+
+
+# # 调试
+# $ curl -i localhost:49160
+
+# HTTP/1.1 200 OK
+# X-Powered-By: Express
+# Content-Type: text/html; charset=utf-8
+# Content-Length: 12
+# ETag: W/"c-M6tWOb/Y57lesdjQuHeB1P/qTV0"
+# Date: Mon, 13 Nov 2017 20:53:59 GMT
+# Connection: keep-alive
+
+# Hello world

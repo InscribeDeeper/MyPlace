@@ -114,10 +114,19 @@ app.set("view engine", "handlebars");
 
 configRoutes(app);
 
-app.listen(3000, () => {
-	console.log("We've now got a server!");
-	console.log("Your routes will be running on http://localhost:3000");
-});
+
+
+// Constants
+const PORT = 3000;
+const HOST = 'localhost';
+app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);
+
+
+// app.listen(3000, () => {
+// 	console.log("We've now got a server!");
+// 	console.log("Your routes will be running on http://localhost:3000");
+// });
 
 // // Access the session as req.session
 // app.get('/', function(req, res, next) {
