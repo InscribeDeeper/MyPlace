@@ -7,4 +7,9 @@ function validNum(age){
     return true;
 }
 // parseINT(price)
-console.log(validNum("14"))
+// console.log(validNum("14"))
+
+
+
+const person = require("./person.js")
+console.log(person)

@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const static = express.static(__dirname + "/public");
+const static = express.static(__dirname + "/public"); // 这个是静态托管, 只允许 http request. 但是网页上的button可以允许AJAX类型的 post update
 const configRoutes = require("./routes");
 const session = require("express-session"); // which generate session ID and save on client browser cache
 const exphbs = require("express-handlebars");
@@ -28,7 +28,7 @@ const handlebarsInstance = exphbs.create({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/public", static); // 这个有什么用?? 表明所有用到的client side js?
+app.use("/public", static); // 这个是静态托管, 只允许 http request. 但是网页上的button可以允许AJAX类型的 post update
 
 app.use(
 	session({
@@ -114,14 +114,11 @@ app.set("view engine", "handlebars");
 
 configRoutes(app);
 
-
-
 // Constants
 const PORT = 3000;
-const HOST = 'localhost';
+const HOST = "localhost";
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
-
 
 // app.listen(3000, () => {
 // 	console.log("We've now got a server!");
