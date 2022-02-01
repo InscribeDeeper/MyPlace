@@ -49,9 +49,7 @@ Rental:
 3. Enter all the information to create a new rental, and click Submit.
 4. Search rentals by location; Filter unit types by selecting numbers of bedrooms and bathrooms in the sliders; Filter by maximum of price in the slider.
 5. View the rental by clicking on it in the table.
-6. View the details of the rental information including
-
--   location, description, unit type, utilities, price, labels, contact, images, and Google Map.
+6. View the details of the rental information including: location, description, unit type, utilities, price, labels, contact, images, and Google Map.
 
 7. Back to the main page.
 
@@ -62,10 +60,7 @@ Furniture:
 3. Enter all the information to create a new furniture, and click Submit.
 4. Search rentals by name and categoty; Filter by maximum of price.
 5. View the furniture by clicking on it in the table.
-6. View the details of the furniture information including
-
--   price, category, description, location, purchase_link, contact, images, and Google Map.
-
+6. View the details of the furniture information including: price, category, description, location, purchase_link, contact, images, and Google Map.
 7. Back to the main page.
 
 Comments:
